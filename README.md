@@ -1,11 +1,11 @@
 # My Living City
 In order to transform our cities into living cities that exist in complete integrity with the natural world, we need to empower every citizen to engage in a conversation for change and a call to take action in their community.
 
-## CONTRIBUTION	
+## Contribution
 Development proposals can be posted for review and consultation by the community for feedback and suggestions, generating added value.	
-## CO-CREATION
+## Co-creation
 Citizens can suggest projects or improvements for discussion in the community that would lead to changes in the community.	
-## EDUCATION
+## Education
 Through discussion forums and expert contributor blogs, the community can engage in a discussion of what sustainability is and how to achieve it.
 
 ## Our Vision
