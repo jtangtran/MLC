@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+- lts/*
+before_install:
+- openssl aes-256-cbc -K $encrypted_65f725bac799_key -iv $encrypted_65f725bac799_iv
+  -in deploy_rsa.enc -out deploy_rsa -d
+script:
+- cd frontend
+- npm install
+- npm test
+- npm run build
+- cd ..
+- chmod 0600 deploy_rsa
+- rsync -r -e "ssh -o StrictHostKeyChecking=no -i deploy_rsa" --delete-after --quiet $TRAVIS_BUILD_DIR
+  prod@13.56.27.60:~
+notifications:
+  slack:
+    secure: Ap9qkWAv01RdFQwA6Jxtp/w8wG7FXzr5a1IDUREwmuasr2jBTcbGTjzJtsyvDVxzVyEA+bMiBZ7XFNd5COS4pBqRShnW2JKV7dC8pM3zPF8LVz1tOIJndhMO2KgCEm+aLOMTkKYauK1beHziPYtDsB0OkeAcavldjpxMCpAGZijkt6F6A3cAPIdBTylI1dkfmhXDkXMonQ6hU9Y0EO3z3nwe08cFFx5RK9tdZzQbHXBKhDppvqJyfxTn7aO1OKI3SBlqBIcmGSYE3K2F7lXPuxcQK+F754VZLSgv5B9tJT49xRlKwGRAbgPXqh0IMJHGn6jDwBylRqK0Mkon8xFWpK8d5UUmUqPk1cXvCt0F3OZ76Eoi2gGiqKvtrqyAXZVKMUL0Uy5h50dBaPDsS8uVUBpU21KKwbpsCzVA+5csC+oqe6rIA0GlXmSAiECIgBVtLWs54fC6sc9K1CPsTbEIfR0rL0pdX48ZGCFv7N8zpDV+IhjWcYzYJSHqasxVqlrTCIHViZ7e2s1B2TG3uAbsgY/o9sjTjfqymmoHrkvM1zVwrP2cEEZNNNiIddMND+nBorf17mSIRN44SKbVrIRc8YPh+EP9l7uBIwXH5bJCcxMhLRzcW6qQW8UBSD43xrAf3x7uHsxwseaeO1Wf5CE8wp118Byy29QO93lRVOdKmlQ=
