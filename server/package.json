@@ -1,0 +1,26 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "backend for mylivingcity",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MyLivingCity/my-living-city.git"
+  },
+  "author": "Paul Sajna",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MyLivingCity/my-living-city/issues"
+  },
+  "homepage": "https://github.com/MyLivingCity/my-living-city#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "pg": "^7.8.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.42.0"
+  }
+}
