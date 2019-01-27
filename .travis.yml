@@ -10,6 +10,9 @@ script:
 - npm test
 - npm run build
 - cd ..
+- cd server
+- npm install
+- cd ..
 - chmod 0600 deploy_rsa
 - rsync -r -e "ssh -o StrictHostKeyChecking=no -i deploy_rsa" --delete-after --quiet $TRAVIS_BUILD_DIR
   prod@13.56.27.60:~
