@@ -1,4 +1,6 @@
+const Sequelize = require('sequelize');
 const express = require('express')
+
 const app = express()
 const port = 3000
 const DB_PASS = process.env.DB_PASS;
