@@ -8,9 +8,12 @@ const sequelize = new Sequelize('postgres://master:'+DB_PASS+'@mylivingcity.cilh
 
 app.get('/', (req, res) => res.send('Welcome to My Living City!'))
 app.get('/dbtest', (req, res) => {
-  sequelize.query("SELECT message FROM `test`", { type: sequelize.QueryTypes.SELECT})
+  sequelize.query("SELECT message FROM test", { type: sequelize.QueryTypes.SELECT})
   .then(message => {
     res.send(message)
+  })
+   .catch(err => {
+    console.error('Error: ', err);
   })
 })
 
