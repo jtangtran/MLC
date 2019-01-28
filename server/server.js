@@ -1,7 +1,9 @@
 const Sequelize = require('sequelize');
 const express = require('express')
+var cors = require('cors')
 
 const app = express()
+app.use(cors())
 const port = 3000
 const DB_PASS = process.env.DB_PASS;
 const sequelize = new Sequelize('postgres://master:'+DB_PASS+'@mylivingcity.cilhwpqjm37r.us-west-1.rds.amazonaws.com:5432/postgres');
