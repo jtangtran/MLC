@@ -9,6 +9,9 @@ class Conversations extends Component {
       <div className="Conversations">
         <Navbar/>
         <h4>Conversations Page</h4>
+        <div className="row">
+          
+        </div>
       </div>
     );
   }
