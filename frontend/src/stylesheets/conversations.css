@@ -1,0 +1,12 @@
+.Conversations .convoCard{
+    min-height: 200px;
+}
+
+.Conversations .likeText{
+    color: green;
+}
+
+.Conversations .dislikeText{
+    color: red;
+}
+
