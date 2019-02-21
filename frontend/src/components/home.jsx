@@ -16,6 +16,14 @@ class Home extends Component {
                 </p>
             </div>
         </div>
+        <div className="row">
+          <div className="col-8 text-center">
+            <h3>New and Trending</h3>
+          </div>
+          <div className="col-4 text-center">
+            <h3>Conversations</h3>
+          </div>
+        </div>
       </div>
     );
   }

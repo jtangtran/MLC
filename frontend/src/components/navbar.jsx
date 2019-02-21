@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import '../stylesheets/navbar.css';
 
+import SignInModal from './loginModal.jsx';
+import SignUpModal from './registerModal.jsx';
+
 class Navbar extends Component {
   render() {
     return (
@@ -18,7 +21,11 @@ class Navbar extends Component {
               <Link to="/about" className="nav-item nav-link">About Us</Link>
             </div>
           </div>
+          <button type="button" className="btn btn-primary mr-2" data-toggle="modal" data-target="#loginModal">Login</button>
+          <button type="button" className="btn btn-secondary" data-toggle="modal" data-target="#registerModal">Register</button>
         </nav>
+        <SignInModal/>
+        <SignUpModal/>
       </div>
     );
   }
