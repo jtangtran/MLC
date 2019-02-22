@@ -19,6 +19,7 @@ class Navbar extends Component {
               <Link to="/conversations" className="nav-item nav-link">Conversations</Link>
               <Link to="/blogs" className="nav-item nav-link">Blogs</Link>
               <Link to="/about" className="nav-item nav-link">About Us</Link>
+              <Link to="/submit" className="nav-item nav-link">Submit Idea</Link>
             </div>
           </div>
           <button type="button" className="btn btn-primary mr-2" data-toggle="modal" data-target="#loginModal">Login</button>

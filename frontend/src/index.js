@@ -9,6 +9,7 @@ import Home from './components/home.jsx';
 import Conversations from './components/conversations.jsx';
 import Blogs from './components/blogs.jsx';
 import About from './components/about.jsx';
+import SubmitIdea from './components/ideaSubmission.jsx';
 
 const routing = (
     <Router>
@@ -17,6 +18,7 @@ const routing = (
         <Route exact path="/about" component={About}/>
         <Route exact path="/conversations" component={Conversations}/>
         <Route exact path="/blogs" component={Blogs}/>
+        <Route exact path="/submit" component={SubmitIdea}/>
       </div>
     </Router>
   )
