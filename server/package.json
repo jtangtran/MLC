@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/MyLivingCity/my-living-city.git"
   },
-  "author": "Paul Sajna",
+  "author": "Paul Sajna, Chris Eddy, Chelsea Birch",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/MyLivingCity/my-living-city/issues"

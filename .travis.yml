@@ -12,6 +12,7 @@ script:
 - cd ..
 - cd server
 - npm install
+- npm run migrate
 - cd ..
 - chmod 0600 deploy_rsa
 - rsync -r -e "ssh -o StrictHostKeyChecking=no -i deploy_rsa" --delete-after --quiet $TRAVIS_BUILD_DIR
