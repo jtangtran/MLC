@@ -6,6 +6,14 @@ const app = express()
 app.use(cors())
 const port = 3000
 const DB_PASS = process.env.DB_PASS;
+
+// DEV DB CONNECTION
+// const sequelize = new Sequelize('postgres', 'postgres', '#HelloThere69', {
+//   host: 'localhost',
+//   dialect: 'postgres'
+// });
+
+// PRODUCTION DB CONNECTION
 const sequelize = new Sequelize('postgres://master:'+DB_PASS+'@mylivingcity.cilhwpqjm37r.us-west-1.rds.amazonaws.com:5432/postgres');
 
 app.get('/', (req, res) => res.send('Welcome to My Living City!'))
