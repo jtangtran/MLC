@@ -44,6 +44,14 @@ app.get('/ideas', async (req, res) => {
   })
 });
 
+app.get('/ideas/:id', async (req, res) => {
+  Idea.findById(req.params.id).then(idea => {
+    res.send(idea)
+  })
+   .catch(err => {
+    console.error('Error: ', err);
+  })
+});
 
 app.post('/ideas', bodyParser.json(), async (req, res) => {
   try {
