@@ -38,7 +38,7 @@ class IdeaSubmission extends Component {
             beauty_petal: this.state.beauty_petal
         });
 
-        let response = await fetch("http://localhost:3000/post_idea", {
+        let response = await fetch("http://localhost:3000/ideas", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: data
