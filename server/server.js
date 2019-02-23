@@ -20,8 +20,18 @@ const sequelize = new Sequelize('postgres://master:'+DB_PASS+'@mylivingcity.cilh
 app.get('/', (req, res) => res.send('Welcome to My Living City!'))
 
 
+app.get('/get_ideas', async (req, res) => {
+  sequelize.query("SELECT * FROM ideas", { type: sequelize.QueryTypes.SELECT})
+  .then(rows => {
+    res.send(rows)
+  })
+   .catch(err => {
+    console.error('Error: ', err);
+  })
+});
+
+
 app.post('/post_idea', bodyParser.json(), async (req, res) => {
-  console.log(req.body);
   const queryString = `
   INSERT INTO ideas (
     title,
