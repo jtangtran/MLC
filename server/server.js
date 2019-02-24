@@ -20,7 +20,8 @@ const Idea = require('./models/idea')
 const sequelize = new Sequelize("mylivingcity", "master", DB_PASS, {
   dialect: "postgres",
   host: "mylivingcity.cilhwpqjm37r.us-west-1.rds.amazonaws.com",
-  query: { searchPath: "prod", supportsSearchPath: true }
+  query: { searchPath: "prod", supportsSearchPath: true },
+  operatorsAliases: false
 });
 
 app.get('/', (req, res) => res.send('Welcome to My Living City!'))

@@ -3,7 +3,8 @@ const Sequelize = require('sequelize')
 const sequelize = new Sequelize("mylivingcity", "master", DB_PASS, {
   dialect: "postgres",
   host: "mylivingcity.cilhwpqjm37r.us-west-1.rds.amazonaws.com",
-  query: { searchPath: "prod", supportsSearchPath: true }
+  query: { searchPath: "prod", supportsSearchPath: true },
+  operatorsAliases: false
 });
 
 const Idea = sequelize.define('idea', 
