@@ -40,7 +40,7 @@ class IdeaSubmission extends Component {
 
           let response = await fetch("http://localhost:3000/ideas", {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            //headers: {"Content-Type": "application/json"},
             body: data
         });
         if (response.ok){

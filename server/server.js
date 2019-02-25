@@ -11,10 +11,10 @@ const DB_PASS = process.env.DB_PASS;
 const Idea = require('./models/idea')
 
 // DEV DB CONNECTION
-// const sequelize = new Sequelize('postgres', 'postgres', '#HelloThere69', {
-//   host: 'localhost',
-//   dialect: 'postgres'
-// });
+ //const sequelize = new Sequelize('mylivingcity', 'postgres', '#HelloThere69', {
+   //host: 'localhost',
+   //dialect: 'postgres'
+ //});
 
 // PRODUCTION DB CONNECTION
 const sequelize = new Sequelize("mylivingcity", "master", DB_PASS, {

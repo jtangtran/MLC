@@ -23,7 +23,7 @@ class Conversations extends Component {
     try{
       await fetch("http://localhost:3000/ideas/", {
           method: "GET",
-          headers: {"Content-Type": "application/json"}
+      //    headers: {"Content-Type": "application/json"}
       }).then((response) => {
           response.json().then((data) => {
             console.log('Fetched Ideas: ', data);

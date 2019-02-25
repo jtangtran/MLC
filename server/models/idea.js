@@ -7,6 +7,13 @@ const sequelize = new Sequelize("mylivingcity", "master", DB_PASS, {
   operatorsAliases: false
 });
 
+// DEV DB CONNECTION
+ //const sequelize = new Sequelize('mylivingcity', 'postgres', '#HelloThere69', {
+   //host: 'localhost',
+   //dialect: 'postgres'
+ //});
+
+
 const Idea = sequelize.define('idea', 
   {
     id: { 
