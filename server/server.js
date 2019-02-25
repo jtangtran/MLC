@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const sequelize = require('./db.js');
 const express = require('express');
 var cors = require('cors');
 const bodyParser = require('body-parser');
@@ -6,23 +6,8 @@ const bodyParser = require('body-parser');
 const app = express()
 app.use(cors())
 const port = 3000
-const DB_PASS = process.env.DB_PASS;
 
 const Idea = require('./models/idea')
-
-// DEV DB CONNECTION
- //const sequelize = new Sequelize('mylivingcity', 'postgres', '#HelloThere69', {
-   //host: 'localhost',
-   //dialect: 'postgres'
- //});
-
-// PRODUCTION DB CONNECTION
-const sequelize = new Sequelize("mylivingcity", "master", DB_PASS, {
-  dialect: "postgres",
-  host: "mylivingcity.cilhwpqjm37r.us-west-1.rds.amazonaws.com",
-  query: { searchPath: "prod", supportsSearchPath: true },
-  operatorsAliases: false
-});
 
 app.get('/', (req, res) => res.send('Welcome to My Living City!'))
 

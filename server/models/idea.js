@@ -1,18 +1,5 @@
-const DB_PASS = process.env.DB_PASS;
-const Sequelize = require('sequelize')
-const sequelize = new Sequelize("mylivingcity", "master", DB_PASS, {
-  dialect: "postgres",
-  host: "mylivingcity.cilhwpqjm37r.us-west-1.rds.amazonaws.com",
-  query: { searchPath: "prod", supportsSearchPath: true },
-  operatorsAliases: false
-});
-
-// DEV DB CONNECTION
- //const sequelize = new Sequelize('mylivingcity', 'postgres', '#HelloThere69', {
-   //host: 'localhost',
-   //dialect: 'postgres'
- //});
-
+const Sequelize = require("sequelize");
+const sequelize = require("../db.js"); 
 
 const Idea = sequelize.define('idea', 
   {
