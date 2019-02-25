@@ -21,7 +21,7 @@ class Conversations extends Component {
 
   async getIdeas(){
     try{
-      await fetch("http://localhost:3000/ideas/", {
+      await fetch("http://dev.mylivingcity.org/api/ideas", {
           method: "GET",
       //    headers: {"Content-Type": "application/json"}
       }).then((response) => {
