@@ -3,7 +3,7 @@ const express = require('express');
 var cors = require('cors');
 const bodyParser = require('body-parser');
 
-const app = express()
+var app = express()
 app.use(cors())
 const port = 3000
 const DB_PASS = process.env.DB_PASS;
@@ -25,16 +25,6 @@ const sequelize = new Sequelize("mylivingcity", "master", DB_PASS, {
 });
 
 app.get('/', (req, res) => res.send('Welcome to My Living City!'))
-
-app.get('/create_tables', (req, res) => {
-  try {
-    Idea.sync()
-    res.status(200).end();
-  } catch(e){
-    console.log(e.stack);
-    res.status(500).end();
-  }
-});
 
 app.get('/ideas', async (req, res) => {
   Idea.findAll().then(ideas => {   
