@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Navbar from './navbar.jsx';
 
+const API_URL = require('../config.js');
+
 class IdeaSubmission extends Component {
     constructor(props) {
         super(props);
@@ -38,7 +40,7 @@ class IdeaSubmission extends Component {
             beauty_petal: this.state.beauty_petal
         });
 
-        let response = await fetch("http://dev.mylivingcity.org/api/ideas", {
+        let response = await fetch(API_URL+"/ideas", {
             method: "POST",
             //headers: {"Content-Type": "application/json"},
             body: data

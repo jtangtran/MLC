@@ -4,6 +4,8 @@ import '../stylesheets/conversations.css';
 import Navbar from './navbar';
 import ConvoCard from './convoCard.jsx';
 
+const API_URL = require('../config.js');
+
 class Conversations extends Component {
 
   constructor(props) {
@@ -21,7 +23,7 @@ class Conversations extends Component {
 
   async getIdeas(){
     try{
-      await fetch("http://dev.mylivingcity.org/api/ideas", {
+      await fetch(API_URL + "/ideas", {
           method: "GET",
       //    headers: {"Content-Type": "application/json"}
       }).then((response) => {
