@@ -48,6 +48,7 @@ app.post('/ideas', bodyParser.json(), async (req, res) => {
   try {
     Idea.create({
       title: req.body.title,
+      description: req.body.description,
       place_petal: req.body.place_petal,
       water_petal: req.body.water_petal,
       energy_petal: req.body.energy_petal,
