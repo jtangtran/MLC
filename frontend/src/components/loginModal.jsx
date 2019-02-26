@@ -23,31 +23,42 @@ class LoginModal extends Component {
   async login(e){
     e.preventDefault();
     try{
-    let data = JSON.stringify({
-        email: this.state.email,
-        password: this.state.password,
-    });
-
-    let response = await fetch(API_URL+"/login", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: data
-    });
-    if (response.ok){
-        console.log('Login sent')
-    }
+      let data = JSON.stringify({
+          email: this.state.email,
+          password: this.state.password,
+      });
+      await fetch(API_URL+"/login", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: data
+      }).then((response) => {
+        if(response.ok){
+          response.json().then((data) => {
+            console.log('Got User: ', data);
+            this.acceptLogin();
+          }).catch(e => {
+            console.log(e.stack);
+            this.rejectLogin();
+          });
+        }
+      });
     }
     catch(e){
         console.log(e.stack);
+        this.rejectLogin();
     }
   }
 
   rejectLogin(){
-
+    document.getElementById('submitBtn').hidden = false;
+    document.getElementById('confirmIcon').hidden = true;
+    document.getElementById('denyIcon').hidden = false;
   }
 
   acceptLogin(){
-
+    document.getElementById('submitBtn').hidden = true;
+    document.getElementById('confirmIcon').hidden = false;
+    document.getElementById('denyIcon').hidden = true;
   }
 
 
@@ -66,12 +77,18 @@ class LoginModal extends Component {
               <div className="modal-body text-center">
                 <form onSubmit={this.login}>
                   <div className="form-group">
-                    <input onChange={this.onChange} type="email" name="email" className="form-control text-center" id="emailLoginInput" aria-describedby="emailLogin" placeholder="Enter email"/>
+                    <input onChange={this.handleChange} type="email" name="email" className="form-control text-center" id="emailLoginInput" aria-describedby="emailLogin" placeholder="Enter email" required/>
                   </div>
                   <div className="form-group">
-                    <input onChange={this.onChange} type="password" name="password" className="form-control text-center" id="passwordLoginInput" placeholder="Password"/>
+                    <input onChange={this.handleChange} type="password" name="password" className="form-control text-center" id="passwordLoginInput" placeholder="Password" required/>
                   </div>
-                  <button type="submit" className="btn btn-primary">Login</button>
+                  <div id="statusContainer">
+                    <button id="submitBtn" type="submit" className="btn btn-primary">Login</button>
+                    <div>
+                      <i id="confirmIcon" className="fas fa-check fa-2x"></i>
+                      <i id="denyIcon" className="far fa-times-circle fa-2x"></i>
+                    </div>
+                  </div>
                 </form>
               </div>
             </div>

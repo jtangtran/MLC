@@ -73,6 +73,7 @@ app.post('/register', bodyParser.json(), async (req, res) => {
           fname: req.body.fname,
           lname: req.body.lname,
         });
+        console.log('User registered')
         res.status(200).end();
       });
     });
@@ -80,6 +81,36 @@ app.post('/register', bodyParser.json(), async (req, res) => {
     console.log(e.stack);
     res.status(500).end();
   }
+})
+
+app.post('/login', bodyParser.json(), async (req, res) => {
+  console.log(' REQ: ', req.body)
+  Users.findAll({
+    where: {
+      email: req.body.email
+    }
+  }).then(user => {
+    if(user[0]){
+      bcrypt.compare(req.body.password, user[0].password, function(err, hashResponse) {
+        if(hashResponse){
+          res.send(user);
+          console.log('User logged in')
+          res.status(200).end();
+        }
+        else{
+          console.log('User password does not match')
+          res.status(500).end();
+        }
+      });
+    }
+    else{
+      console.log('User email does not exist')
+      res.status(500).end();
+    }
+  }).catch(e => {
+    console.log(e.stack);
+    res.status(500).end();
+  });
 })
 
 app.listen(port, () => console.log(`My Living City listening on port ${port}!`))
