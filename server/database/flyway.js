@@ -17,5 +17,4 @@ module.exports = {
     user: 'master',
     password: DB_PASS,
     sqlMigrationSuffix: '.sql',
-    baselineOnMigrate: true
 };
