@@ -11,15 +11,15 @@ const Idea = require('./models/idea')
 
 app.get('/', (req, res) => res.send('Welcome to My Living City!'))
 
-app.get('/create_tables', (req, res) => {
+function syncTables(){
   try {
     Idea.sync()
-    res.status(200).end();
   } catch(e){
     console.log(e.stack);
-    res.status(500).end();
   }
-});
+}
+// INIT tables
+syncTables();
 
 app.get('/ideas', async (req, res) => {
   Idea.findAll().then(ideas => {   
