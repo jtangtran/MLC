@@ -24,7 +24,7 @@ function syncTables(){
   }
 }
 // INIT tables
-//syncTables();
+syncTables();
 
 app.get('/ideas', async (req, res) => {
   Idea.findAll().then(ideas => {   
