@@ -3,17 +3,22 @@ const express = require('express');
 var cors = require('cors');
 const bodyParser = require('body-parser');
 
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 const app = express()
 app.use(cors())
 const port = 3000
 
-const Idea = require('./models/idea')
+const Idea = require('./models/idea');
+const Users = require('./models/users');
 
 app.get('/', (req, res) => res.send('Welcome to My Living City!'))
 
 function syncTables(){
   try {
-    Idea.sync()
+    Idea.sync();
+    Users.sync();
   } catch(e){
     console.log(e.stack);
   }
@@ -53,6 +58,25 @@ app.post('/ideas', bodyParser.json(), async (req, res) => {
       beauty_petal: req.body.beauty_petal
     });
     res.status(200).end();
+  } catch(e){
+    console.log(e.stack);
+    res.status(500).end();
+  }
+})
+
+app.post('/register', bodyParser.json(), async (req, res) => {
+  try {
+    bcrypt.genSalt(saltRounds, function(err, salt) {
+      bcrypt.hash(req.body.password, salt, function(err, hashPass) {
+        Users.create({
+          email: req.body.email,
+          password: hashPass,
+          fname: req.body.fname,
+          lname: req.body.lname,
+        });
+        res.status(200).end();
+      });
+    });
   } catch(e){
     console.log(e.stack);
     res.status(500).end();
