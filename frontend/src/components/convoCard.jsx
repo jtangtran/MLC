@@ -6,7 +6,9 @@ class ConvoCard extends Component {
     return (
         <div className="card convoCard">
             <div className="card-body">
-                <h5 className="card-title">{this.props.model ? this.props.model.title : '...'}{}</h5>
+              <h5 className="card-title">
+                {this.props.model ? <a href={"/idea/" + this.props.model.id}>
+                  {this.props.model.title}</a> : '...'}{}</h5>
                 <h6 className="card-subtitle mb-2 text-muted">Posted by: Chris Eddy</h6>
                 <p className="card-text">Description</p>
                 <div className="row">
