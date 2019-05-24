@@ -1,26 +1,23 @@
-const Sequelize = require("sequelize");
-const sequelize = require("../db.js"); 
-
-const Idea = sequelize.define('idea', 
-  {
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  const Idea = sequelize.define('Idea', {
     id: { 
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    title: Sequelize.STRING,
-    description: Sequelize.STRING(5000),
-    place_petal: Sequelize.STRING,
-    water_petal: Sequelize.STRING,
-    energy_petal: Sequelize.STRING,
-    health_petal: Sequelize.STRING,
-    materials_petal: Sequelize.STRING,
-    equity_petal: Sequelize.STRING,
-    beauty_petal: Sequelize.STRING
-  },
-  {
-    schema: "prod"
-  }
-);
-
-module.exports = Idea;
+    title: DataTypes.STRING,
+    description: DataTypes.STRING(5000),
+    place_petal: DataTypes.STRING,
+    water_petal: DataTypes.STRING,
+    energy_petal: DataTypes.STRING,
+    health_petal: DataTypes.STRING,
+    materials_petal: DataTypes.STRING,
+    equity_petal: DataTypes.STRING,
+    beauty_petal: DataTypes.STRING
+  }, {});
+  Idea.associate = function(models) {
+    // associations can be defined here
+  };
+  return Idea;
+};

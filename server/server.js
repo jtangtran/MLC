@@ -1,4 +1,3 @@
-const sequelize = require('./db.js');
 const express = require('express');
 var cors = require('cors');
 const bodyParser = require('body-parser');
@@ -6,45 +5,41 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-const app = express()
-app.use(cors())
-const port = 3000
+const index = require('./models/index');
+const sequelize = index.sequelize;
 
-const Idea = require('./models/idea');
-const Users = require('./models/users');
+const Idea = index.Idea; 
+const Users = index.Users;
+const Blog = index.Blog; 
+const Comment = index.Comment; 
 
-app.get('/', (req, res) => res.send('Welcome to My Living City!'))
+const app = express();
+app.use(cors());
+const port = 3000;
 
-function syncTables(){
-  try {
-    Idea.sync();
-    Users.sync();
-  } catch(e){
-    console.log(e.stack);
-  }
-}
-// INIT tables
-syncTables();
+app.get('/', (req, res) => res.send('Welcome to My Living City!'));
 
-app.get('/ideas', async (req, res) => {
+sequelize.sync();
+
+app.get('/ideas', (req, res) => {
   Idea.findAll().then(ideas => {   
-    res.send(ideas)
+    res.send(ideas);
   })
    .catch(err => {
     console.error('Error: ', err);
-  })
+  });
 });
 
-app.get('/ideas/:id', async (req, res) => {
+app.get('/ideas/:id', (req, res) => {
   Idea.findById(req.params.id).then(idea => {
-    res.send(idea)
+    res.send(idea);
   })
    .catch(err => {
     console.error('Error: ', err);
-  })
+  });
 });
 
-app.post('/ideas', bodyParser.json(), async (req, res) => {
+app.post('/ideas', bodyParser.json(), (req, res) => {
   try {
     Idea.create({
       title: req.body.title,
@@ -62,9 +57,9 @@ app.post('/ideas', bodyParser.json(), async (req, res) => {
     console.log(e.stack);
     res.status(500).end();
   }
-})
+});
 
-app.post('/register', bodyParser.json(), async (req, res) => {
+app.post('/register', bodyParser.json(), (req, res) => {
   try {
     bcrypt.genSalt(saltRounds, function(err, salt) {
       bcrypt.hash(req.body.password, salt, function(err, hashPass) {
@@ -74,7 +69,7 @@ app.post('/register', bodyParser.json(), async (req, res) => {
           fname: req.body.fname,
           lname: req.body.lname,
         });
-        console.log('User registered')
+        console.log('User registered');
         res.status(200).end();
       });
     });
@@ -82,10 +77,10 @@ app.post('/register', bodyParser.json(), async (req, res) => {
     console.log(e.stack);
     res.status(500).end();
   }
-})
+});
 
-app.post('/login', bodyParser.json(), async (req, res) => {
-  console.log(' REQ: ', req.body)
+app.post('/login', bodyParser.json(), (req, res) => {
+  console.log(' REQ: ', req.body);
   Users.findAll({
     where: {
       email: req.body.email
@@ -95,23 +90,23 @@ app.post('/login', bodyParser.json(), async (req, res) => {
       bcrypt.compare(req.body.password, user[0].password, function(err, hashResponse) {
         if(hashResponse){
           res.send(user);
-          console.log('User logged in')
+          console.log('User logged in');
           res.status(200).end();
         }
         else{
-          console.log('User password does not match')
+          console.log('User password does not match');
           res.status(500).end();
         }
       });
     }
     else{
-      console.log('User email does not exist')
+      console.log('User email does not exist');
       res.status(500).end();
     }
   }).catch(e => {
     console.log(e.stack);
     res.status(500).end();
   });
-})
+});
 
-app.listen(port, () => console.log(`My Living City listening on port ${port}!`))
+app.listen(port, () => console.log(`My Living City listening on port ${port}!`));

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "migrate": "flyway -c database/flyway.js migrate"
+    "migrate": "npx sequelize-cli db:migrate"
   },
   "repository": {
     "type": "git",
@@ -23,9 +23,12 @@
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "mysql2": "^1.6.5",
     "node-flywaydb": "^0.1.6",
     "pg": "^7.8.0",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.42.0"
+    "sequelize": "^4.42.0",
+    "sequelize-auto-migrations": "^1.0.3",
+    "sequelize-cli": "^5.4.0"
   }
 }
