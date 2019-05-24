@@ -80,7 +80,6 @@ app.post('/register', bodyParser.json(), (req, res) => {
 });
 
 app.post('/login', bodyParser.json(), (req, res) => {
-  console.log(' REQ: ', req.body);
   Users.findAll({
     where: {
       email: req.body.email
