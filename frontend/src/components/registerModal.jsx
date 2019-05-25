@@ -32,13 +32,15 @@ class RegisterModal extends Component {
     e.preventDefault();
     if(this.state.password === this.state.passwordConfirm){
       try{
-        let data = JSON.stringify({
-            email: this.state.email,
-            password: this.state.password,
-            fname: this.state.fname,
-            lname: this.state.lname
-        });
-        let response = await fetch(API_URL+"/register", {
+          let data = JSON.stringify({
+              user: {
+                email: this.state.email,
+                password: this.state.password,
+                fname: this.state.fname,
+                lname: this.state.lname
+              }
+          });
+          let response = await fetch(API_URL+"/user/register", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: data

@@ -10,9 +10,9 @@ module.exports = (sequelize, DataTypes) => {
     active: DataTypes.BOOLEAN,
   }, {});
   Comment.associate = function(models) {
-    Comment.hasOne(models.Users);
-    Comment.hasOne(models.Blog);
-    Comment.hasOne(models.Idea);
+    Comment.belongsTo(models.User);
+    Comment.belongsTo(models.Blog);
+    Comment.belongsTo(models.Idea);
   };
   return Comment;
 };

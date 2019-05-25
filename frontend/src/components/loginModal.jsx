@@ -23,11 +23,13 @@ class LoginModal extends Component {
   async login(e){
     e.preventDefault();
     try{
-      let data = JSON.stringify({
-          email: this.state.email,
-          password: this.state.password,
-      });
-      await fetch(API_URL+"/login", {
+        let data = JSON.stringify({
+          user: {
+            email: this.state.email,
+            password: this.state.password,
+          }
+        });
+        await fetch(API_URL+"/user/login", {
           method: "POST",
           headers: {"Content-Type": "application/json"},
           body: data
