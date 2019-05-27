@@ -66,6 +66,8 @@ const login = (req, res, next) => {
         if(passportUser) {
             const user = passportUser;
             user.token = passportUser.generateJWT();
+            req.session.user = user;
+            res.cookie('authToken', user.token);
             return res.json({ user: user.toAuthJSON() });
         }
 
@@ -77,7 +79,8 @@ const login = (req, res, next) => {
 const getCurrentUser = (req, res, next) => {
     const { payload: { id } } = req;
 
-    return User.findById(id)
+    console.log(req.session);
+    return User.findByPk(id)
         .then((user) => {
         if(!user) {
             return res.sendStatus(400);
