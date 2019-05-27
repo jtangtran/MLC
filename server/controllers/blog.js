@@ -24,7 +24,10 @@ const getBlog = (req, res) => {
 };
 
 // POST /blog
-const postBlog = (req, res) => {
+const postBlog = (req, res, next) => {
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        return res.status(401).send("Unauthorized");
+    }
     try {
         Blog.create({
             title: req.body.title,
@@ -43,6 +46,9 @@ const postBlog = (req, res) => {
 
 // PUT /blog/:id
 const editBlog = (req, res) => {
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        return res.status(401).send("Unauthorized");
+    }
     try {
         Blog.update({
             title: req.body.title,
@@ -61,6 +67,9 @@ const editBlog = (req, res) => {
 
 // DELETE /blog/:id
 const deleteBlog = (req, res) => {
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        return res.status(401).send("Unauthorized");
+    }
     try {
         Blog.update({
             active: false

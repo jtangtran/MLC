@@ -30,17 +30,6 @@
                     "allowNull": false,
                     "field": "updatedAt",
                     "seqType": "Sequelize.DATE"
-                },
-                "CommentId": {
-                    "allowNull": true,
-                    "references": {
-                        "model": "Comments",
-                        "key": "id"
-                    },
-                    "onDelete": "SET NULL",
-                    "onUpdate": "CASCADE",
-                    "field": "CommentId",
-                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
@@ -71,6 +60,39 @@
                     "allowNull": false,
                     "field": "updatedAt",
                     "seqType": "Sequelize.DATE"
+                },
+                "UserId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Users",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "UserId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "BlogId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Blogs",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "BlogId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "IdeaId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Ideas",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "IdeaId",
+                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
@@ -129,17 +151,6 @@
                     "allowNull": false,
                     "field": "updatedAt",
                     "seqType": "Sequelize.DATE"
-                },
-                "CommentId": {
-                    "allowNull": true,
-                    "references": {
-                        "model": "Comments",
-                        "key": "id"
-                    },
-                    "onDelete": "SET NULL",
-                    "onUpdate": "CASCADE",
-                    "field": "CommentId",
-                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
@@ -190,21 +201,10 @@
                     "allowNull": false,
                     "field": "updatedAt",
                     "seqType": "Sequelize.DATE"
-                },
-                "CommentId": {
-                    "allowNull": true,
-                    "references": {
-                        "model": "Comments",
-                        "key": "id"
-                    },
-                    "onDelete": "SET NULL",
-                    "onUpdate": "CASCADE",
-                    "field": "CommentId",
-                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
         }
     },
-    "revision": 1
+    "revision": 2
 }

@@ -45,6 +45,7 @@ app.post('/user/login', auth.optional, bodyParser.json(), userController.login);
 app.get('/user/me', auth.required, userController.getCurrentUser);
 
 app.get('/blog/:id', auth.optional, blogController.getBlog);
+app.post('/blog', auth.required, blogController.postBlog);
 
 
 app.listen(port, () => console.log(`My Living City listening on port ${port}!`));

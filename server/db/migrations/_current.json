@@ -192,6 +192,13 @@
                     "field": "longitude",
                     "seqType": "Sequelize.DECIMAL"
                 },
+                "role": {
+                    "defaultValue": {
+                        "value": "user"
+                    },
+                    "field": "role",
+                    "seqType": "Sequelize.STRING"
+                },
                 "createdAt": {
                     "allowNull": false,
                     "field": "createdAt",
@@ -206,5 +213,5 @@
             "indexes": []
         }
     },
-    "revision": 2
+    "revision": 3
 }

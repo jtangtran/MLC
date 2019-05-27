@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
     location: DataTypes.STRING,
     latitude: DataTypes.DECIMAL,
     longitude: DataTypes.DECIMAL,
+    role: {
+        type: DataTypes.STRING,
+        defaultValue: 'user'
+    }
   });
   User.prototype.validatePassword = function (password) {
     return bcrypt.compareSync(password, this.password);
