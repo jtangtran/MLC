@@ -11,7 +11,7 @@ import Blogs from './components/blogs.jsx';
 import About from './components/about.jsx';
 import SubmitIdea from './components/ideaSubmission.jsx';
 import Idea from './components/idea.jsx';
-import Test from './components/test.jsx';
+import CheckAuth from './components/checkauth.jsx';
 
 const routing = (
     <Router>
@@ -22,7 +22,7 @@ const routing = (
         <Route exact path="/blogs" component={Blogs}/>
         <Route exact path="/submit" component={SubmitIdea}/>
         <Route path="/idea/:id" component={Idea}/>
-        <Route exact path="/test" component={Test}/>
+        <Route exact path="/test" component={CheckAuth}/>
       </div>
     </Router>
   )

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 const API_URL = require('../config.js')
 
-class Test extends Component {
+class CheckAuth extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,4 +31,4 @@ class Test extends Component {
   }
 }
 
-export default Test;
+export default CheckAuth;
