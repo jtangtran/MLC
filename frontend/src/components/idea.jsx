@@ -7,9 +7,22 @@ class Idea extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      json: {}
+      json: {},
+      value: 'Comment on Idea'
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  handleChange(event){
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event){
+    event.preventDefault();
+  }
+
+  
 
   async componentDidMount() {
     await fetch(API_URL + "/ideas/" + this.props.match.params.id)
@@ -43,7 +56,18 @@ class Idea extends Component {
         <b>Equity Petal: </b> {this.state.json.equity_petal} 
         <br/>
         <b>Beauty Petal: </b> {this.state.json.beauty_petal} 
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Comment:
+            <textarea value={this.state.value} onChange={this.handleChange}></textarea>
+          </label>
+          <input class="btn btn-primary" type="submit" value="Submit"></input>
+        </form>
       </div>
+    
+
+     
+     
     );
   }
 }
