@@ -8,7 +8,7 @@ class Idea extends Component {
     super(props);
     this.state = {
       json: {},
-      value: 'Comment on Idea'
+      idea: {}
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,9 +26,12 @@ class Idea extends Component {
 
   async componentDidMount() {
     await fetch(API_URL + "/ideas/" + this.props.match.params.id)
-      .then(response => response.json())
+      .then(response => {
+        return response.json();
+      })
       .then(json => {
         this.setState({json: json});
+        this.setState({idea: json.idea});
       })
       .catch(error => {
         console.log("Error: " + error);
@@ -40,22 +43,22 @@ class Idea extends Component {
     return (
       <div className="Idea">
         <Navbar/>
-        <h4>{this.state.json.title}</h4>
+        <h4>{this.state.idea.title}</h4>
         <br/>
         <p>{this.state.json.description}</p>
-        <b>Place Petal: </b> {this.state.json.place_petal} 
+        <b>Place Petal: </b> {this.state.idea.place_petal} 
         <br/>
-        <b>Water Petal: </b> {this.state.json.water_petal} 
+        <b>Water Petal: </b> {this.state.idea.water_petal} 
         <br/>
-        <b>Energy Petal: </b> {this.state.json.energy_petal} 
+        <b>Energy Petal: </b> {this.state.idea.energy_petal} 
         <br/>
-        <b>Health Petal: </b> {this.state.json.health_petal} 
+        <b>Health Petal: </b> {this.state.idea.health_petal} 
         <br/>
-        <b>Materials Petal: </b> {this.state.json.materials_petal} 
+        <b>Materials Petal: </b> {this.state.idea.materials_petal} 
         <br/>
-        <b>Equity Petal: </b> {this.state.json.equity_petal} 
+        <b>Equity Petal: </b> {this.state.idea.equity_petal} 
         <br/>
-        <b>Beauty Petal: </b> {this.state.json.beauty_petal} 
+        <b>Beauty Petal: </b> {this.state.idea.beauty_petal} 
         <form onSubmit={this.handleSubmit}>
           <label>
             Comment:
@@ -64,10 +67,6 @@ class Idea extends Component {
           <input class="btn btn-primary" type="submit" value="Submit"></input>
         </form>
       </div>
-    
-
-     
-     
     );
   }
 }

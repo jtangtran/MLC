@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     beauty_petal: DataTypes.STRING
   }, {});
   Idea.associate = function(models) {
-    // associations can be defined here
+    Idea.belongsTo(models.User);
   };
   return Idea;
 };

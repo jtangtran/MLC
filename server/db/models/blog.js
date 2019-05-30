@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     active: DataTypes.BOOLEAN,
   }, {});
   Blog.associate = function(models) {
-    // associations can be defined here
+    Blog.belongsTo(models.User);
   };
   return Blog;
 };
