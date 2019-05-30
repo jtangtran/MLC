@@ -56,15 +56,12 @@ class Idea extends Component {
         <b>Equity Petal: </b> {this.state.json.equity_petal} 
         <br/>
         <b>Beauty Petal: </b> {this.state.json.beauty_petal} 
-        <h4>Comment</h4>
-        <input type="text" name="comment"></input>
-        <input type="submit" value="Submit"></input>
         <form onSubmit={this.handleSubmit}>
           <label>
             Comment:
             <textarea value={this.state.value} onChange={this.handleChange}></textarea>
           </label>
-          <input type="submit" value="Submit"></input>
+          <input class="btn btn-primary" type="submit" value="Submit"></input>
         </form>
       </div>
     
