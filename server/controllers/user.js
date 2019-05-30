@@ -79,7 +79,6 @@ const login = (req, res, next) => {
 const getCurrentUser = (req, res, next) => {
     const { payload: { id } } = req;
 
-    console.log(req.session);
     return User.findByPk(id)
         .then((user) => {
         if(!user) {

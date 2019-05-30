@@ -1,5 +1,6 @@
 const db = require('../db/models/index');
 const Idea = db.Idea; 
+const Vote = db.Vote; 
 
 // GET /ideas
 const getAllIdeas = (req, res) => {
@@ -12,13 +13,20 @@ const getAllIdeas = (req, res) => {
 };
 
 // GET /ideas/:id
-const getSingleIdea = (req, res) => {
-  Idea.findById(req.params.id).then(idea => {
+const getSingleIdea = async function(req, res) {
+  try {
+    var dbIdea = await Idea.findById(req.params.id);
+    var upvoteCount = await Vote.count({ where: {'up': true, 'IdeaId': req.params.id} });
+    var downvoteCount = await Vote.count({ where: {'down': true, 'IdeaId': req.params.id} });
+    var idea = {
+      idea: dbIdea,
+      upvoteCount,
+      downvoteCount,
+    }
     res.send(idea);
-  })
-   .catch(err => {
+  } catch (err) {
     console.error('Error: ', err);
-  });
+  }
 };
 
 // POST /ideas
@@ -42,9 +50,79 @@ const postIdea = (req, res) => {
   }
 };
 
+const upvote = (req, res) => {
+  try {
+    Vote.findOne({ where: {UserId: req.session.user.id, IdeaId: req.params.id}})
+    .then(existingVote => {
+      if (existingVote != null) {
+          return res.status(409).json({
+              errors: {
+                error: 'You have already voted',
+              },
+          });
+      } else {
+        Vote.create({
+          UserId: req.session.user.id,
+          IdeaId: req.params.id,
+          up: true
+        });
+        res.status(200).end();
+      }
+    });
+  } catch(e) {
+    return res.status(400).json({
+      errors: {
+        error: e.stack,
+      }
+    });
+  }
+};
+
+const downvote = (req, res) => {
+  try {
+    Vote.findOne({ where: {UserId: req.session.user.id, IdeaId: req.params.id}})
+    .then(existingVote => {
+      if (existingVote != null) {
+          return res.status(409).json({
+              errors: {
+                error: 'You have already voted on this idea',
+              },
+          });
+      } else {
+        Vote.create({
+          UserId: req.session.user.id,
+          IdeaId: req.params.id,
+          down: true
+        });
+        res.status(200).end();
+      }
+    });
+  } catch(e) {
+    return res.status(400).json({
+      errors: {
+        error: e.stack,
+      }
+    });
+  }
+};
+
+getUpvoteCount = (req, res) => {
+  Vote.count({ where: {'up': true, 'IdeaId': req.params.id} }).then(count => {
+    res.status(200).send({'upvoteCount': count}); 
+  });
+};
+
+getDownvoteCount = (req, res) => {
+  Vote.count({ where: {'down': true, 'IdeaId': req.params.id} }).then(count => {
+    res.status(200).send({'downvoteCount': count}); 
+  });
+};
+
 module.exports = {
-    getAllIdeas,
-    getSingleIdea,
-    postIdea
+  getAllIdeas,
+  getSingleIdea,
+  postIdea,
+  upvote,
+  downvote,
 };
 
