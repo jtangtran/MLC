@@ -1,5 +1,6 @@
 const db = require('../db/models/index');
 const Idea = db.Idea; 
+const Vote = db.Vote; 
 
 // GET /ideas
 const getAllIdeas = (req, res) => {
@@ -42,9 +43,66 @@ const postIdea = (req, res) => {
   }
 };
 
+const upvote = (req, res) => {
+  try {
+    Vote.findOne({ where: {UserId: req.session.user.id, IdeaId: req.params.id}})
+    .then(existingVote => {
+      if (existingVote != null) {
+          return res.status(409).json({
+              errors: {
+                error: 'You have already voted',
+              },
+          });
+      } else {
+        Vote.create({
+          UserId: req.session.user.id,
+          IdeaId: req.params.id,
+          up: true
+        });
+        res.status(200).end();
+      }
+    });
+  } catch(e) {
+    return res.status(400).json({
+      errors: {
+        error: e.stack,
+      }
+    });
+  }
+};
+
+const downvote = (req, res) => {
+  try {
+    Vote.findOne({ where: {UserId: req.session.user.id, IdeaId: req.params.id}})
+    .then(existingVote => {
+      if (existingVote != null) {
+          return res.status(409).json({
+              errors: {
+                error: 'You have already voted on this idea',
+              },
+          });
+      } else {
+        Vote.create({
+          UserId: req.session.user.id,
+          IdeaId: req.params.id,
+          down: true
+        });
+        res.status(200).end();
+      }
+    });
+  } catch(e) {
+    return res.status(400).json({
+      errors: {
+        error: e.stack,
+      }
+    });
+  }
+};
 module.exports = {
-    getAllIdeas,
-    getSingleIdea,
-    postIdea
+  getAllIdeas,
+  getSingleIdea,
+  postIdea,
+  upvote,
+  downvote,
 };
 
