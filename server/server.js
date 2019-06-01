@@ -42,6 +42,8 @@ app.get('/', auth.optional, (req, res) => res.send('Welcome to My Living City!')
 
 app.get('/ideas', auth.optional, ideaController.getAllIdeas);
 app.get('/ideas/:id', auth.optional, ideaController.getSingleIdea);
+app.delete('/ideas/:id', auth.required, ideaController.deleteIdea);
+app.put('/ideas/:id', auth.required, bodyParser.json(), ideaController.editIdea);
 app.post('/ideas', auth.required, bodyParser.json(), ideaController.postIdea);
 app.post('/ideas/:id/upvote', auth.required, ideaController.upvote);
 app.post('/ideas/:id/downvote', auth.required, ideaController.downvote);

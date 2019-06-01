@@ -18,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
     state: {
       type: DataTypes.STRING,
       defaultValue: 'idea'
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
     }
   }, {});
   Idea.associate = function(models) {

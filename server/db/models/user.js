@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     return jwt.sign({
         email: this.email,
         id: this.id,
-    }, 'secret', { expiresIn: '7d'} );
+    }, 'secret', { expiresIn: '30d'} );
   };
   User.prototype.toAuthJSON = function() {
     return {

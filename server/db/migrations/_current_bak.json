@@ -167,6 +167,13 @@
                     "field": "beauty_petal",
                     "seqType": "Sequelize.STRING"
                 },
+                "state": {
+                    "defaultValue": {
+                        "value": "idea"
+                    },
+                    "field": "state",
+                    "seqType": "Sequelize.STRING"
+                },
                 "createdAt": {
                     "allowNull": false,
                     "field": "createdAt",
@@ -301,5 +308,5 @@
             "indexes": []
         }
     },
-    "revision": 6
+    "revision": 7
 }

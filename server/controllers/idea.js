@@ -14,6 +14,7 @@ const getAllIdeas = async function (req, res) {
             ['lname', 'lname']
           ]}
       ],
+      where: {active: true}
     });
     var ideas = await Promise.all(dbIdeas.map(idea => addVotes(idea))) 
     res.send(ideas);
@@ -75,6 +76,56 @@ const postIdea = (req, res) => {
   } catch(e){
     console.log(e.stack);
     res.status(500).end();
+  }
+};
+
+// PUT /idea/:id
+const editIdea = (req, res) => {
+  Idea.findByPk(req.params.id).then(idea => {
+    if (req.session.user.id != idea.UserId) {
+      return res.status(401).send("Unauthorized");
+    }
+  });
+  try {
+    Idea.update({
+      title: req.body.title,
+      description: req.body.description,
+      place_petal: req.body.place_petal, 
+      water_petal: req.body.water_petal,
+      energy_petal: req.body.energy_petal,
+      health_petal: req.body.health_petal,
+      materials_petal: req.body.materials_petal,
+      equity_petal: req.body.equity_petal,
+      beauty_petal: req.body.beauty_petal,
+    }, { where: {id: req.params.id}});
+    res.status(200).end();
+  } catch(e){
+    return res.status(500).json({
+      errors: {
+        error: e.stack
+      },
+    });
+  }
+};
+
+// DELETE /idea/:id
+const deleteIdea = (req, res) => {
+  Idea.findByPk(req.params.id).then(idea => {
+    if (req.session.user.id != idea.UserId) {
+      return res.status(401).send("Unauthorized");
+    }
+  });
+  try {
+    Idea.update({
+      active: false
+    }, { where: {id: req.params.id}});
+    res.status(200).end();
+  } catch(e){
+    return res.status(500).json({
+      errors: {
+        error: e.stack
+      },
+    });
   }
 };
 
@@ -150,6 +201,8 @@ module.exports = {
   getAllIdeas,
   getSingleIdea,
   postIdea,
+  editIdea,
+  deleteIdea,
   upvote,
   downvote,
 };
