@@ -47,6 +47,7 @@ app.post('/ideas/:id/downvote', auth.required, ideaController.downvote);
 
 app.post('/user/register', auth.optional, bodyParser.json(), userController.register);
 app.post('/user/login', auth.optional, bodyParser.json(), userController.login);
+app.post('/user/logout', auth.required, userController.logout);
 app.get('/user/me', auth.required, userController.getCurrentUser);
 
 app.get('/blog/:id', auth.optional, blogController.getBlog);

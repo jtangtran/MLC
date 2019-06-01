@@ -6,92 +6,97 @@ const sequelize = db.sequelize;
 
 //POST new user route (optional, everyone has access)
 const register = (req, res, next) => {
-    const { body: { user } } = req;
-  
-    User.findOne({ where: {email: user.email} }).then(existingUser => {
-        if (existingUser != null) {
-            return res.status(409).json({
-                errors: {
-                  email: 'already exists',
-                },
-            });
-        } else {
-            if(!user.email) {
-                return res.status(422).json({
-                errors: {
-                    email: 'is required',
-                },
-                });
-            }
+  const { body: { user } } = req;
 
-            if(!user.password) {
-                return res.status(422).json({
-                errors: {
-                    password: 'is required',
-                },
-                });
-            }
-
-            User.create(user)
-                .then((user) => res.json({'user': user.toAuthJSON() }));
-        }
-    });
+  User.findOne({ where: {email: user.email} }).then(existingUser => {
+    if (existingUser != null) {
+      return res.status(409).json({
+        errors: {
+          email: 'already exists',
+        },
+      });
+    } else {
+      if(!user.email) {
+        return res.status(422).json({
+          errors: {
+            email: 'is required',
+          },
+        });
+      }
+      if(!user.password) {
+        return res.status(422).json({
+          errors: {
+            password: 'is required',
+          },
+        });
+      }
+      User.create(user)
+        .then((user) => res.json({'user': user.toAuthJSON() }));
+      }
+  });
 };
 
 //POST login route (optional, everyone has access)
 const login = (req, res, next) => {
-    const { body: { user } } = req;
+  const { body: { user } } = req;
 
-    if(!user.email) {
-        return res.status(422).json({
-        errors: {
-            email: 'is required',
-        },
-        });
+  if(!user.email) {
+    return res.status(422).json({
+      errors: {
+        email: 'is required',
+      },
+    });
+  }
+
+  if(!user.password) {
+    return res.status(422).json({
+      errors: {
+        password: 'is required',
+      },
+    });
+  }
+
+  return passport.authenticate('local', { session: true }, (err, passportUser, info) => {
+    if(err) {
+      return next(err);
     }
 
-    if(!user.password) {
-        return res.status(422).json({
-        errors: {
-            password: 'is required',
-        },
-        });
+    if(passportUser) {
+      const user = passportUser;
+      user.token = passportUser.generateJWT();
+      req.session.user = user;
+      res.cookie('authToken', user.token, { 
+        expires: new Date(Date.now + 30 * 60 * 60 * 24 * 1000)}); // 30 days in ms
+      return res.json({ user: user.toAuthJSON() });
     }
 
-    return passport.authenticate('local', { session: true }, (err, passportUser, info) => {
-        if(err) {
-            return next(err);
-        }
+    return status(400).info;
+  })(req, res, next);
+};
 
-        if(passportUser) {
-            const user = passportUser;
-            user.token = passportUser.generateJWT();
-            req.session.user = user;
-            res.cookie('authToken', user.token, { 
-              expires: new Date(Date.now + 30 * 60 * 60 * 24 * 1000)}); // 30 days in ms
-            return res.json({ user: user.toAuthJSON() });
-        }
-
-        return status(400).info;
-    })(req, res, next);
+const logout = (req, res, next) => {
+  req.session.destroy();
+  res.clearCookie('authToken');
+  res.status(200).end();
 };
 
 //GET current route (required, only authenticated users have access)
 const getCurrentUser = (req, res, next) => {
-    const { payload: { id } } = req;
+  const { payload: { id } } = req;
 
-    return User.findByPk(id)
-        .then((user) => {
-        if(!user) {
-            return res.sendStatus(400);
-        }
+  return User.findByPk(id)
+    .then((user) => {
+      if(!user) {
+        return res.sendStatus(400);
+      }
 
-        return res.json({ user: user.toAuthJSON() });
-        });
+      return res.json({ user: user.toAuthJSON() });
+    });
 };
 
 module.exports = {
-    register,
-    login,
-    getCurrentUser
+  register,
+  login,
+  logout,
+  getCurrentUser
 };
