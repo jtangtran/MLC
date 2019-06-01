@@ -14,7 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     health_petal: DataTypes.STRING,
     materials_petal: DataTypes.STRING,
     equity_petal: DataTypes.STRING,
-    beauty_petal: DataTypes.STRING
+    beauty_petal: DataTypes.STRING,
+    state: {
+      type: DataTypes.STRING,
+      defaultValue: 'idea'
+    }
   }, {});
   Idea.associate = function(models) {
     Idea.belongsTo(models.User);

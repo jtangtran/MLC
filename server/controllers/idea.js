@@ -13,9 +13,8 @@ const getAllIdeas = async function (req, res) {
             ['fname', 'fname'],
             ['lname', 'lname']
           ]}
-        ]
-      }
-    );
+      ],
+    });
     var ideas = await Promise.all(dbIdeas.map(idea => addVotes(idea))) 
     res.send(ideas);
   }
@@ -46,7 +45,7 @@ const getSingleIdea = async function(req, res) {
           ['fname', 'fname'],
           ['lname', 'lname']
         ]}
-      ]
+      ],
     });
     var upvoteCount = await Vote.count({ where: {'up': true, 'IdeaId': req.params.id} });
     var downvoteCount = await Vote.count({ where: {'down': true, 'IdeaId': req.params.id} });
