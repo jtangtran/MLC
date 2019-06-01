@@ -17,7 +17,7 @@ const auth = require ('./controllers/auth');
 var session = require("express-session");
 app.use(session({
   secret: "?Jmapv57ueVK!#6@WZJ-VMs7W#@?&!RX",
-  cookie: {_expires: 30 * 60 * 60 * 24 * 1000} // 30 days in milliseconds
+  cookie: {maxAge: 30 * 60 * 60 * 24 * 1000} // 30 days in milliseconds
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -36,6 +36,7 @@ passport.deserializeUser(function(id, done) {
 const ideaController = require('./controllers/idea');
 const userController = require('./controllers/user');
 const blogController = require('./controllers/blog');
+const commentController = require('./controllers/comment');
 
 app.get('/', auth.optional, (req, res) => res.send('Welcome to My Living City!'));
 
@@ -51,7 +52,13 @@ app.post('/user/logout', auth.required, userController.logout);
 app.get('/user/me', auth.required, userController.getCurrentUser);
 
 app.get('/blog/:id', auth.optional, blogController.getBlog);
-app.post('/blog', auth.required, blogController.postBlog);
+app.post('/blog', auth.required, bodyParser.json(), blogController.postBlog);
+app.put('/blog/:id', auth.required, bodyParser.json(), blogController.editBlog);
+app.delete('/blog/:id', auth.required, blogController.deleteBlog);
 
+app.get('/:type/:id/comments', auth.optional, commentController.getComments);
+app.post('/:type/:id/comment', auth.required, bodyParser.json(), commentController.addComment);
+app.put('/comment/:id', auth.required, bodyParser.json(), commentController.editComment);
+app.delete('/comment/:id', auth.required, commentController.deleteComment);
 
 app.listen(port, () => console.log(`My Living City listening on port ${port}!`));

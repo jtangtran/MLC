@@ -26,15 +26,10 @@ module.exports = (sequelize, DataTypes) => {
     return bcrypt.compareSync(password, this.password);
   };
   User.prototype.generateJWT = function() {
-    const today = new Date();
-    const expirationDate = new Date(today);
-    expirationDate.setDate(today.getDate() + 60);
-
     return jwt.sign({
         email: this.email,
         id: this.id,
-        exp: parseInt(expirationDate.getTime() / 1000, 10),
-    }, 'secret');
+    }, 'secret', { expiresIn: '7d'} );
   };
   User.prototype.toAuthJSON = function() {
     return {

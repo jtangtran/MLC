@@ -8,7 +8,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     title: DataTypes.STRING,
     markdown: DataTypes.STRING(5000),
-    active: DataTypes.BOOLEAN,
+    active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    },
+    slug: DataTypes.STRING,
+    short_desc: DataTypes.STRING(500),
   }, {});
   Blog.associate = function(models) {
     Blog.belongsTo(models.User);

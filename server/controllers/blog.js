@@ -32,7 +32,6 @@ const postBlog = (req, res, next) => {
         Blog.create({
             title: req.body.title,
             markdown: req.body.markdown,
-            active: true
         });
         res.status(200).end();
     } catch(e){
@@ -53,7 +52,6 @@ const editBlog = (req, res) => {
         Blog.update({
             title: req.body.title,
             markdown: req.body.markdown,
-            active: true
         }, { where: {id: req.params.id}});
         res.status(200).end();
     } catch(e){

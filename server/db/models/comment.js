@@ -7,7 +7,10 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
     },
     text: DataTypes.STRING(5000),
-    active: DataTypes.BOOLEAN,
+    active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    }
   }, {});
   Comment.associate = function(models) {
     Comment.belongsTo(models.User);
