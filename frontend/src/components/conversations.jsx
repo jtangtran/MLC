@@ -29,6 +29,10 @@ class Conversations extends Component {
       }).then((response) => {
           response.json().then((data) => {
             console.log('Fetched Ideas: ', data);
+            data.forEach(element => {
+              element.idea.downvotes = element.downvoteCount;
+              element.idea.upvotes = element.upvoteCount;
+            });
             this.setState({ideas: data})
             this.setState({loading: false})
         });
@@ -44,66 +48,33 @@ class Conversations extends Component {
       return (
         <div className="Conversations">
           <Navbar/>
-          <div className="row ml-3 mr-3">
+          <div className="convoRow row ml-3 mr-3">
             <div className="col-12 text-center">
               <br/>
               <h2>Ideas Discussions</h2>
-              <div className="row">
-                <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                  <ConvoCard model={this.state.ideas[0]}/>
-                </div>
-                <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                  <ConvoCard model={this.state.ideas[1]}/>
-                </div>
-                <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                  <ConvoCard model={this.state.ideas[2]}/>
-                </div>
-                <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                  <ConvoCard model={this.state.ideas[3]}/>
-                </div>
-              </div>
+              {this.state.ideas.map((value, index) => {
+                return <ConvoCard key={index} model={value}/>
+              })}
             </div>
           </div>
   
-          <div className="row ml-3 mr-3">
+          <div className="convoRow row ml-3 mr-3">
             <div className="col-12 text-center">
               <br/>
               <h2>Proposals Discussions</h2>
-              <div className="row">
-                <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                  <ConvoCard/>
-                </div>
-                <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                  <ConvoCard/>
-                </div>
-                <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                  <ConvoCard/>
-                </div>
-                <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                  <ConvoCard/>
-                </div>
-              </div>
+              {this.state.ideas.map((value, index) => {
+                return <ConvoCard key={index} model={value}/>
+              })}
             </div>
           </div>
   
-          <div className="row ml-3 mr-3">
+          <div className="convoRow row ml-3 mr-3">
             <div className="col-12 text-center">
               <br/>
               <h2>Active Collaborations</h2>
-              <div className="row">
-                <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                  <ConvoCard/>
-                </div>
-                <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                  <ConvoCard/>
-                </div>
-                <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                  <ConvoCard/>
-                </div>
-                <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                  <ConvoCard/>
-                </div>
-              </div>
+              {this.state.ideas.map((value, index) => {
+                return <ConvoCard key={index} model={value}/>
+              })}
             </div>
           </div>
         </div>

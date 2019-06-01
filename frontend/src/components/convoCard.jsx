@@ -10,16 +10,13 @@ class ConvoCard extends Component {
                 {this.props.model ? <a href={"/idea/" + this.props.model.idea.id}>
                   {this.props.model.idea.title}</a> : '...'}{}</h5>
                 <h6 className="card-subtitle mb-2 text-muted">Posted by: Chris Eddy</h6>
-                <p className="card-text">Description</p>
+                <p className="card-text">{this.props.model.idea.description}</p>
                 <div className="row">
                 <div className="col-6">
-                    <p className="likeText">134 Likes</p>
+                    <p className="likeText">{this.props.model.idea.upvotes} Likes</p>
                 </div>
                 <div className="col-6">
-                    <p className="dislikeText">134 Dislikes</p>
-                </div>
-                <div className="col-12">
-                    <p>15 Comments</p>
+                    <p className="dislikeText">{this.props.model.idea.downvotes} Dislikes</p>
                 </div>
                 </div>
             </div>
