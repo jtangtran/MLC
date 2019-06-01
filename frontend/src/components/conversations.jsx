@@ -48,13 +48,15 @@ class Conversations extends Component {
       return (
         <div className="Conversations">
           <Navbar/>
-          <div className="convoRow row ml-3 mr-3">
+          <div className="row ml-3 mr-3">
             <div className="col-12 text-center">
               <br/>
               <h2>Ideas Discussions</h2>
-              {this.state.ideas.map((value, index) => {
-                return <ConvoCard key={index} model={value}/>
-              })}
+              <div className="convoRow">
+                {this.state.ideas.map((value, index) => {
+                  return <ConvoCard key={index} model={value}/>
+                })}
+              </div>
             </div>
           </div>
   
@@ -62,9 +64,11 @@ class Conversations extends Component {
             <div className="col-12 text-center">
               <br/>
               <h2>Proposals Discussions</h2>
-              {this.state.ideas.map((value, index) => {
-                return <ConvoCard key={index} model={value}/>
-              })}
+              <div className="convoRow">
+                {this.state.ideas.map((value, index) => {
+                  return <ConvoCard key={index} model={value}/>
+                })}
+              </div>
             </div>
           </div>
   
@@ -72,9 +76,11 @@ class Conversations extends Component {
             <div className="col-12 text-center">
               <br/>
               <h2>Active Collaborations</h2>
-              {this.state.ideas.map((value, index) => {
-                return <ConvoCard key={index} model={value}/>
-              })}
+              <div className="convoRow">
+                {this.state.ideas.map((value, index) => {
+                  return <ConvoCard key={index} model={value}/>
+                })}
+              </div>
             </div>
           </div>
         </div>

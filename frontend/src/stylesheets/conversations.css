@@ -5,6 +5,13 @@
     display: inline-block;
     margin-bottom: 30px;
 }
+.Conversations .convoCard:hover{
+    background-color: #eceaea;
+}
+.Conversations .convoCard a{
+    text-decoration: none;
+    color: black;
+}
 .Conversations .convoRow{
     max-height: 400px;
     overflow-x: auto;
