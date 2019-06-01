@@ -67,7 +67,8 @@ const login = (req, res, next) => {
             const user = passportUser;
             user.token = passportUser.generateJWT();
             req.session.user = user;
-            res.cookie('authToken', user.token);
+            res.cookie('authToken', user.token, { 
+              expires: new Date(Date.now + 30 * 60 * 60 * 24 * 1000)}); // 30 days in ms
             return res.json({ user: user.toAuthJSON() });
         }
 
