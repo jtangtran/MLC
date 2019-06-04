@@ -30,10 +30,11 @@ class Conversations extends Component {
       for(let i = 0; i < scrollRows.length; i++){
         setInterval(function(){
           let width = scrollRows[i].scrollWidth / 2;
-          if(scrollRows[i].scrollLeft == width){
+          console.log(width, scrollRows[0].scrollLeft)
+          if(scrollRows[i].scrollLeft >= width){
             turnAround[i] = true;
           }
-          if(scrollRows[i].scrollLeft == 20){
+          if(scrollRows[i].scrollLeft <= 10){
             turnAround[i] = false;
           }
           if(turnAround[i]){
