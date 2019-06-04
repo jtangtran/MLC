@@ -54,15 +54,15 @@ class Idea extends Component {
 
   addComment(e){
     e.preventDefault();
+    const data = {
+      text: this.state.newComment
+    }
     fetch(API_URL + "/idea/" + this.props.match.params.id + '/comment', {
       method: "POST",
-      body: {"text": this.state.newComment}
+      body: data
     })
     .then(res => {
-      return res.json();
-    })
-    .then(json => {
-      console.log(json);
+      return res;
     })
     .catch(error => {
       console.log("Error: " + error);
