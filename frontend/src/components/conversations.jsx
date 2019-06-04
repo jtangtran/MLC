@@ -15,15 +15,41 @@ class Conversations extends Component {
         loading: true
     };
     this.getIdeas = this.getIdeas.bind(this);
+    this.autoScroll = this.autoScroll.bind(this);
   }
 
   componentDidMount(){
     this.getIdeas();
+    this.autoScroll();
   }
 
-  async getIdeas(){
+  autoScroll(){
+    setTimeout(function(){
+      const scrollRows = document.getElementsByClassName('convoRow');
+      let turnAround = [false, false, false];
+      for(let i = 0; i < scrollRows.length; i++){
+        setInterval(function(){
+          let width = scrollRows[i].scrollWidth / 2;
+          if(scrollRows[i].scrollLeft == width){
+            turnAround[i] = true;
+          }
+          if(scrollRows[i].scrollLeft == 20){
+            turnAround[i] = false;
+          }
+          if(turnAround[i]){
+            scrollRows[i].scrollLeft -= 1;
+          }
+          else{
+            scrollRows[i].scrollLeft += 1;
+          }
+          }, 50);
+      }
+      }, 1000);
+  }
+
+  getIdeas(){
     try{
-      await fetch(API_URL + "/ideas", {
+      fetch(API_URL + "/ideas", {
           method: "GET",
           headers: {"Content-Type": "application/json"}
       }).then((response) => {
@@ -60,7 +86,7 @@ class Conversations extends Component {
             </div>
           </div>
   
-          <div className="convoRow row ml-3 mr-3">
+          <div className="row ml-3 mr-3">
             <div className="col-12 text-center">
               <br/>
               <h2>Proposals Discussions</h2>
@@ -72,7 +98,7 @@ class Conversations extends Component {
             </div>
           </div>
   
-          <div className="convoRow row ml-3 mr-3">
+          <div className="row ml-3 mr-3">
             <div className="col-12 text-center">
               <br/>
               <h2>Active Collaborations</h2>
