@@ -47,7 +47,7 @@ class Conversations extends Component {
       }, 1000);
   }
 
-  getIdeas(){
+  async getIdeas(){
     try{
       await fetch(API_URL + "/ideas/0", {
           method: "GET",
