@@ -54,11 +54,12 @@ class Idea extends Component {
 
   addComment(e){
     e.preventDefault();
-    const data = {
+    const data = JSON.stringify({
       text: this.state.newComment
-    }
+    })
     fetch(API_URL + "/idea/" + this.props.match.params.id + '/comment', {
       method: "POST",
+      headers: {"Content-Type": "application/json"},
       body: data
     })
     .then(res => {
