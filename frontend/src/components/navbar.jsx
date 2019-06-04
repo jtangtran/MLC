@@ -6,6 +6,29 @@ import SignInModal from './loginModal.jsx';
 import SignUpModal from './registerModal.jsx';
 
 class Navbar extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      user: ''
+    };
+  }
+
+  componentDidMount(){
+    const loginButtons = document.getElementById('loginButtons');
+    const loggedIn = document.getElementById('loggedIn');
+    let userLoggedIn = sessionStorage.getItem('loggedin');
+    let user = sessionStorage.getItem('user');
+    this.setState({user: user});
+    if(userLoggedIn){
+      loginButtons.hidden = true;
+      loggedIn.hidden = false;
+    }
+    else{
+      loginButtons.hidden = false;
+      loggedIn.hidden = true;
+    }
+  }
+
   render() {
     return (
       <div className="Navbar">
@@ -22,8 +45,13 @@ class Navbar extends Component {
               <Link to="/submit" className="nav-item nav-link">Submit Idea</Link>
             </div>
           </div>
-          <button type="button" className="btn btn-primary mr-2" data-toggle="modal" data-target="#loginModal">Login</button>
-          <button type="button" className="btn btn-secondary" data-toggle="modal" data-target="#registerModal">Register</button>
+          <div id="loginButtons">
+            <button type="button" className="btn btn-primary mr-2" data-toggle="modal" data-target="#loginModal">Login</button>
+            <button type="button" className="btn btn-secondary" data-toggle="modal" data-target="#registerModal">Register</button>
+          </div>
+          <div id="loggedIn">
+            <button type="button" className="btn btn-outline-success">{this.state.user}</button>
+          </div>
         </nav>
         <SignInModal/>
         <SignUpModal/>

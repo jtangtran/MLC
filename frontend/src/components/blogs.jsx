@@ -4,33 +4,38 @@ import '../stylesheets/blogs.css';
 import Navbar from './navbar';
 import BlogCard from './blogCard';
 
+const API_URL = require('../config.js')
+
 class Blogs extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      blogs: ['lol', 'lol', 'lol']
+    };
+}
+  componentDidMount(){
+    fetch(API_URL + "/blog/")
+      .then(res => {
+        return res.json();
+      })
+      .then(json => {
+        this.setState({blogs: json});
+      })
+      .catch(error => {
+        console.log("Error: " + error);
+      });
+  }
+
   render() {
     return (
       <div className="Blogs">
         <Navbar/>
         <h1 className="pt-3 pl-4">Blogs</h1>
         <div className="row pt-3 pl-4 pr-4">
-          <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 pt-2 pb-2">
-            <BlogCard/>
-          </div>
-          <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 pt-2 pb-2">
-            <BlogCard/>
-          </div>
-          <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 pt-2 pb-2">
-            <BlogCard/>
-          </div>
-        </div>
-        <br/>
-        <div className="row pt-3 pl-4 pr-4">
-          <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 pt-2 pb-2">
-            <BlogCard/>
-          </div>
-          <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 pt-2 pb-2">
-            <BlogCard/>
-          </div>
-          <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 pt-2 pb-2">
-            <BlogCard/>
+          <div className="col-12">
+          {this.state.blogs.map((value, index) => {
+            return <BlogCard model={value} key={index}/>
+          })}
           </div>
         </div>
       </div>

@@ -9,19 +9,11 @@ class RegisterModal extends Component {
     this.state = {
         email: '',
         password: '',
-        passwordConfirm: '',
         fname: '',
         lname: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.register = this.register.bind(this);
-    this.rejectRegister = this.rejectRegister.bind(this);
-    this.acceptRegister = this.acceptRegister.bind(this);
-  }
-
-  componentDidMount(){
-    document.getElementById('confirmIcon').hidden = true;
-    document.getElementById('denyIcon').hidden = true;
   }
 
   handleChange(event) {
@@ -29,50 +21,63 @@ class RegisterModal extends Component {
   }
 
   async register(e){
+
     e.preventDefault();
-    if(this.state.password === this.state.passwordConfirm){
-      try{
-          let data = JSON.stringify({
+    try{
+        let data = JSON.stringify({
+            user: {
+              email: this.state.email,
+              password: this.state.password,
+              fname: this.state.fname,
+              lname: this.state.lname
+            }
+        });
+        let response = await fetch(API_URL+"/user/register", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: data
+      });
+      if (response.ok){
+          console.log('Register Success')
+          document.getElementById('submitBtnRegister').hidden = true;
+          document.getElementById('confirmIconRegister').hidden = false;
+          try{
+            let data = JSON.stringify({
               user: {
                 email: this.state.email,
                 password: this.state.password,
-                fname: this.state.fname,
-                lname: this.state.lname
               }
+            });
+            await fetch(API_URL+"/user/login", {
+              method: "POST",
+              headers: {"Content-Type": "application/json"},
+              body: data
+          }).then((response) => {
+            if(response.ok){
+              response.json().then((data) => {
+                console.log('Got User: ', data);
+                sessionStorage.setItem('loggedin', true);
+                sessionStorage.setItem('user', data.user.email);
+                setTimeout(function(){
+                  window.location.reload();
+                  }, 1500);
+              }).catch(e => {
+                console.log(e.stack);
+                sessionStorage.setItem('loggedin', false);
+                sessionStorage.setItem('user', data.user.email);
+              });
+            }
           });
-          let response = await fetch(API_URL+"/user/register", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: data
-        });
-        if (response.ok){
-            console.log('Register Success')
-            this.acceptRegister();
         }
-        else{
-          this.rejectRegister();
+        catch(e){
+            console.log(e.stack);
+            this.rejectLogin();
         }
       }
-      catch(e){
-          console.log(e.stack);
-          this.rejectRegister();
-      }
     }
-    else{
-      this.rejectRegister();
+    catch(e){
+        console.log(e.stack);
     }
-  }
-
-  rejectRegister(){
-    document.getElementById('submitBtn').hidden = false;
-    document.getElementById('confirmIcon').hidden = true;
-    document.getElementById('denyIcon').hidden = false;
-  }
-
-  acceptRegister(){
-    document.getElementById('submitBtn').hidden = true;
-    document.getElementById('confirmIcon').hidden = false;
-    document.getElementById('denyIcon').hidden = true;
   }
 
   render() {
@@ -101,15 +106,9 @@ class RegisterModal extends Component {
                   <div className="form-group">
                     <input onChange={this.handleChange} name="password" type="password" className="form-control text-center" id="passwordRegisterInput" placeholder="Password" required/>
                   </div>
-                  <div className="form-group">
-                    <input onChange={this.handleChange} name="passwordConfirm" type="password" className="form-control text-center" id="passwordConfirmInput" placeholder="Confirm Password" required/>
-                  </div>
-                  <div id="statusContainer">
-                    <button id="submitBtn" type="submit" className="btn btn-primary">Register</button>
-                    <div>
-                      <i id="confirmIcon" className="fas fa-check fa-2x"></i>
-                      <i id="denyIcon" className="far fa-times-circle fa-2x"></i>
-                    </div>
+                  <div>
+                    <button id="submitBtnRegister" type="submit" className="btn btn-primary">Register</button>
+                    <i id="confirmIconRegister" hidden className="fas fa-check fa-2x"></i>
                   </div>
                 </form>
               </div>
