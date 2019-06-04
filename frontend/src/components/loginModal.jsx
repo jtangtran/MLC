@@ -37,9 +37,13 @@ class LoginModal extends Component {
         if(response.ok){
           response.json().then((data) => {
             console.log('Got User: ', data);
+            sessionStorage.setItem('loggedin', true);
+            sessionStorage.setItem('user', data.user.email);
             this.acceptLogin();
           }).catch(e => {
             console.log(e.stack);
+            sessionStorage.setItem('loggedin', false);
+            sessionStorage.setItem('user', data.user.email);
             this.rejectLogin();
           });
         }
@@ -61,6 +65,9 @@ class LoginModal extends Component {
     document.getElementById('submitBtn').hidden = true;
     document.getElementById('confirmIcon').hidden = false;
     document.getElementById('denyIcon').hidden = true;
+    setTimeout(function(){
+      window.location.reload();
+      }, 1500);
   }
 
 
@@ -87,8 +94,8 @@ class LoginModal extends Component {
                   <div id="statusContainer">
                     <button id="submitBtn" type="submit" className="btn btn-primary">Login</button>
                     <div>
-                      <i id="confirmIcon" className="fas fa-check fa-2x"></i>
-                      <i id="denyIcon" className="far fa-times-circle fa-2x"></i>
+                      <i id="confirmIcon" hidden className="fas fa-check fa-2x"></i>
+                      <i id="denyIcon" hidden className="far fa-times-circle fa-2x"></i>
                     </div>
                   </div>
                 </form>
