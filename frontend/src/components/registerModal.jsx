@@ -21,7 +21,6 @@ class RegisterModal extends Component {
   }
 
   async register(e){
-
     e.preventDefault();
     try{
         let data = JSON.stringify({
@@ -71,7 +70,6 @@ class RegisterModal extends Component {
         }
         catch(e){
             console.log(e.stack);
-            this.rejectLogin();
         }
       }
     }
