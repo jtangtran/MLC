@@ -1,27 +1,52 @@
 const db = require('../db/models/index');
 const Comment = db.Comment; 
+const User = db.User;
 
 // GET /:type/:id/comments
 const getComments = (req, res) => {
   if (req.params.type === 'blog') { 
-    Comment.findAll({where: {'BlogId': req.params.id, active: true}}).then(comments => {
+    Comment.findAll({
+      where: {
+        'BlogId': req.params.id
+      },
+      active: true,
+      include: [{
+        model: User,
+        attributes: [
+          ['fname', 'fname'],
+          ['lname', 'lname']
+        ]}
+      ],
+      }).then(comments => {
       res.send(comments);
     })
     .catch(err => {
       return res.status(500).json({
         errors: {
-          error: err
+          error: err.stack
         },
       });
     });
   } else if (req.params.type === 'idea') {
-    Comment.findAll({where: {'IdeaId': req.params.id, active: true}}).then(comments => {
+    Comment.findAll({
+      where: {
+        'IdeaId': req.params.id
+      },
+      active: true,
+      include: [{
+        model: User,
+        attributes: [
+          ['fname', 'fname'],
+          ['lname', 'lname']
+        ]}
+      ],
+    }).then(comments => {
       res.send(comments);
     })
     .catch(err => {
       return res.status(500).json({
         errors: {
-          err
+          error: err.stack
         },
       });
     });
