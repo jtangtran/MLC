@@ -15,36 +15,10 @@ class Conversations extends Component {
         loading: true
     };
     this.getIdeas = this.getIdeas.bind(this);
-    this.autoScroll = this.autoScroll.bind(this);
   }
 
   componentDidMount(){
     this.getIdeas();
-    this.autoScroll();
-  }
-
-  autoScroll(){
-    setTimeout(function(){
-      const scrollRows = document.getElementsByClassName('convoRow');
-      let turnAround = [false, false, false];
-      for(let i = 0; i < scrollRows.length; i++){
-        setInterval(function(){
-          let width = scrollRows[i].scrollWidth / 2;
-          if(scrollRows[i].scrollLeft >= width){
-            turnAround[i] = true;
-          }
-          if(scrollRows[i].scrollLeft <= 10){
-            turnAround[i] = false;
-          }
-          if(turnAround[i]){
-            scrollRows[i].scrollLeft -= 1;
-          }
-          else{
-            scrollRows[i].scrollLeft += 1;
-          }
-          }, 50);
-      }
-      }, 1000);
   }
 
   async getIdeas(){

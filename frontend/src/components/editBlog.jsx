@@ -12,7 +12,8 @@ class EditBlog extends Component {
         super(props);
         this.state = {
           value: "",
-          tab: "write" | "preview"
+          tab: "write" | "preview",
+          title: ''
         };
         this.converter = new Showdown.Converter({
           tables: true,
@@ -27,13 +28,17 @@ class EditBlog extends Component {
         this.setState({ value });
     };
 
+    handleTitleChange = (event) => {
+      this.setState({title: event.target.value});
+    };
+
     handleTabChange = (tab) => {
       this.setState({tab})
     };
 
     addBlog(){
       const data = JSON.stringify({
-        title: "blog",
+        title: this.state.title,
         markdown: this.state.value
       })
       fetch(API_URL + "/blog", {
@@ -50,6 +55,10 @@ class EditBlog extends Component {
         <div className="row">
           <div className="col-6">
             <h1 className="pt-3 pl-4">Edit Blog</h1>
+            <div class="input-group mb-3 ml-2">
+              <input onChange={this.handleTitleChange} value={this.state.title} type="text" class="form-control" placeholder="Title"/>
+            </div>
+
           </div>
           <div className="col-6">
             <button onClick={this.addBlog} type="button" className="btn btn-warning float-right mt-3 mr-4">Save Blog</button>
