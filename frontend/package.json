@@ -6,8 +6,10 @@
     "bcrypt": "^3.0.4",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "react-mde": "^7.3.4",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "^2.1.5"
+    "react-scripts": "^2.1.5",
+    "showdown": "^1.9.0"
   },
   "scripts": {
     "start": "react-scripts start",
