@@ -23,7 +23,7 @@ class Conversations extends Component {
 
   async getIdeas(){
     try{
-      await fetch(API_URL + "/ideas", {
+      await fetch(API_URL + "/ideas/0", {
           method: "GET",
           headers: {"Content-Type": "application/json"}
       }).then((response) => {

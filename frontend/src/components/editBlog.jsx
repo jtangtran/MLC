@@ -11,7 +11,7 @@ class EditBlog extends Component {
     constructor (props) {
         super(props);
         this.state = {
-          value: "**Hello world!!!**",
+          value: "",
           tab: "write" | "preview"
         };
         this.converter = new Showdown.Converter({
