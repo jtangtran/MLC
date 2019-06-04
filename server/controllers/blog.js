@@ -1,5 +1,34 @@
 const db = require('../db/models/index');
 const Blog = db.Blog; 
+const User = db.User;
+
+// GET /blogs
+const getBlogs = (req, res) => {
+  try {
+    var Blogs = Blog.findAll({
+      include: [{
+          model: User,
+          attributes: [
+            ['fname', 'fname'],
+            ['lname', 'lname']
+          ]}
+      ],
+      where: {active: true},
+      limit: 50
+    }).then((blogs) => res.send(blogs))
+      .catch((err) => {
+        throw err;
+      });
+  }
+
+  catch(err) {
+    return res.status(400).json({
+      errors: {
+        error: err.stack
+      },
+    });
+  }
+};
 
 // GET /blog/:id
 const getBlog = (req, res) => {
@@ -83,6 +112,7 @@ const deleteBlog = (req, res) => {
 };
 
 module.exports = {
+    getBlogs,
     getBlog,
     postBlog,
     editBlog,

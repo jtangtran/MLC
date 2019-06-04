@@ -40,19 +40,21 @@ const commentController = require('./controllers/comment');
 
 app.get('/', auth.optional, (req, res) => res.send('Welcome to My Living City!'));
 
-app.get('/ideas', auth.optional, ideaController.getAllIdeas);
-app.get('/ideas/:id', auth.optional, ideaController.getSingleIdea);
-app.delete('/ideas/:id', auth.required, ideaController.deleteIdea);
-app.put('/ideas/:id', auth.required, bodyParser.json(), ideaController.editIdea);
-app.post('/ideas', auth.required, bodyParser.json(), ideaController.postIdea);
-app.post('/ideas/:id/upvote', auth.required, ideaController.upvote);
-app.post('/ideas/:id/downvote', auth.required, ideaController.downvote);
+app.get('/ideas/:offset', auth.optional, ideaController.getIdeas);
+app.get('/idea/:id', auth.optional, ideaController.getSingleIdea);
+app.delete('/idea/:id', auth.required, ideaController.deleteIdea);
+app.put('/idea/:id', auth.required, bodyParser.json(), ideaController.editIdea);
+app.post('/idea', auth.required, bodyParser.json(), ideaController.postIdea);
+app.post('/idea/:id/upvote', auth.required, ideaController.upvote);
+app.post('/idea/:id/downvote', auth.required, ideaController.downvote);
 
 app.post('/user/register', auth.optional, bodyParser.json(), userController.register);
 app.post('/user/login', auth.optional, bodyParser.json(), userController.login);
 app.post('/user/logout', auth.required, userController.logout);
 app.get('/user/me', auth.required, userController.getCurrentUser);
 
+
+app.get('/blogs', auth.optional, blogController.getBlogs);
 app.get('/blog/:id', auth.optional, blogController.getBlog);
 app.post('/blog', auth.required, bodyParser.json(), blogController.postBlog);
 app.put('/blog/:id', auth.required, bodyParser.json(), blogController.editBlog);

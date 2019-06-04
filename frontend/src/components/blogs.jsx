@@ -14,7 +14,7 @@ class Blogs extends Component {
     };
 }
   componentDidMount(){
-    fetch(API_URL + "/blog/")
+    fetch(API_URL + "/blogs/")
       .then(res => {
         return res.json();
       })

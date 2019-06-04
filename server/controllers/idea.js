@@ -3,8 +3,8 @@ const Idea = db.Idea;
 const Vote = db.Vote; 
 const User = db.User;
 
-// GET /ideas
-const getAllIdeas = async function (req, res) {
+// GET /ideas/:offset
+const getIdeas = async function (req, res) {
   try {
     var dbIdeas = await Idea.findAll({
       include: [{
@@ -14,7 +14,9 @@ const getAllIdeas = async function (req, res) {
             ['lname', 'lname']
           ]}
       ],
-      where: {active: true}
+      where: {active: true},
+      offset: req.params.offset,
+      limit: 50
     });
     var ideas = await Promise.all(dbIdeas.map(idea => addVotes(idea))) 
     res.send(ideas);
@@ -36,7 +38,7 @@ const addVotes = async idea => {
   }
 }
 
-// GET /ideas/:id
+// GET /idea/:id
 const getSingleIdea = async function(req, res) {
   try {
     var dbIdea = await Idea.findByPk(req.params.id, {
@@ -198,7 +200,7 @@ getDownvoteCount = (req, res) => {
 };
 
 module.exports = {
-  getAllIdeas,
+  getIdeas,
   getSingleIdea,
   postIdea,
   editIdea,

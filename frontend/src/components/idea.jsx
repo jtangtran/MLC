@@ -28,7 +28,7 @@ class Idea extends Component {
   }
 
   async componentDidMount() {
-    await fetch(API_URL + "/ideas/" + this.props.match.params.id)
+    await fetch(API_URL + "/idea/" + this.props.match.params.id)
       .then(response => {
         return response.json();
       })
@@ -72,7 +72,7 @@ class Idea extends Component {
 
   addLike(e){
     e.preventDefault();
-    fetch(API_URL + "/ideas/" + this.props.match.params.id + '/upvote', {
+    fetch(API_URL + "/idea/" + this.props.match.params.id + '/upvote', {
       method: "POST",
     })
     .then(res => {
@@ -88,7 +88,7 @@ class Idea extends Component {
 
   addDislike(e){
     e.preventDefault();
-    fetch(API_URL + "/ideas/" + this.props.match.params.id + '/downvote', {
+    fetch(API_URL + "/idea/" + this.props.match.params.id + '/downvote', {
       method: "POST"
     })
     .then(res => {
