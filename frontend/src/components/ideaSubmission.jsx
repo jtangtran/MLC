@@ -28,7 +28,6 @@ class IdeaSubmission extends Component {
             console.log(evt.target.files);
         });
 
-        const user = sessionStorage.getItem('user');
         const userLoggedIn = sessionStorage.getItem('loggedin');
         const signInWarning = document.getElementById('signInWarning');
         const submitIdeaBtn = document.getElementById('submitIdeaBtn');
