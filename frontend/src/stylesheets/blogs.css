@@ -3,3 +3,11 @@
     display: inline-block;
     margin: 10px;
 }
+
+.BlogAdmin .list-group-item div span{
+    cursor: pointer;
+}
+
+.BlogAdmin .list-group-item div span:hover{
+    color: whitesmoke;
+}

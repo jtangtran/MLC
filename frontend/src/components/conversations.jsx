@@ -60,7 +60,7 @@ class Conversations extends Component {
             </div>
           </div>
   
-          <div className="convoRow row ml-3 mr-3">
+          <div className="row ml-3 mr-3">
             <div className="col-12 text-center">
               <br/>
               <h2>Proposals Discussions</h2>
@@ -72,7 +72,7 @@ class Conversations extends Component {
             </div>
           </div>
   
-          <div className="convoRow row ml-3 mr-3">
+          <div className="row ml-3 mr-3">
             <div className="col-12 text-center">
               <br/>
               <h2>Active Collaborations</h2>
