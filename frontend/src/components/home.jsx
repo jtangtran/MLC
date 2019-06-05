@@ -44,7 +44,7 @@ class Home extends Component {
     return (
       <div className="Home">
         <Navbar/>
-        <div className="jumbotron jumbotron-fluid">
+        <div className="jumbotron jumbotron-fluid" id="banner">
             <div className="container">
                 <h1 className="display-4">My Living City</h1>
                 <p className="lead">
@@ -53,7 +53,7 @@ class Home extends Component {
             </div>
         </div>
         <div className="row">
-          <div className="col-8 text-center">
+          <div className="col-8 text-center pr-0">
             <h3>New and Trending</h3>
             <div className="bd-example">
               <div id="carouselExampleCaptions" className="carousel slide" data-ride="carousel">
@@ -65,7 +65,7 @@ class Home extends Component {
                 <div className="carousel-inner">
                   {this.state.ideas.map((value, index) => {
                     return  <div key={index} className={index === 0 ? "carousel-item active" : "carousel-item"}>
-                              <img src="https://www.w3schools.com/w3css/img_lights.jpg" className="d-block w-100" alt="..."/>
+                              <img src="https://cdn-images-1.medium.com/max/1600/1*14cEm2ezAJs_nPgjsVJHZg.jpeg" className="d-block w-100" alt="..."/>
                               <div className="carousel-caption d-none d-md-block">
                                 <h5>{value.idea.title}</h5>
                                 <p>{value.idea.description}</p>
@@ -85,7 +85,7 @@ class Home extends Component {
               </div>
             </div>
           </div>
-          <div className="col-4 text-center">
+          <div className="col-4 text-center pl-0">
             <h3>Conversations</h3>
             <div className="list-group">
                 {this.state.ideas.map((value, index) => {
