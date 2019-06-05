@@ -58,16 +58,19 @@ class IdeaSubmission extends Component {
             const images = document.getElementById('pictureUpload');
             let formData  = new FormData();
             formData.append('image', images.files[0]);
-          let imageResponse = await fetch(API_URL+"/idea/"+ response.json().id + "/images", {
-                method: "POST",
-                body: formData
+            response.json().then(async (data) => {
+                let imageResponse = await fetch(API_URL+"/idea/" + data.id + "/images", {
+                    method: "POST",
+                    body: formData
+                });
+
+                if(imageResponse.ok){
+                    console.log('Image Uploaded')
+                }
+                else{
+                    console.log('image failed')
+                }
             });
-            if(imageResponse.ok){
-                console.log('Image Uploaded')
-            }
-            else{
-                console.log('image failed')
-            }
         }
         else{
             console.log('Idea post failed', response)
