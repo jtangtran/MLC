@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Moment from 'react-moment';
 
 class ConvoCard extends Component {
 
@@ -18,6 +19,9 @@ class ConvoCard extends Component {
               </div>
               <div className="col-6">
                   <p className="dislikeText">{this.props.model.idea.downvotes} Dislikes</p>
+              </div>
+              <div className="col-12">
+                <Moment format="MMM Do YYYY">{this.props.model.idea.createdAt}</Moment>
               </div>
               </div>
             </div>
