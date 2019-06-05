@@ -30,6 +30,7 @@ const getIdeas = async function (req, res) {
 // Adds votes to an idea object
 const addVotes = async idea => {
   var upvoteCount = await Vote.count({ where: {'up': true, 'IdeaId': idea.id} });
+
   var downvoteCount = await Vote.count({ where: {'down': true, 'IdeaId': idea.id} });
   return await {
     idea,
@@ -61,24 +62,26 @@ const getSingleIdea = async function(req, res) {
 
 // POST /ideas
 const postIdea = (req, res) => {
-  try {
-    Idea.create({
-      title: req.body.title,
-      description: req.body.description,
-      place_petal: req.body.place_petal,
-      water_petal: req.body.water_petal,
-      energy_petal: req.body.energy_petal,
-      health_petal: req.body.health_petal,
-      materials_petal: req.body.materials_petal,
-      equity_petal: req.body.equity_petal,
-      beauty_petal: req.body.beauty_petal,
-      UserId: req.session.user.id
+  Idea.create({
+    title: req.body.title,
+    description: req.body.description,
+    place_petal: req.body.place_petal,
+    water_petal: req.body.water_petal,
+    energy_petal: req.body.energy_petal,
+    health_petal: req.body.health_petal,
+    materials_petal: req.body.materials_petal,
+    equity_petal: req.body.equity_petal,
+    beauty_petal: req.body.beauty_petal,
+    UserId: req.session.user.id
+  }).then((idea) => {
+    res.status(200).send(idea);
+  }).catch((e) => {
+    return res.status(500).json({
+      errors: {
+        error: e.stack
+      },
     });
-    res.status(200).end();
-  } catch(e){
-    console.log(e.stack);
-    res.status(500).end();
-  }
+  });
 };
 
 // PUT /idea/:id

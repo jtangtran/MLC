@@ -54,22 +54,24 @@ const getBlog = (req, res) => {
 
 // POST /blog
 const postBlog = (req, res, next) => {
-    if (!req.session.user || req.session.user.role !== 'admin') {
-        return res.status(401).send("Unauthorized");
-    }
-    try {
-        Blog.create({
-            title: req.body.title,
-            markdown: req.body.markdown,
-        });
-        res.status(200).end();
-    } catch(e){
-        return res.status(400).json({
-            errors: {
-                e
-            },
-        });
-    }
+  if (!req.session.user || req.session.user.role !== 'admin') {
+      return res.status(401).send("Unauthorized");
+  }
+  Blog.create({
+      title: req.body.title,
+      markdown: req.body.markdown,
+      short_desc: req.body.short_desc,
+      slug: req.body.slug,
+      UserId: req.session.user.id
+  }).then((blog) => {
+    res.status(200).send(blog);
+  }).catch((e) => {
+    return res.status(500).json({
+      errors: {
+        error: e.stack
+      },
+    });
+  });
 };
 
 // PUT /blog/:id
