@@ -62,14 +62,15 @@ const addComment = (req, res, next) => {
         active: true,
         UserId: req.session.user.id,
         BlogId: req.params.id,
-      });
+      }).catch((err) => { throw err;});
+
     } else if (req.params.type === 'idea') {
-        Comment.create({
+      Comment.create({
         text: req.body.text,
         active: true,
         UserId: req.session.user.id,
         IdeaId: req.params.id, 
-      });
+      }).catch((err) => { throw err;});
     }
     res.status(200).end();
   } catch(e){

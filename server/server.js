@@ -68,7 +68,9 @@ app.post('/:type/:id/comment', auth.required, bodyParser.json(), commentControll
 app.put('/comment/:id', auth.required, bodyParser.json(), commentController.editComment);
 app.delete('/comment/:id', auth.required, commentController.deleteComment);
 
+
 app.get('/image/:filename', auth.optional, imageController.getImage);
-app.post('/image', auth.required, multer.array('file'), imageController.postImage);
+app.get('/:type/:id/images', auth.optional, imageController.getImageUrls);
+app.post('/:type/:id/images', auth.required, multer.array('file'), imageController.postImage);
 
 app.listen(port, () => console.log(`My Living City listening on port ${port}!`));
