@@ -3,6 +3,8 @@ var cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
 const cookieParser = require('cookie-parser');
+var multer = require('multer');
+multer = multer({storage: multer.memoryStorage()});
 app.use(cookieParser());
 app.use(cors());
 const port = 3000;
@@ -37,6 +39,7 @@ const ideaController = require('./controllers/idea');
 const userController = require('./controllers/user');
 const blogController = require('./controllers/blog');
 const commentController = require('./controllers/comment');
+const imageController = require('./controllers/image');
 
 app.get('/', auth.optional, (req, res) => res.send('Welcome to My Living City!'));
 
@@ -64,5 +67,8 @@ app.get('/:type/:id/comments', auth.optional, commentController.getComments);
 app.post('/:type/:id/comment', auth.required, bodyParser.json(), commentController.addComment);
 app.put('/comment/:id', auth.required, bodyParser.json(), commentController.editComment);
 app.delete('/comment/:id', auth.required, commentController.deleteComment);
+
+app.get('/image/:filename', auth.optional, imageController.getImage);
+app.post('/image', auth.required, multer.array('file'), imageController.postImage);
 
 app.listen(port, () => console.log(`My Living City listening on port ${port}!`));
