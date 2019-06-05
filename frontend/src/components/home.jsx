@@ -69,7 +69,7 @@ class Home extends Component {
                               <div className="carousel-caption d-none d-md-block">
                                 <h5>{value.idea.title}</h5>
                                 <p>{value.idea.description}</p>
-                                <a href={"/idea/" + value.idea.id}><button type="button" class="btn btn-primary">View</button></a>
+                                <a href={"/idea/" + value.idea.id}><button type="button" className="btn btn-primary">View</button></a>
                               </div>
                             </div>
                   })}
