@@ -56,15 +56,13 @@ class IdeaSubmission extends Component {
         if (response.ok){
             console.log('Idea posted successfully')
             const images = document.getElementById('pictureUpload');
-            let imageData = JSON.stringify({
-                file: images.files[0]
-            })
-            let response = await fetch(API_URL+"/image", {
+            let formData  = new FormData();
+            formData.append('image', images.files[0]);
+            let imageResponse = await fetch(API_URL+"/image", {
                 method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: imageData
+                body: formData
             });
-            if(response.ok){
+            if(imageResponse.ok){
                 console.log('Image Uploaded')
             }
             else{
