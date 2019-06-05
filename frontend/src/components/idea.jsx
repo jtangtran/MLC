@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from './navbar';
+import Moment from 'react-moment';
 
 const API_URL = require('../config.js')
 
@@ -10,6 +11,7 @@ class Idea extends Component {
       json: {},
       idea: {},
       comments: [],
+      user: [],
       newComment: ""
     };
     this.handleCommentChange = this.handleCommentChange.bind(this);
@@ -34,7 +36,9 @@ class Idea extends Component {
       })
       .then(json => {
         this.setState({json: json});
+        json.idea.createdAt = json.idea.createdAt.slice(0,10)
         this.setState({idea: json.idea});
+        this.setState({user: json.idea.User})
       })
       .catch(error => {
         console.log("Error: " + error);
@@ -111,6 +115,10 @@ class Idea extends Component {
             <div className="jumbotron jumbotron-fluid">
               <div className="container">
                 <h1 className="display-4">{this.state.idea.title}</h1>
+                <h5>Posted by: {this.state.user.fname} {this.state.user.lname}</h5>
+                <Moment format="MMM Do YYYY">{this.state.idea.createdAt}</Moment>
+                <br/>
+                <br/>
                 <p className="lead">{this.state.idea.description}</p>
                 <div className="row">
                   <div className="col-6">
