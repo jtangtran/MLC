@@ -35,8 +35,6 @@ class IdeaSubmission extends Component {
 
     async postIdea(e){
         e.preventDefault();
-        const images = document.getElementById('pictureUpload');
-        console.log(images.files)
         try{
         let data = JSON.stringify({
             title: this.state.title,
@@ -58,9 +56,9 @@ class IdeaSubmission extends Component {
         if (response.ok){
             console.log('Idea posted successfully')
             const images = document.getElementById('pictureUpload');
-            let imageData = {
+            let imageData = JSON.stringify({
                 file: images.files[0]
-            }
+            })
             let response = await fetch(API_URL+"/image", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
@@ -68,6 +66,9 @@ class IdeaSubmission extends Component {
             });
             if(response.ok){
                 console.log('Image Uploaded')
+            }
+            else{
+                console.log('image failed')
             }
         }
         else{
