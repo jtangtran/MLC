@@ -1,0 +1,12 @@
+.Home .convoList{
+    text-decoration: none;
+}
+.Home .convoList .list-group-item {
+    cursor: pointer
+}
+.Home .carousel-inner img{
+    max-height: 400px;
+}
+.Home .carousel-caption{
+    bottom: 30px;
+}
