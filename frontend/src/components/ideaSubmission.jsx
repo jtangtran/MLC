@@ -57,7 +57,7 @@ class IdeaSubmission extends Component {
             console.log('Idea posted successfully')
             const images = document.getElementById('pictureUpload');
             let formData  = new FormData();
-            formData.append('image', images.files[0]);
+            formData.append('file', images.files[0]);
             response.json().then(async (data) => {
                 let imageResponse = await fetch(API_URL+"/idea/" + data.id + "/images", {
                     method: "POST",
