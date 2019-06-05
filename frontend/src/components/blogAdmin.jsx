@@ -29,7 +29,7 @@ class BlogAdmin extends Component {
   }
 
   deleteBlog(id){
-    fetch(API_URL + "/blogs/" + id, {
+    fetch(API_URL + "/blog/" + id, {
       method: "DELETE"
     })
     .then(res => {
