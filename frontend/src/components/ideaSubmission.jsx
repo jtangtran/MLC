@@ -14,11 +14,19 @@ class IdeaSubmission extends Component {
             health_petal: '',
             materials_petal: '',
             equity_petal: '',
-            beauty_petal: ''
+            beauty_petal: '',
+            image: ''
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.postIdea = this.postIdea.bind(this);
+    }
+
+    componentDidMount(){
+        const images = document.getElementById('pictureUpload');
+        images.addEventListener('input', function (evt) {
+            console.log(evt.target.files);
+        });
     }
     
     handleChange(event) {
@@ -47,6 +55,19 @@ class IdeaSubmission extends Component {
         });
         if (response.ok){
             console.log('Idea posted successfully')
+            const images = document.getElementById('pictureUpload');
+            let formData  = new FormData();
+            formData.append('image', images.files[0]);
+            let imageResponse = await fetch(API_URL+"/image", {
+                method: "POST",
+                body: formData
+            });
+            if(imageResponse.ok){
+                console.log('Image Uploaded')
+            }
+            else{
+                console.log('image failed')
+            }
         }
         else{
             console.log('Idea post failed', response)
@@ -102,7 +123,7 @@ render() {
                         <span className="input-group-text" id="inputGroupFileAddon01">Upload Pictures</span>
                     </div>
                     <div className="custom-file">
-                        <input type="file" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01"/>
+                        <input type="file" className="custom-file-input" id="pictureUpload"/>
                         <label className="custom-file-label">Choose file</label>
                     </div>
                 </div>           
