@@ -27,6 +27,19 @@ class IdeaSubmission extends Component {
         images.addEventListener('input', function (evt) {
             console.log(evt.target.files);
         });
+
+        const userLoggedIn = sessionStorage.getItem('loggedin');
+        const signInWarning = document.getElementById('signInWarning');
+        const submitIdeaBtn = document.getElementById('submitIdeaBtn');
+        console.log(userLoggedIn)
+        if(userLoggedIn){
+            signInWarning.hidden = true;
+            submitIdeaBtn.hidden = false;
+        }
+        else{
+            signInWarning.hidden = false;
+            submitIdeaBtn.hidden = true;
+        }
     }
     
     handleChange(event) {
@@ -57,7 +70,7 @@ class IdeaSubmission extends Component {
             console.log('Idea posted successfully')
             const images = document.getElementById('pictureUpload');
             let formData  = new FormData();
-            formData.append('image', images.files[0]);
+            formData.append('file', images.files[0]);
             response.json().then(async (data) => {
                 let imageResponse = await fetch(API_URL+"/idea/" + data.id + "/images", {
                     method: "POST",
@@ -93,33 +106,33 @@ render() {
             <form onSubmit={this.postIdea}>
                 <div className="form-group">
                     <p>Whats Your Idea?</p>
-                    <input onChange={this.handleChange} name="title" type="text" className="form-control" id="ideaTitleInput" aria-describedby="ideaTitle" placeholder="Enter the title for your Idea."/>
+                    <input onChange={this.handleChange} name="title" type="text" className="form-control" id="ideaTitleInput" aria-describedby="ideaTitle" placeholder="Enter the title for your Idea." required/>
                 </div>
                 <div className="form-group">
                     <p>Describe your Idea.</p>
-                    <textarea onChange={this.handleChange} name="description" className="form-control" id="ideaDescriptionInput" rows="3"></textarea>
+                    <textarea onChange={this.handleChange} name="description" className="form-control" id="ideaDescriptionInput" rows="3" required></textarea>
                 </div>
                 <div className="form-group">
                     <p>How does your idea affect the community positively? (7 Petals)</p>
-                    <input onChange={this.handleChange} name="place_petal" type="text" className="form-control" id="placePetalInput" aria-describedby="placePetal" placeholder="Place"/>
+                    <input onChange={this.handleChange} name="place_petal" type="text" className="form-control" id="placePetalInput" aria-describedby="placePetal" placeholder="Place" required/>
                 </div>
                 <div className="form-group">
-                    <input onChange={this.handleChange} name="water_petal" type="text" className="form-control" id="waterPetalInput" aria-describedby="waterPetal" placeholder="Water"/>
+                    <input onChange={this.handleChange} name="water_petal" type="text" className="form-control" id="waterPetalInput" aria-describedby="waterPetal" placeholder="Water" required/>
                 </div>
                 <div className="form-group">
-                    <input onChange={this.handleChange} name="energy_petal" type="text" className="form-control" id="energyPetalInput" aria-describedby="energyPetal" placeholder="Energy"/>
+                    <input onChange={this.handleChange} name="energy_petal" type="text" className="form-control" id="energyPetalInput" aria-describedby="energyPetal" placeholder="Energy" required/>
                 </div>
                 <div className="form-group">
-                    <input onChange={this.handleChange} name="health_petal" type="text" className="form-control" id="healthPetalInput" aria-describedby="healthPetal" placeholder="Health and Happiness"/>
+                    <input onChange={this.handleChange} name="health_petal" type="text" className="form-control" id="healthPetalInput" aria-describedby="healthPetal" placeholder="Health and Happiness" required/>
                 </div>
                 <div className="form-group">
-                    <input onChange={this.handleChange} name="materials_petal" type="text" className="form-control" id="materialsPetalInput" aria-describedby="materialsPetal" placeholder="Materials"/>
+                    <input onChange={this.handleChange} name="materials_petal" type="text" className="form-control" id="materialsPetalInput" aria-describedby="materialsPetal" placeholder="Materials" required/>
                 </div>
                 <div className="form-group">
-                    <input onChange={this.handleChange} name="equity_petal" type="text" className="form-control" id="equityPetalInput" aria-describedby="equityPetal" placeholder="Equity"/>
+                    <input onChange={this.handleChange} name="equity_petal" type="text" className="form-control" id="equityPetalInput" aria-describedby="equityPetal" placeholder="Equity" required/>
                 </div>
                 <div className="form-group">
-                    <input onChange={this.handleChange} name="beauty_petal" type="text" className="form-control" id="beautyPetalInput" aria-describedby="beautyPetal" placeholder="Beauty"/>
+                    <input onChange={this.handleChange} name="beauty_petal" type="text" className="form-control" id="beautyPetalInput" aria-describedby="beautyPetal" placeholder="Beauty" required />
                 </div>
                 <div className="input-group mb-3">
                     <div className="input-group-prepend">
@@ -131,7 +144,8 @@ render() {
                     </div>
                 </div>           
                 <div className="text-center">
-                    <button type="submit" className="btn btn-primary">Submit your Idea!</button>
+                    <button id="submitIdeaBtn" type="submit" className="btn btn-primary">Submit your Idea!</button>
+                    <button id="signInWarning" className="btn btn-primary" data-toggle="modal" data-target="#loginModal">Sign In To Post</button>
                 </div>
                 </form>
             </div>
