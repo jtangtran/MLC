@@ -3,27 +3,59 @@ const Idea = db.Idea;
 const Vote = db.Vote; 
 const User = db.User;
 
-// GET /ideas/:offset
+// GET /ideas/:sort/:offset
 const getIdeas = async function (req, res) {
   try {
-    var dbIdeas = await Idea.findAll({
-      include: [{
-          model: User,
-          attributes: [
-            ['fname', 'fname'],
-            ['lname', 'lname']
-          ]}
-      ],
-      where: {active: true},
-      offset: req.params.offset,
-      limit: 50
+    if (req.params.sort === 'new') {
+      var dbIdeas = await Idea.findAll({
+        include: [{
+            model: User,
+            attributes: [
+              ['fname', 'fname'],
+              ['lname', 'lname']
+            ]}
+        ],
+        where: {active: true},
+        offset: req.params.offset,
+        limit: 50,
+        order: [['createdAt', 'DESC']]
+      }).catch((err) => {throw err;});
+      var ideas = await Promise.all(dbIdeas.map(idea => addVotes(idea))) 
+      res.send(ideas);
+    } else if (req.params.sort === 'trending') {
+     var dbIdeas = await Idea.findAll({
+        include: [{
+            model: User,
+            attributes: [
+              ['fname', 'fname'],
+              ['lname', 'lname']
+            ]}
+        ],
+        where: {active: true},
+        offset: req.params.offset,
+        limit: 50,
+        order: [['createdAt', 'DESC']]
+      }).catch((err) => {throw err;});
+      var ideas = await Promise.all(dbIdeas.map(idea => addVotes(idea))) 
+      ideas.sort((a,b) => {
+        if (a.upvoteCount - a.downvoteCount > b.upvoteCount - b.downvoteCount) {
+          return 1;
+        }
+        if (a.upvoteCount - a.downvoteCount < b.upvoteCount - b.downvoteCount) {
+          return -1;
+        }
+        return 0;
+      }).reverse();
+      res.send(ideas);
+    } else {
+      throw "invalid sort method";
+    }
+  } catch(e) {
+    return res.status(400).json({
+      errors: {
+        error: e.stack
+      },
     });
-    var ideas = await Promise.all(dbIdeas.map(idea => addVotes(idea))) 
-    res.send(ideas);
-  }
-
-  catch(err) {
-    console.error('Error: ', err);
   }
 }
 
@@ -50,13 +82,17 @@ const getSingleIdea = async function(req, res) {
           ['lname', 'lname']
         ]}
       ],
-    });
+    }).catch(err => {throw err;});
     var upvoteCount = await Vote.count({ where: {'up': true, 'IdeaId': req.params.id} });
     var downvoteCount = await Vote.count({ where: {'down': true, 'IdeaId': req.params.id} });
     var idea = await addVotes(dbIdea) 
     res.send(idea);
-  } catch (err) {
-    console.error('Error: ', err);
+  } catch (e) {
+    return res.status(500).json({
+      errors: {
+        error: e.stack
+      },
+    });
   }
 };
 
