@@ -5,12 +5,15 @@ import '../stylesheets/navbar.css';
 import SignInModal from './loginModal.jsx';
 import SignUpModal from './registerModal.jsx';
 
+const API_URL = require('../config.js')
+
 class Navbar extends Component {
   constructor (props) {
     super(props);
     this.state = {
       user: ''
     };
+    this.logout = this.logout.bind(this);
   }
 
   componentDidMount(){
@@ -26,6 +29,23 @@ class Navbar extends Component {
     else{
       loginButtons.hidden = false;
       loggedIn.hidden = true;
+    }
+  }
+
+  logout(){
+    try{
+        fetch(API_URL+"/user/logout", {
+          method: "POST",
+      }).then((response) => {
+        if(response.ok){
+            console.log('Logged Out User');
+            sessionStorage.setItem('loggedin', false);
+            sessionStorage.setItem('user', null);
+        }
+      });
+    }
+    catch(e){
+        console.log(e.stack);
     }
   }
 
@@ -50,7 +70,14 @@ class Navbar extends Component {
             <button type="button" className="btn btn-secondary" data-toggle="modal" data-target="#registerModal">Register</button>
           </div>
           <div id="loggedIn">
-            <button type="button" className="btn btn-outline-success">{this.state.user}</button>
+            <div className="btn-group" role="group">
+              <button id="btnGroupDrop1" type="button" className="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {this.state.user}
+              </button>
+              <div className="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <div style={{"cursor": "pointer"}}className="dropdown-item" onClick={() => this.logout()}>Logout</div>
+              </div>
+            </div>
           </div>
         </nav>
         <SignInModal/>
