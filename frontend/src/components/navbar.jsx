@@ -41,6 +41,7 @@ class Navbar extends Component {
             console.log('Logged Out User');
             sessionStorage.setItem('loggedin', false);
             sessionStorage.setItem('user', null);
+            window.location.reload();
         }
       });
     }
