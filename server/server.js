@@ -43,7 +43,7 @@ const imageController = require('./controllers/image');
 
 app.get('/', auth.optional, (req, res) => res.send('Welcome to My Living City!'));
 
-app.get('/ideas/:offset', auth.optional, ideaController.getIdeas);
+app.get('/ideas/:sort/:offset', auth.optional, ideaController.getIdeas);
 app.get('/idea/:id', auth.optional, ideaController.getSingleIdea);
 app.delete('/idea/:id', auth.required, ideaController.deleteIdea);
 app.put('/idea/:id', auth.required, bodyParser.json(), ideaController.editIdea);
