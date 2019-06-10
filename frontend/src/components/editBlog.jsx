@@ -24,6 +24,13 @@ class EditBlog extends Component {
         this.addBlog = this.addBlog.bind(this);
     }
 
+    componentDidMount(){
+      const images = document.getElementById('pictureUpload');
+      images.addEventListener('input', function (evt) {
+          console.log(evt.target.files);
+      });
+    }
+
     handleValueChange = (value) => {
         this.setState({ value });
     };
@@ -36,16 +43,33 @@ class EditBlog extends Component {
       this.setState({tab})
     };
 
-    addBlog(){
+    async addBlog(){
       const data = JSON.stringify({
         title: this.state.title,
         markdown: this.state.value
       })
-      fetch(API_URL + "/blog", {
+      let response = await fetch(API_URL + "/blog", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: data
       })
+      if(response.ok){
+        const images = document.getElementById('pictureUpload');
+        let formData  = new FormData();
+        formData.append('file', images.files[0]);
+        response.json().then(async (data) => {
+        let imageResponse = await fetch(API_URL+"/blog/" + data.id + "/images", {
+            method: "POST",
+            body: formData
+        });
+        if(imageResponse.ok){
+            console.log('Image Uploaded')
+        }
+        else{
+            console.log('image failed')
+        }
+      });
+      }
     }
     
   render() {
@@ -57,6 +81,12 @@ class EditBlog extends Component {
             <h1 className="pt-3 pl-4">Edit Blog</h1>
             <div class="input-group mb-3 ml-2">
               <input onChange={this.handleTitleChange} value={this.state.title} type="text" class="form-control" placeholder="Title"/>
+              <div className="input-group mb-3 mt-3">
+                <div className="custom-file">
+                    <input type="file" className="custom-file-input" id="pictureUpload"/>
+                    <label className="custom-file-label">Choose Cover Image</label>
+                </div>
+              </div> 
             </div>
 
           </div>
