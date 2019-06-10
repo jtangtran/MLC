@@ -59,7 +59,7 @@ const getImageUrls = (req, res) => {
         'BlogId': req.params.id
       },
     }).then((images) => {
-      const imageUrls = images.map(image => "/image/" + image.filename);
+      const imageUrls = images.map(image => "/api/image/" + image.filename);
       res.send(imageUrls);
     })
     .catch(err => {
@@ -75,7 +75,7 @@ const getImageUrls = (req, res) => {
         'IdeaId': req.params.id
       },
     }).then((images) => {
-      const imageUrls = images.map(image => "/image/" + image.filename);
+      const imageUrls = images.map(image => "/api/image/" + image.filename);
       res.send(imageUrls);
     })
     .catch(err => {
