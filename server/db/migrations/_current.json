@@ -15,7 +15,7 @@
                 },
                 "markdown": {
                     "field": "markdown",
-                    "seqType": "Sequelize.STRING(5000)"
+                    "seqType": "Sequelize.STRING(20000)"
                 },
                 "active": {
                     "defaultValue": {
@@ -374,5 +374,5 @@
             "indexes": []
         }
     },
-    "revision": 9
+    "revision": 10
 }
