@@ -170,25 +170,33 @@ const deleteIdea = (req, res) => {
   }
 };
 
-const upvote = (req, res) => {
+const upvote = async function (req, res) {
   try {
-    Vote.findOne({ where: {UserId: req.session.user.id, IdeaId: req.params.id}})
-    .then(existingVote => {
-      if (existingVote != null) {
-          return res.status(409).json({
-              errors: {
-                error: 'You have already voted',
-              },
-          });
-      } else {
-        Vote.create({
-          UserId: req.session.user.id,
-          IdeaId: req.params.id,
-          up: true
-        });
-        res.status(200).end();
+    var existingVote = await Vote.findOne({ where: {UserId: req.session.user.id, IdeaId: req.params.id}});
+    if (existingVote != null) {
+      return res.status(409).json({
+        errors: {
+          error: 'You have already voted',
+        },
+      });
+    } else {
+      Vote.create({
+        UserId: req.session.user.id,
+        IdeaId: req.params.id,
+        up: true
+      }).catch((err) => {throw err;});
+
+      // Did we transition to a proposal state?
+      var upvoteCount = await Vote.count({ where: {'up': true, 'IdeaId': req.params.id} }).catch((err) => {throw err;});
+      var downvoteCount = await Vote.count({ where: {'up': true, 'IdeaId': req.params.id} }).catch((err) => {throw err;});
+      if (upvoteCount + downvoteCount > 50) {
+        if ((upvoteCount/downvoteCount * 100) > 70) {
+          Idea.update({state: 'proposal'}, { where: {id: req.params.id}}).catch((err) => {throw err;});
+
+        }
       }
-    });
+      res.status(200).end();
+    }
   } catch(e) {
     return res.status(400).json({
       errors: {
