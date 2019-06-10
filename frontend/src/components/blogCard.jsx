@@ -19,7 +19,7 @@ class BlogCard extends Component {
     })
     .then(json => {
       console.log(json)
-      this.setState({picture: json});
+      this.setState({picture: json[0]});
     })
     .catch(error => {
       console.log("Error: " + error);
