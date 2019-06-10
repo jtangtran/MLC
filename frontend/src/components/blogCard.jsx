@@ -34,9 +34,7 @@ class BlogCard extends Component {
             <img src={this.state.picture ? this.state.picture : 'https://c-lj.gnst.jp/public/img/common/noimage.jpg?20181011050048'} className="card-img-top" alt="..."/>
             <div className="card-body">
             <h5 className="card-title">{this.props.model.title}</h5>
-            <p className="card-text">
-              <ReactMarkdown source={this.props.model.markdown ? this.props.model.markdown.slice(0, 50) + "..." : ""}/>
-            </p>
+            <ReactMarkdown source={this.props.model.markdown ? this.props.model.markdown.slice(0, 50) + "..." : ""} className="card-text"/>
             <a href={"/blog/" + this.props.model.id} className="btn btn-primary">Read Blog</a>
             </div>
         </div>
