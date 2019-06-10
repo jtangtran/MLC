@@ -10,7 +10,7 @@ class Blogs extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      blogs: ['lol', 'lol', 'lol']
+      blogs: []
     };
 }
   componentDidMount(){

@@ -10,7 +10,7 @@ class ViewBlog extends Component {
     constructor (props) {
         super(props);
         this.state = {
-          blog: ''
+          blog: []
         };
     }
     
@@ -38,7 +38,6 @@ class ViewBlog extends Component {
                 <div className="text-left p-5">
                     <ReactMarkdown source={this.state.blog.markdown}/>
                 </div>
-                
             </div>
         </div>
       </div>
