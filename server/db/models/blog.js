@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
     },
     title: DataTypes.STRING,
-    markdown: DataTypes.STRING(5000),
+    markdown: DataTypes.STRING(20000),
     active: {
       type: DataTypes.BOOLEAN,
       defaultValue: true
