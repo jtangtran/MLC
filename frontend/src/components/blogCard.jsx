@@ -31,7 +31,7 @@ class BlogCard extends Component {
     return (
       <div className="BlogCard">
         <div className="card">
-            <img src={this.state.picture.length > 1 ? this.state.picture : 'https://c-lj.gnst.jp/public/img/common/noimage.jpg?20181011050048'} className="card-img-top" alt="..."/>
+            <img src={this.state.picture ? this.state.picture : 'https://c-lj.gnst.jp/public/img/common/noimage.jpg?20181011050048'} className="card-img-top" alt="..."/>
             <div className="card-body">
             <h5 className="card-title">{this.props.model.title}</h5>
             <p className="card-text">
