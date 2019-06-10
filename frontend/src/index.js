@@ -13,6 +13,7 @@ import SubmitIdea from './components/ideaSubmission.jsx';
 import Idea from './components/idea.jsx';
 import EditBlog from './components/editBlog.jsx';
 import BlogAdmin from './components/blogAdmin.jsx';
+import ViewBlog from './components/viewBlog.jsx';
 
 const routing = (
     <Router>
@@ -25,6 +26,7 @@ const routing = (
         <Route exact path="/editBlog" component={EditBlog}/>
         <Route exact path="/blogAdmin" component={BlogAdmin}/>
         <Route path="/idea/:id" component={Idea}/>
+        <Route path="/blog/:id" component={ViewBlog}/>
       </div>
     </Router>
   )
