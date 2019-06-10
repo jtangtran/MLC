@@ -188,11 +188,11 @@ const upvote = async function (req, res) {
 
       // Did we transition to a proposal state?
       var upvoteCount = await Vote.count({ where: {'up': true, 'IdeaId': req.params.id} }).catch((err) => {throw err;});
-      var downvoteCount = await Vote.count({ where: {'up': true, 'IdeaId': req.params.id} }).catch((err) => {throw err;});
-      if (upvoteCount + downvoteCount > 50) {
-        if ((upvoteCount/downvoteCount * 100) > 70) {
+      var downvoteCount = await Vote.count({ where: {'down': true, 'IdeaId': req.params.id} }).catch((err) => {throw err;});
+      if (upvoteCount + downvoteCount >= 50) {
+        if (downvoteCount == 0) { downvoteCount = 1; } // avoid divide by zero
+        if ((upvoteCount/downvoteCount * 100) >= 70) {
           Idea.update({state: 'proposal'}, { where: {id: req.params.id}}).catch((err) => {throw err;});
-
         }
       }
       res.status(200).end();
