@@ -13,7 +13,8 @@ class EditBlog extends Component {
         this.state = {
           value: "",
           tab: "write" | "preview",
-          title: ''
+          title: '',
+          short_desc: ''
         };
         this.converter = new Showdown.Converter({
           tables: true,
@@ -32,11 +33,15 @@ class EditBlog extends Component {
     }
 
     handleValueChange = (value) => {
-        this.setState({ value });
+        this.setState({value});
     };
 
     handleTitleChange = (event) => {
       this.setState({title: event.target.value});
+    };
+
+    handleDescText = (event) => {
+      this.setState({short_desc: event.target.value});
     };
 
     handleTabChange = (tab) => {
@@ -46,6 +51,7 @@ class EditBlog extends Component {
     async addBlog(){
       const data = JSON.stringify({
         title: this.state.title,
+        short_desc: this.state.short_desc,
         markdown: this.state.value
       })
       let response = await fetch(API_URL + "/blog", {
@@ -79,16 +85,18 @@ class EditBlog extends Component {
         <div className="row">
           <div className="col-6">
             <h1 className="pt-3 pl-4">Edit Blog</h1>
-            <div class="input-group mb-3 ml-2">
-              <input onChange={this.handleTitleChange} value={this.state.title} type="text" class="form-control" placeholder="Title"/>
-              <div className="input-group mb-3 mt-3">
-                <div className="custom-file">
-                    <input type="file" className="custom-file-input" id="pictureUpload"/>
-                    <label className="custom-file-label">Choose Cover Image</label>
-                </div>
-              </div> 
+            <div className="input-group mb-3 ml-2">
+              <input onChange={this.handleTitleChange} value={this.state.title} type="text" className="form-control" placeholder="Title"/>
             </div>
-
+            <div className="input-group mb-3 ml-2">
+              <input onChange={this.handleDescText} value={this.state.short_desc} type="text" className="form-control" placeholder="Short Description"/>
+            </div>
+            <div className="input-group mb-3 mt-3 ml-2">
+              <div className="custom-file">
+                  <input type="file" className="custom-file-input" id="pictureUpload"/>
+                  <label className="custom-file-label">Choose Cover Image</label>
+              </div>
+            </div> 
           </div>
           <div className="col-6">
             <button onClick={this.addBlog} type="button" className="btn btn-warning float-right mt-3 mr-4">Save Blog</button>
