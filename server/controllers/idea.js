@@ -13,6 +13,12 @@ const getIdeas = async function (req, res) {
             attributes: [
               ['fname', 'fname'],
               ['lname', 'lname']
+            ]},
+          { 
+            association: 'developer',
+            attributes: [
+              ['fname', 'fname'],
+              ['lname', 'lname']
             ]}
         ],
         where: {active: true},
@@ -25,11 +31,17 @@ const getIdeas = async function (req, res) {
     } else if (req.params.sort === 'trending') {
      var dbIdeas = await Idea.findAll({
         include: [{
-            model: User,
+          model: User,
+          attributes: [
+            ['fname', 'fname'],
+            ['lname', 'lname']
+          ]},
+          {
+            association: 'developer',
             attributes: [
               ['fname', 'fname'],
               ['lname', 'lname']
-            ]}
+          ]}
         ],
         where: {active: true},
         offset: req.params.offset,
@@ -77,6 +89,12 @@ const getSingleIdea = async function(req, res) {
     var dbIdea = await Idea.findByPk(req.params.id, {
       include: [{
         model: User,
+        attributes: [
+          ['fname', 'fname'],
+          ['lname', 'lname']
+        ]},
+        {
+        association: 'developer',
         attributes: [
           ['fname', 'fname'],
           ['lname', 'lname']
@@ -246,6 +264,30 @@ getDownvoteCount = (req, res) => {
   });
 };
 
+// PUT /idea/:id/developer
+const assignDeveloper = async function (req, res, next) {
+  await Idea.findByPk(req.params.id).then(idea => {
+    if (req.session.user.id != idea.UserId) {
+      return res.status(401).send("Unauthorized");
+    }
+  }).catch((e) => { 
+    return res.status(401).send("Unauthorized");
+  });
+  try {
+    await Idea.update({
+      developerId: req.body.developerId,
+      state: 'collaboration',
+    }, { where: {id: req.params.id}});
+    res.status(200).end();
+  } catch(e){
+    return res.status(400).json({
+      errors: {
+        error: e.stack
+      },
+    });
+  }
+};
+
 module.exports = {
   getIdeas,
   getSingleIdea,
@@ -254,5 +296,6 @@ module.exports = {
   deleteIdea,
   upvote,
   downvote,
+  assignDeveloper,
 };
 
