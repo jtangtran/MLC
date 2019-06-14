@@ -56,7 +56,13 @@ class Conversations extends Component {
                 {this.state.ideas.map((value, index) => {
                   if (value.idea.state === "idea") { 
                     return <ConvoCard key={index} model={value}/>
-                  } else {
+                  } else if(value.idea.state !== "idea" && index === this.state.ideas.length - 1){
+                    return <div key={index}>
+                        <br/>
+                        <p className="lead">No Proposals Discussions</p>
+                      </div>;
+                  }
+                  else{
                     return null;
                   }
                 })}
@@ -72,8 +78,14 @@ class Conversations extends Component {
                 {this.state.ideas.map((value, index) => {
                 if (value.idea.state === "proposal") { 
                   return <ConvoCard key={index} model={value}/>
-                } else {
-                    return null;
+                } else if(value.idea.state !== "proposal" && index === this.state.ideas.length - 1){
+                  return <div key={index}>
+                      <br/>
+                      <p className="lead">No Proposals Discussions</p>
+                    </div>;
+                }
+                else{
+                  return null;
                 }
                 })}
               </div>
@@ -85,11 +97,17 @@ class Conversations extends Component {
               <br/>
               <h2>Active Collaborations</h2>
               <div className="convoRow">
-
                 {this.state.ideas.map((value, index) => {
                   if (value.idea.state === "collaboration") { 
                     return <ConvoCard key={index} model={value}/>
-                  } else {
+                  } 
+                  else if(value.idea.state !== "collaboration" && index === this.state.ideas.length - 1){
+                    return <div key={index}>
+                        <br/>
+                        <p className="lead">No Active Collaborations</p>
+                      </div>;
+                  }
+                  else{
                     return null;
                   }
                 })}
