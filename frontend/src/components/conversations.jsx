@@ -15,6 +15,7 @@ class Conversations extends Component {
         loading: true
     };
     this.getIdeas = this.getIdeas.bind(this);
+    this.sort = this.sort.bind(this);
   }
 
   componentDidMount(){
@@ -43,14 +44,47 @@ class Conversations extends Component {
     }
   }
 
+   async sort(e, type){
+    e.preventDefault();
+    try{
+      await fetch(API_URL + "/ideas/" + type + "/0", {
+          method: "GET",
+          headers: {"Content-Type": "application/json"}
+      }).then((response) => {
+          response.json().then((data) => {
+            console.log('Fetched Ideas: ', data);
+            data.forEach(element => {
+              element.idea.downvotes = element.downvoteCount;
+              element.idea.upvotes = element.upvoteCount;
+            });
+            this.setState({ideas: data})
+            this.setState({loading: false})
+        });
+      });
+    }
+    catch(e){
+        console.log(e.stack);
+    }
+  }
+
   render() {
     if(!this.state.loading){
       return (
         <div className="Conversations">
           <Navbar/>
           <div className="row ml-3 mr-3">
+            <div className="col-12 mt-4">
+              <div className="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Sort
+                </button>
+                <div className="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                  <div className="dropdown-item" onClick={(e) => this.sort(e, "new")}>Newest</div>
+                  <div className="dropdown-item" onClick={(e) => this.sort(e, "trending")}>Trending</div>
+                </div>
+              </div>
+            </div>
             <div className="col-12 text-center">
-              <br/>
               <h2>Ideas Discussions</h2>
               <div className="convoRow">
                 {this.state.ideas.map((value, index) => {
