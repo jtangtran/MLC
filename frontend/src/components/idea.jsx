@@ -150,29 +150,41 @@ class Idea extends Component {
           </div>
           <div className="col-12">
             <div className="row">
-              <div className="col-2 text-center">
-                <p>Place Petal:</p>
-                <span className="badge badge-pill badge-primary p-2">{this.state.idea.place_petal}</span>
+              <div className="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                <div className="row">
+                <div className="col-6 text-center">
+                  <p>Place Petal:</p>
+                  <span className="badge badge-pill badge-primary p-2">{this.state.idea.place_petal}</span>
+                  </div>
+                  <div className="col-6 text-center">
+                    <p>Beauty Petal:</p> 
+                    <span className="badge badge-pill badge-primary p-2">{this.state.idea.beauty_petal}</span>
+                  </div>
+                </div>
               </div>
-              <div className="col-2 text-center">
-                <p>Beauty Petal:</p> 
-                <span className="badge badge-pill badge-primary p-2">{this.state.idea.beauty_petal}</span>
+              <div className="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                <div className="row">
+                  <div className="col-6 text-center">
+                    <p>Energy Petal:</p> 
+                    <span className="badge badge-pill badge-primary p-2">{this.state.idea.energy_petal}</span>
+                  </div>
+                  <div className="col-6 text-center">
+                    <p>Health Petal:</p> 
+                    <span className="badge badge-pill badge-primary p-2">{this.state.idea.health_petal}</span>
+                  </div>
+                </div>
               </div>
-              <div className="col-2 text-center">
-                <p>Energy Petal:</p> 
-                <span className="badge badge-pill badge-primary p-2">{this.state.idea.energy_petal}</span>
-              </div>
-              <div className="col-2 text-center">
-                <p>Health Petal:</p> 
-                <span className="badge badge-pill badge-primary p-2">{this.state.idea.health_petal}</span>
-              </div>
-              <div className="col-2 text-center">
-                <p>Materials Petal:</p> 
-                <span className="badge badge-pill badge-primary p-2">{this.state.idea.materials_petal}</span>
-              </div>
-              <div className="col-2 text-center">
-                <p>Equity Petal:</p> 
-                <span className="badge badge-pill badge-primary p-2">{this.state.idea.equity_petal}</span>
+              <div className="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                <div className="row">
+                  <div className="col-6 text-center">
+                    <p>Materials Petal:</p> 
+                    <span className="badge badge-pill badge-primary p-2">{this.state.idea.materials_petal}</span>
+                  </div>
+                  <div className="col-6 text-center">
+                    <p>Equity Petal:</p> 
+                    <span className="badge badge-pill badge-primary p-2">{this.state.idea.equity_petal}</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

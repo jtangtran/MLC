@@ -1,5 +1,6 @@
 .badge-pill {
-  width: 250px;
+  min-width: 100px;
+  max-width: 150px;
   overflow-wrap: break-word;
   white-space: pre-wrap;
 }
