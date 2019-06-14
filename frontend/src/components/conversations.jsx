@@ -54,7 +54,11 @@ class Conversations extends Component {
               <h2>Ideas Discussions</h2>
               <div className="convoRow">
                 {this.state.ideas.map((value, index) => {
-                  return <ConvoCard key={index} model={value}/>
+                  if (value.idea.state === "idea") { 
+                    return <ConvoCard key={index} model={value}/>
+                  } else {
+                    return null;
+                  }
                 })}
               </div>
             </div>
@@ -66,7 +70,11 @@ class Conversations extends Component {
               <h2>Proposals Discussions</h2>
               <div className="convoRow">
                 {this.state.ideas.map((value, index) => {
+                if (value.idea.state === "proposal") { 
                   return <ConvoCard key={index} model={value}/>
+                } else {
+                    return null;
+                }
                 })}
               </div>
             </div>
@@ -77,8 +85,13 @@ class Conversations extends Component {
               <br/>
               <h2>Active Collaborations</h2>
               <div className="convoRow">
+
                 {this.state.ideas.map((value, index) => {
-                  return <ConvoCard key={index} model={value}/>
+                  if (value.idea.state === "collaboration") { 
+                    return <ConvoCard key={index} model={value}/>
+                  } else {
+                    return null;
+                  }
                 })}
               </div>
             </div>
