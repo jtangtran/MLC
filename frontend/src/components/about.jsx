@@ -19,17 +19,17 @@ class About extends Component {
             <div className="row pr-5 pl-5">
               <div className="col-4">
                 <a href="https://github.com/ChrisEddy">
-                  <i class="fab fa-github fa-2x"></i>
+                  <i className="fab fa-github fa-2x"></i>
                 </a>
               </div>
               <div className="col-4">
                 <a href="https://twitter.com/ChrisEddyDev">
-                  <i class="fab fa-twitter fa-2x"></i>
+                  <i className="fab fa-twitter fa-2x"></i>
                 </a>
               </div>
               <div className="col-4">
                 <a href="https://www.linkedin.com/in/chris-eddy-394784160/">
-                  <i class="fab fa-linkedin-in fa-2x"></i>
+                  <i className="fab fa-linkedin-in fa-2x"></i>
                 </a>
               </div>
             </div>
@@ -41,17 +41,17 @@ class About extends Component {
             <div className="row pr-5 pl-5">
               <div className="col-4">
                 <a href="https://github.com/sajattack">
-                  <i class="fab fa-github fa-2x"></i>
+                  <i className="fab fa-github fa-2x"></i>
                 </a>
               </div>
               <div className="col-4">
                 <a href="https://twitter.com/sajattack">
-                  <i class="fab fa-twitter fa-2x"></i>
+                  <i className="fab fa-twitter fa-2x"></i>
                 </a>
               </div>
               <div className="col-4">
                 <a href="https://www.linkedin.com/in/paulsajna/">
-                  <i class="fab fa-linkedin-in fa-2x"></i>
+                  <i className="fab fa-linkedin-in fa-2x"></i>
                 </a>
               </div>
             </div>
@@ -63,14 +63,14 @@ class About extends Component {
             <div className="row pr-5 pl-5">
               <div className="col-4">
                 <a href="https://github.com/chelc99">
-                  <i class="fab fa-github fa-2x"></i>
+                  <i className="fab fa-github fa-2x"></i>
                 </a>
               </div>
               <div className="col-4">
-                <i class="fab fa-twitter fa-2x" style={{"color": "#a9a9a9c2"}}></i>
+                <i className="fab fa-twitter fa-2x" style={{"color": "#a9a9a9c2"}}></i>
               </div>
               <div className="col-4">
-                <i class="fab fa-linkedin-in fa-2x" style={{"color": "#a9a9a9c2"}}></i>
+                <i className="fab fa-linkedin-in fa-2x" style={{"color": "#a9a9a9c2"}}></i>
               </div>
             </div>
           </div>
@@ -80,13 +80,13 @@ class About extends Component {
             <p>Sponsor</p>
             <div className="row pr-5 pl-5">
               <div className="col-4">
-                <i class="fab fa-github fa-2x" style={{"color": "#a9a9a9c2"}}></i>
+                <i className="fab fa-github fa-2x" style={{"color": "#a9a9a9c2"}}></i>
               </div>
               <div className="col-4">
-                <i class="fab fa-twitter fa-2x" style={{"color": "#a9a9a9c2"}}></i>
+                <i className="fab fa-twitter fa-2x" style={{"color": "#a9a9a9c2"}}></i>
               </div>
               <div className="col-4">
-                <i class="fab fa-linkedin-in fa-2x" style={{"color": "#a9a9a9c2"}}></i>
+                <i className="fab fa-linkedin-in fa-2x" style={{"color": "#a9a9a9c2"}}></i>
               </div>
             </div>
           </div>

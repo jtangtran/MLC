@@ -26,12 +26,12 @@ class IdeaSubmission extends Component {
         const images = document.getElementById('pictureUpload');
         images.addEventListener('input', function (evt) {
             console.log(evt.target.files);
+            document.getElementById('fileText').innerText = evt.target.files[0].name;
         });
 
         const userLoggedIn = sessionStorage.getItem('loggedin');
         const signInWarning = document.getElementById('signInWarning');
         const submitIdeaBtn = document.getElementById('submitIdeaBtn');
-        console.log(userLoggedIn)
         if(userLoggedIn){
             signInWarning.hidden = true;
             submitIdeaBtn.hidden = false;
@@ -99,7 +99,8 @@ render() {
     return (
     <div className="IdeaSubmission">
         <Navbar/>
-        <div className="row mt-5 mr-0 ml-0">
+        <h1 className="pt-3 pl-4 pb-4">Submit Idea</h1>
+        <div className="row mt-2 mr-0 ml-0">
             <div className="col-2">
             </div>
             <div className="col-8">
@@ -136,11 +137,11 @@ render() {
                 </div>
                 <div className="input-group mb-3">
                     <div className="input-group-prepend">
-                        <span className="input-group-text" id="inputGroupFileAddon01">Upload Pictures</span>
+                        <span className="input-group-text" id="inputGroupFileAddon01">Upload Picture</span>
                     </div>
                     <div className="custom-file">
                         <input type="file" className="custom-file-input" id="pictureUpload"/>
-                        <label className="custom-file-label">Choose file</label>
+                        <label className="custom-file-label" id="fileText">Choose file</label>
                     </div>
                 </div>           
                 <div className="text-center">

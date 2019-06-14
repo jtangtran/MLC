@@ -3,6 +3,10 @@
     display: inline-block;
     margin: 10px;
 }
+.BlogCard .card-img-top{
+    height: 348px;
+    object-fit: cover;
+}
 
 .BlogAdmin .list-group-item div span{
     cursor: pointer;
