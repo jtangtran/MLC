@@ -81,9 +81,6 @@ class Idea extends Component {
       method: "POST",
     })
     .then(res => {
-      return res.json();
-    })
-    .then(json => {
       window.location.reload();
     })
     .catch(error => {
@@ -97,9 +94,6 @@ class Idea extends Component {
       method: "POST"
     })
     .then(res => {
-      return res.json();
-    })
-    .then(json => {
       window.location.reload();
     })
     .catch(error => {
