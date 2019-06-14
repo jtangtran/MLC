@@ -73,17 +73,16 @@ class IdeaSubmission extends Component {
             let formData  = new FormData();
             formData.append('file', images.files[0]);
             response.json().then(async (data) => {
+                this.setState({ideaLink:  'http://dev.mylivingcity.org/idea/'+ data.id})
+                document.getElementById('seeIdea').hidden = false;
+                document.getElementById('signInWarning').hidden = true;
+                document.getElementById('submitIdeaBtn').hidden = true;
                 let imageResponse = await fetch(API_URL+"/idea/" + data.id + "/images", {
                     method: "POST",
                     body: formData
                 });
-
                 if(imageResponse.ok){
                     console.log('Image Uploaded')
-                    this.setState({ideaLink:  'http://dev.mylivingcity.org/idea/'+ data.id})
-                    document.getElementById('seeIdea').hidden = false;
-                    document.getElementById('signInWarning').hidden = true;
-                    document.getElementById('submitIdeaBtn').hidden = true;
                 }
                 else{
                     console.log('image failed')
