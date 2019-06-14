@@ -93,7 +93,7 @@ class Conversations extends Component {
                   } else if(value.idea.state !== "idea" && index === this.state.ideas.length - 1){
                     return <div key={index}>
                         <br/>
-                        <p className="lead">No Proposals Discussions</p>
+                        <p className="lead">No Ideas</p>
                       </div>;
                   }
                   else{

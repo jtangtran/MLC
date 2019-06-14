@@ -15,7 +15,8 @@ class IdeaSubmission extends Component {
             materials_petal: '',
             equity_petal: '',
             beauty_petal: '',
-            image: ''
+            image: '',
+            ideaLink: ''
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -79,6 +80,10 @@ class IdeaSubmission extends Component {
 
                 if(imageResponse.ok){
                     console.log('Image Uploaded')
+                    this.setState({ideaLink:  'http://dev.mylivingcity.org/idea/'+ data.id})
+                    document.getElementById('seeIdea').hidden = false;
+                    document.getElementById('signInWarning').hidden = true;
+                    document.getElementById('submitIdeaBtn').hidden = true;
                 }
                 else{
                     console.log('image failed')
@@ -145,6 +150,7 @@ render() {
                     </div>
                 </div>           
                 <div className="text-center">
+                    <p id="seeIdea" hidden className="lead">Thanks for Posting!<br/><a href={this.state.ideaLink}>See your Idea</a></p>
                     <button id="submitIdeaBtn" type="submit" className="btn btn-primary">Submit your Idea!</button>
                     <button id="signInWarning" className="btn btn-primary" data-toggle="modal" data-target="#loginModal">Sign In To Post</button>
                 </div>

@@ -68,7 +68,7 @@ class Idea extends Component {
       body: data
     })
     .then(res => {
-      return res;
+      window.location.reload();
     })
     .catch(error => {
       console.log("Error: " + error);
@@ -84,7 +84,7 @@ class Idea extends Component {
       return res.json();
     })
     .then(json => {
-      console.log(json);
+      window.location.reload();
     })
     .catch(error => {
       console.log("Error: " + error);
@@ -100,7 +100,7 @@ class Idea extends Component {
       return res.json();
     })
     .then(json => {
-      console.log(json);
+      window.location.reload();
     })
     .catch(error => {
       console.log("Error: " + error);
