@@ -78,7 +78,7 @@ class Conversations extends Component {
                 <button id="btnGroupDrop1" type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Sort
                 </button>
-                <div className="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <div className="dropdown-menu" aria-labelledby="Sorting">
                   <div className="dropdown-item" onClick={(e) => this.sort(e, "new")}>Newest</div>
                   <div className="dropdown-item" onClick={(e) => this.sort(e, "trending")}>Trending</div>
                 </div>
