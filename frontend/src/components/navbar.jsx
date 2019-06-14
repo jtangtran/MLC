@@ -60,10 +60,10 @@ class Navbar extends Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
-              <Link to="/conversations" className="nav-item nav-link">Conversations</Link>
-              <Link to="/blogs" className="nav-item nav-link">Blogs</Link>
-              <Link to="/about" className="nav-item nav-link">About Us</Link>
-              <Link to="/submit" className="nav-item nav-link">Submit Idea</Link>
+              <Link to="/conversations" className="nav-item nav-link" id="conversationsNav">Conversations</Link>
+              <Link to="/blogs" className="nav-item nav-link" id="blogsNav">Blogs</Link>
+              <Link to="/about" className="nav-item nav-link" id="aboutNav">About Us</Link>
+              <Link to="/submit" className="nav-item nav-link" id="submitNav">Submit Idea</Link>
             </div>
           </div>
           <div id="loginButtons">

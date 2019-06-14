@@ -6,6 +6,17 @@ import paul from '../media/paul.jpg'
 import Navbar from './navbar';
 
 class About extends Component {
+
+  componentDidMount(){
+    const path = window.location.pathname;
+    const navLink = document.getElementById(path.slice(1, path.length) + "Nav")
+    const links = document.getElementsByClassName('nav-link');
+    for(let i = 0; i < links.length; i++){
+      links[i].style = "font-weight: 400; color: rgba(0, 0, 0, 0.5);"
+    }
+    navLink.style = "font-weight: bold; color: #007bff;"
+  }
+
   render() {
     return (
       <div className="About">
