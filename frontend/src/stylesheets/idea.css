@@ -1,0 +1,5 @@
+.badge-pill {
+  width: 250px;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}

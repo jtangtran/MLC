@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from './navbar';
 import Moment from 'react-moment';
+import '../stylesheets/idea.css';
 
 const API_URL = require('../config.js')
 
