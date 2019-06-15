@@ -70,7 +70,7 @@ class About extends Component {
           <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center pt-3 pb-3">
             <img className="teamImg" src={chelsea} alt="..."/>
             <h5>Chelsea Birch</h5>
-            <p>Business Anaylst</p>
+            <p>Business Analyst</p>
             <div className="row pr-5 pl-5">
               <div className="col-4">
                 <a href="https://github.com/chelc99">

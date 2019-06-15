@@ -86,8 +86,8 @@ class Conversations extends Component {
                   Sort
                 </button>
                 <div className="dropdown-menu" aria-labelledby="Sorting">
-                  <div className="dropdown-item" onClick={(e) => this.sort(e, "new")}>Newest</div>
-                  <div className="dropdown-item" onClick={(e) => this.sort(e, "trending")}>Trending</div>
+                  <div style={{"cursor": "pointer"}} className="dropdown-item" onClick={(e) => this.sort(e, "new")}>Newest</div>
+                  <div style={{"cursor": "pointer"}} className="dropdown-item" onClick={(e) => this.sort(e, "trending")}>Trending</div>
                 </div>
               </div>
             </div>

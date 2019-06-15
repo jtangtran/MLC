@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import '../stylesheets/home.css';
-
+import logo from '../media/mylivingcity.gif';
 import Navbar from './navbar.jsx';
+import Footer from './footer.jsx';
+import Moment from 'react-moment';
+
 const API_URL = require('../config.js')
 
 
@@ -46,56 +49,92 @@ class Home extends Component {
         <Navbar/>
         <div className="jumbotron jumbotron-fluid" id="banner">
             <div className="container">
-                <h1 className="display-4">My Living City</h1>
+                <img src={logo} alt="logo"/>
                 <p className="lead">
                     In order to transform our cities into living cities that exist in complete integrity with the natural world, we need to empower every citizen to engage in a conversation for change and a call to take action in their community.
                 </p>
             </div>
         </div>
         <div className="row">
-          <div className="col-8 text-center pr-0">
-            <h3>New and Trending</h3>
-            <div className="bd-example">
-              <div id="carouselExampleCaptions" className="carousel slide" data-ride="carousel">
-                <ol className="carousel-indicators">
-                  {this.state.ideas.map((value, index) => {
-                    return <li key={index} data-target="#carouselExampleCaptions" data-slide-to={index} className="active"></li>
-                  })}
-                </ol>
-                <div className="carousel-inner">
-                  {this.state.ideas.map((value, index) => {
-                    return  <div key={index} className={index === 0 ? "carousel-item active" : "carousel-item"}>
-                              <img src="https://cdn-images-1.medium.com/max/1600/1*14cEm2ezAJs_nPgjsVJHZg.jpeg" className="d-block w-100" alt="..."/>
-                              <div className="carousel-caption d-none d-md-block">
-                                <h5>{value.idea.title}</h5>
-                                <p>{value.idea.description}</p>
-                                <a href={"/idea/" + value.idea.id}><button type="button" className="btn btn-primary">View</button></a>
-                              </div>
-                            </div>
-                  })}
+          <div className="col-12 text-center">
+            <br/>
+            <h1 className="display-4">New and Trending</h1>
+            <br/>
+            <br/>
+            <div className="row">
+              {this.state.ideas.map((value, index) => {
+                if(index < 3){
+                  return <div className="col-4" key={index}>
+                  <div className="card newTrendingCard">
+                    <a href={"/idea/" + value.idea.id}>
+                      <div className="card-body">
+                        <h5 className="card-title">{value.idea.title}</h5>
+                        <h6 className="card-subtitle mb-2 text-muted">Posted by: {value.idea.User.fname} {value.idea.User.lname}</h6>
+                        <p className="card-text">{value.idea.description.length < 30 ? value.idea.description: value.idea.description.slice(0, 30) + '...'}</p>
+                        <div className="row">
+                          <div className="col-6">
+                              <p className="likeText">{value.idea.upvotes} Likes</p>
+                          </div>
+                          <div className="col-6">
+                              <p className="dislikeText">{value.idea.downvotes} Dislikes</p>
+                          </div>
+                          <div className="col-12">
+                            <Moment format="MMM Do YYYY">{value.idea.createdAt}</Moment>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
                 </div>
-                <a className="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                  <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span className="sr-only">Previous</span>
-                </a>
-                <a className="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-                  <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span className="sr-only">Next</span>
-                </a>
+                }
+                else{
+                  return null
+                  }
+              })}
+              <div className="col-12">
+                <br/>
+                <br/>
+                <h5><a href="/conversations">View all ideas and conversations</a></h5>
+                <br/>
+                <br/>
               </div>
             </div>
-          </div>
-          <div className="col-4 text-center pl-0">
-            <h3>Conversations</h3>
-            <div className="list-group">
-                {this.state.ideas.map((value, index) => {
-                  return <a href={"/idea/" + value.idea.id} key={index} className="convoList">
-                          <button type="button" className="list-group-item list-group-item-action">
-                            {value.idea.title}
-                          </button>
-                        </a>
-                })}
+            <div className="row" style={{"backgroundColor": "#e9ecef", "height": "500px"}}>
+              <div className="col-12">
+                <br/>
+                <br/>
+                <h1 className="display-4">Share your Ideas</h1>
+                <br/>
+                <br/>
+                <br/>
+                <div className="row">
+                  <div className="col-4 text-center">
+                    <i className="far fa-user-circle fa-6x"></i>
+                    <br/>
+                    <br/>
+                    <p className="lead">Create your Account</p>
+                  </div>
+                  <div className="col-4 text-center">
+                    <i className="fas fa-clipboard-list fa-6x"></i>
+                    <br/>
+                    <br/>
+                    <p className="lead">Post your Idea</p>
+                  </div>
+                  <div className="col-4 text-center">
+                    <i className="far fa-comments fa-6x"></i>
+                    <br/>
+                    <br/>
+                    <p className="lead">Take part in Discussion</p>
+                  </div>
+                  <div className="col-12 text-center">
+                    <br/>
+                    <br/>
+                    <h5>MyLivingCity provides the platform for your community to discuss ideas.</h5>
+                  </div>
+                </div>
+              </div>
             </div>
+            <Footer/>
           </div>
         </div>
       </div>
