@@ -1,9 +1,22 @@
 import React, { Component } from 'react';
 import '../stylesheets/about.css';
+import chelsea from '../media/chelsea.jpg'
+import paul from '../media/paul.jpg'
 
 import Navbar from './navbar';
 
 class About extends Component {
+
+  componentDidMount(){
+    const path = window.location.pathname;
+    const navLink = document.getElementById(path.slice(1, path.length) + "Nav")
+    const links = document.getElementsByClassName('nav-link');
+    for(let i = 0; i < links.length; i++){
+      links[i].style = "font-weight: 400; color: rgba(0, 0, 0, 0.5);"
+    }
+    navLink.style = "font-weight: bold; color: #007bff;"
+  }
+
   render() {
     return (
       <div className="About">
@@ -14,21 +27,79 @@ class About extends Component {
             <img className="teamImg" src="https://avatars1.githubusercontent.com/u/27584221?s=460&v=4" alt="..."/>
             <h5>Chris Eddy</h5>
             <p>Full-stack Web Developer</p>
+            <div className="row pr-5 pl-5">
+              <div className="col-4">
+                <a href="https://github.com/ChrisEddy">
+                  <i className="fab fa-github fa-2x"></i>
+                </a>
+              </div>
+              <div className="col-4">
+                <a href="https://twitter.com/ChrisEddyDev">
+                  <i className="fab fa-twitter fa-2x"></i>
+                </a>
+              </div>
+              <div className="col-4">
+                <a href="https://www.linkedin.com/in/chris-eddy-394784160/">
+                  <i className="fab fa-linkedin-in fa-2x"></i>
+                </a>
+              </div>
+            </div>
           </div>
           <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center pt-3 pb-3">
-            <img className="teamImg" src="https://avatars1.githubusercontent.com/u/1562711?s=460&v=4" alt="..."/>
+            <img className="teamImg" src={paul} alt="..."/>
             <h5>Paul Sajna</h5>
             <p>Backend Developer / Dev-Ops</p>
+            <div className="row pr-5 pl-5">
+              <div className="col-4">
+                <a href="https://github.com/sajattack">
+                  <i className="fab fa-github fa-2x"></i>
+                </a>
+              </div>
+              <div className="col-4">
+                <a href="https://twitter.com/sajattack">
+                  <i className="fab fa-twitter fa-2x"></i>
+                </a>
+              </div>
+              <div className="col-4">
+                <a href="https://www.linkedin.com/in/paulsajna/">
+                  <i className="fab fa-linkedin-in fa-2x"></i>
+                </a>
+              </div>
+            </div>
           </div>
           <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center pt-3 pb-3">
-            <img className="teamImg" src="https://via.placeholder.com/200" alt="..."/>
+            <img className="teamImg" src={chelsea} alt="..."/>
             <h5>Chelsea Birch</h5>
-            <p>Business Anaylst</p>
+            <p>Business Analyst</p>
+            <div className="row pr-5 pl-5">
+              <div className="col-4">
+                <a href="https://github.com/chelc99">
+                  <i className="fab fa-github fa-2x"></i>
+                </a>
+              </div>
+              <div className="col-4">
+                <i className="fab fa-twitter fa-2x" style={{"color": "#a9a9a9c2"}}></i>
+              </div>
+              <div className="col-4">
+                <i className="fab fa-linkedin-in fa-2x" style={{"color": "#a9a9a9c2"}}></i>
+              </div>
+            </div>
           </div>
           <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center pt-3 pb-3">
             <img className="teamImg" src="https://via.placeholder.com/200" alt="..."/>
             <h5>Sonny Brar</h5>
             <p>Sponsor</p>
+            <div className="row pr-5 pl-5">
+              <div className="col-4">
+                <i className="fab fa-github fa-2x" style={{"color": "#a9a9a9c2"}}></i>
+              </div>
+              <div className="col-4">
+                <i className="fab fa-twitter fa-2x" style={{"color": "#a9a9a9c2"}}></i>
+              </div>
+              <div className="col-4">
+                <i className="fab fa-linkedin-in fa-2x" style={{"color": "#a9a9a9c2"}}></i>
+              </div>
+            </div>
           </div>
         </div>
 

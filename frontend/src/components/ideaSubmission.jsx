@@ -15,7 +15,8 @@ class IdeaSubmission extends Component {
             materials_petal: '',
             equity_petal: '',
             beauty_petal: '',
-            image: ''
+            image: '',
+            ideaLink: ''
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -23,15 +24,23 @@ class IdeaSubmission extends Component {
     }
 
     componentDidMount(){
+        const path = window.location.pathname;
+        const navLink = document.getElementById(path.slice(1, path.length) + "Nav")
+        const links = document.getElementsByClassName('nav-link');
+        for(let i = 0; i < links.length; i++){
+          links[i].style = "font-weight: 400; color: rgba(0, 0, 0, 0.5);"
+        }
+        navLink.style = "font-weight: bold; color: #007bff;"
+        
         const images = document.getElementById('pictureUpload');
         images.addEventListener('input', function (evt) {
             console.log(evt.target.files);
+            document.getElementById('fileText').innerText = evt.target.files[0].name;
         });
 
         const userLoggedIn = sessionStorage.getItem('loggedin');
         const signInWarning = document.getElementById('signInWarning');
         const submitIdeaBtn = document.getElementById('submitIdeaBtn');
-        console.log(userLoggedIn)
         if(userLoggedIn){
             signInWarning.hidden = true;
             submitIdeaBtn.hidden = false;
@@ -72,11 +81,14 @@ class IdeaSubmission extends Component {
             let formData  = new FormData();
             formData.append('file', images.files[0]);
             response.json().then(async (data) => {
+                this.setState({ideaLink:  'http://dev.mylivingcity.org/idea/'+ data.id})
+                document.getElementById('seeIdea').hidden = false;
+                document.getElementById('signInWarning').hidden = true;
+                document.getElementById('submitIdeaBtn').hidden = true;
                 let imageResponse = await fetch(API_URL+"/idea/" + data.id + "/images", {
                     method: "POST",
                     body: formData
                 });
-
                 if(imageResponse.ok){
                     console.log('Image Uploaded')
                 }
@@ -99,7 +111,8 @@ render() {
     return (
     <div className="IdeaSubmission">
         <Navbar/>
-        <div className="row mt-5 mr-0 ml-0">
+        <h1 className="pt-3 pl-4 pb-4">Submit Idea</h1>
+        <div className="row mt-2 mr-0 ml-0">
             <div className="col-2">
             </div>
             <div className="col-8">
@@ -136,14 +149,15 @@ render() {
                 </div>
                 <div className="input-group mb-3">
                     <div className="input-group-prepend">
-                        <span className="input-group-text" id="inputGroupFileAddon01">Upload Pictures</span>
+                        <span className="input-group-text" id="inputGroupFileAddon01">Upload Picture</span>
                     </div>
                     <div className="custom-file">
                         <input type="file" className="custom-file-input" id="pictureUpload"/>
-                        <label className="custom-file-label">Choose file</label>
+                        <label className="custom-file-label" id="fileText">Choose file</label>
                     </div>
                 </div>           
                 <div className="text-center">
+                    <p id="seeIdea" hidden className="lead">Thanks for Posting!<br/><a href={this.state.ideaLink}>See your Idea</a></p>
                     <button id="submitIdeaBtn" type="submit" className="btn btn-primary">Submit your Idea!</button>
                     <button id="signInWarning" className="btn btn-primary" data-toggle="modal" data-target="#loginModal">Sign In To Post</button>
                 </div>

@@ -28,6 +28,7 @@ class EditBlog extends Component {
     componentDidMount(){
       const images = document.getElementById('pictureUpload');
       images.addEventListener('input', function (evt) {
+          document.getElementById('fileText').innerText = evt.target.files[0].name;
           console.log(evt.target.files);
       });
     }
@@ -94,7 +95,7 @@ class EditBlog extends Component {
             <div className="input-group mb-3 mt-3 ml-2">
               <div className="custom-file">
                   <input type="file" className="custom-file-input" id="pictureUpload"/>
-                  <label className="custom-file-label">Choose Cover Image</label>
+                  <label className="custom-file-label" id="fileText">Choose Cover Image</label>
               </div>
             </div> 
           </div>
