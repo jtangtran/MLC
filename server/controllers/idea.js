@@ -59,6 +59,34 @@ const getIdeas = async function (req, res) {
         return 0;
       }).reverse();
       res.send(ideas);
+
+    // Not really a sort but gets only ideas the user has interacted with.
+    // Stuck it here because the route is the same format.
+    // Also I felt this query was too complicated to do with sequelize so that's why
+    // it's a raw query instead.
+    } else if (req.params.sort === 'interacted') {
+      [dbIdeas, metadata] = await db.sequelize.query(
+        'SELECT DISTINCT "Ideas".*, "Users".fname, "Users".lname, developer.fname as developer_fname, developer.lname as developer_lname FROM "Votes" JOIN "Ideas" ON "Votes"."IdeaId" = "Ideas".id LEFT OUTER JOIN "Comments" on "Ideas".id = "Comments"."IdeaId" JOIN "Users" on "Ideas"."UserId" = "Users".id LEFT OUTER JOIN "Users" as "developer" on "Ideas"."developerId" = "Users".id WHERE ("Votes"."UserId" = ' + req.session.user.id + 'OR "Comments"."UserId" = ' + req.session.user.id + ') AND "Ideas".active = true ORDER BY "updatedAt" OFFSET ' + req.params.offset + 'ROWS FETCH NEXT 50 ROWS ONLY'
+      ).catch((err) => {throw err;});
+      dbIdeas.map(idea => {
+        idea.User = {};
+        idea.User.fname = idea.fname;
+        idea.User.lname = idea.lname;
+        delete idea.fname;
+        delete idea.lname;
+        if (idea.developerId !== null) {
+          idea.developer = {};
+          idea.developer.fname = idea.developer_fname;
+          idea.developer.lname = idea.developer_lname;
+        } else { 
+          idea.developer = null;
+        }
+        delete idea.developer_fname;
+        delete idea.developer_lname;
+        return idea;
+      });
+      var ideas = await Promise.all(dbIdeas.map(idea => addVotes(idea))) 
+      res.send(ideas);
     } else {
       throw "invalid sort method";
     }
