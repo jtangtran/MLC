@@ -66,7 +66,7 @@ const getIdeas = async function (req, res) {
     // it's a raw query instead.
     } else if (req.params.sort === 'interacted') {
       [dbIdeas, metadata] = await db.sequelize.query(
-        'SELECT DISTINCT "Ideas".*, "Users".fname, "Users".lname, developer.fname as developer_fname, developer.lname as developer_lname FROM "Votes" JOIN "Ideas" ON "Votes"."IdeaId" = "Ideas".id LEFT OUTER JOIN "Comments" on "Ideas".id = "Comments"."IdeaId" JOIN "Users" on "Ideas"."UserId" = "Users".id LEFT OUTER JOIN "Users" as "developer" on "Ideas"."developerId" = "Users".id WHERE ("Votes"."UserId" = ' + req.session.user.id + 'OR "Comments"."UserId" = ' + req.session.user.id + ') AND "Ideas".active = true ORDER BY "updatedAt" OFFSET ' + req.params.offset + 'ROWS FETCH NEXT 50 ROWS ONLY'
+        'SELECT DISTINCT "Ideas".*, "Users".fname, "Users".lname, developer.fname AS developer_fname, developer.lname AS developer_lname FROM "Votes" JOIN "Ideas" ON "Votes"."IdeaId" = "Ideas".id LEFT OUTER JOIN "Comments" ON "Ideas".id = "Comments"."IdeaId" JOIN "Users" ON "Ideas"."UserId" = "Users".id LEFT OUTER JOIN "Users" AS "developer" ON "Ideas"."developerId" = "Users".id WHERE ("Ideas"."UserId" = ' + req.session.user.id + ' OR "Votes"."UserId" = ' + req.session.user.id + 'OR "Comments"."UserId" = ' + req.session.user.id + ') AND "Ideas".active = true ORDER BY "updatedAt" OFFSET ' + req.params.offset + 'ROWS FETCH NEXT 50 ROWS ONLY'
       ).catch((err) => {throw err;});
       dbIdeas.map(idea => {
         idea.User = {};
