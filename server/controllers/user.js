@@ -78,6 +78,7 @@ const login = (req, res, next) => {
 const logout = (req, res, next) => {
   req.session.destroy();
   res.clearCookie('authToken');
+  res.clearCookie('connect.sid');
   res.status(200).end();
 };
 
