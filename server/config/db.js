@@ -1,7 +1,7 @@
 module.exports = {
   development: {
     username: 'postgres',
-    password: process.env.DB_PASS,
+    password: process.env.DB_PASS || 'postgres',
     database: 'mylivingcity',
     host: '127.0.0.1',
     dialect: 'postgres'
@@ -11,7 +11,7 @@ module.exports = {
     password: process.env.DB_PASS,
     database: 'mylivingcity',
     host: "mylivingcity.cilhwpqjm37r.us-west-1.rds.amazonaws.com",
-    dialect: 'postgres',
+    dialect: 'postgres'
   }
 };
 
