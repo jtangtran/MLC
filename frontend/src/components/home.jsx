@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../stylesheets/home.css';
-import logo from '../media/mylivingcity.gif';
+import logo from '../media/MyLivingCityLogo.png';
 import Navbar from './navbar.jsx';
 import Footer from './footer.jsx';
 import Moment from 'react-moment';
@@ -49,7 +49,7 @@ class Home extends Component {
         <Navbar/>
         <div className="jumbotron jumbotron-fluid" id="banner">
             <div className="container">
-                <img src={logo} alt="logo"/>
+                <img src={logo} alt="logo" width="600"/>
                 <p className="lead">
                     In order to transform our cities into living cities that exist in complete integrity with the natural world, we need to empower every citizen to engage in a conversation for change and a call to take action in their community.
                 </p>
