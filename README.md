@@ -16,5 +16,5 @@ The city can invite resident to review as well as provide feedback and contribut
 Increasing the knowledge in the community, contributing experts can post on the sites blogs with information helping residents and cities to deepen their sustainable mindset and be more adept at making choices and decisions that reduce the impact to the environment. As well as creating an invitation for citizens to group and be the source of meaningful development in their community.
 
 ## Capstone Development
-Chris, Paul, and Chelsea has made this web application for their Capstone project in June 2019
+Chris, Paul, and Chelsea has made this web application for their Capstone project in June 2019.
 Jennifer, Joshua, and Changsin will update this application with new features for their Capstone project.
