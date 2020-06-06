@@ -8,13 +8,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     title: DataTypes.STRING,
     description: DataTypes.STRING(5000),
-    place_petal: DataTypes.STRING,
-    water_petal: DataTypes.STRING,
-    energy_petal: DataTypes.STRING,
-    health_petal: DataTypes.STRING,
-    materials_petal: DataTypes.STRING,
-    equity_petal: DataTypes.STRING,
-    beauty_petal: DataTypes.STRING,
+    community_impact: DataTypes.STRING,
+    nature_impact: DataTypes.STRING,
+    arts_impact: DataTypes.STRING,
+    energy_impact: DataTypes.STRING,
+    manufacturing_impact: DataTypes.STRING,
     state: {
       type: DataTypes.STRING,
       defaultValue: 'idea'
