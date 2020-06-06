@@ -10,7 +10,8 @@ class RegisterModal extends Component {
         email: '',
         password: '',
         fname: '',
-        lname: ''
+        lname: '',
+        role: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.register = this.register.bind(this);
@@ -28,7 +29,8 @@ class RegisterModal extends Component {
               email: this.state.email,
               password: this.state.password,
               fname: this.state.fname,
-              lname: this.state.lname
+              lname: this.state.lname,
+              role: this.state.role
             }
         });
         let response = await fetch(API_URL+"/user/register", {
@@ -103,6 +105,15 @@ class RegisterModal extends Component {
                   </div>
                   <div className="form-group">
                     <input onChange={this.handleChange} name="password" type="password" className="form-control text-center" id="passwordRegisterInput" placeholder="Password" required/>
+                  </div>
+                  <div className="form-group">
+                    <label for="selectRole">Choose your desired account type:</label>
+                    <select name="role" className="form-control text-center" id="selectRole" required>
+                      <option value="guest">Guest</option>
+                      <option value="resident">Resident</option>
+                      <option value="worker">Worker</option>
+                      <option value="associate">Associate</option>
+                    </select>
                   </div>
                   <div>
                     <button id="submitBtnRegister" type="submit" className="btn btn-primary">Register</button>
