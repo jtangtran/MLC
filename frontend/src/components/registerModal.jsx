@@ -3,14 +3,17 @@ import React, { Component } from 'react';
 const API_URL = require('../config.js');
 
 class RegisterModal extends Component {
-
+// add address
   constructor(props) {
     super(props);
     this.state = {
         email: '',
         password: '',
+        confirmPass: '',
         fname: '',
         lname: '',
+        Street_Name:'',
+        Postal_Code:'',
         role: ''
     };
     this.handleChange = this.handleChange.bind(this);
@@ -30,6 +33,8 @@ class RegisterModal extends Component {
               password: this.state.password,
               fname: this.state.fname,
               lname: this.state.lname,
+              Street_Name: this.state.Street_Name,
+              Postal_Code: this.state.Postal_Code,
               role: this.state.role
             }
         });
@@ -98,14 +103,21 @@ class RegisterModal extends Component {
                     <input onChange={this.handleChange} name="fname" type="text" className="form-control text-center" id="fnameRegisterInput" aria-describedby="firstName" placeholder="First Name" required/>
                   </div>
                   <div className="form-group">
-                    <input onChange={this.handleChange} name="lname" type="text" className="form-control text-center" id="lnameRegisterInput" aria-describedby="lastName" placeholder="Last Name" required/>
+                    <input onChange={this.handleChange} name="lname" type="text" className="form-control text-center" id="lnameRegisterInput" aria-describedby="lastName" placeholder="Last Name Initial" required/>
                   </div>
                   <div className="form-group">
-                    <input onChange={this.handleChange} name="email" type="email" className="form-control text-center" id="emailRegisterInput" aria-describedby="emailRegister" placeholder="Enter email" required/>
+                    <input onChange={this.handleChange} name="email" type="email" className="form-control text-center" id="emailRegisterInput" aria-describedby="emailRegister" placeholder="Email" required/>
                   </div>
                   <div className="form-group">
                     <input onChange={this.handleChange} name="password" type="password" className="form-control text-center" id="passwordRegisterInput" placeholder="Password" required/>
                   </div>
+                  <div className="form-group">
+                    <input onChange={this.handleChange} name="Street_Name" type="text" className="form-control text-center" id="streetAddRegisterInput" placeholder="Street Name"/>
+                  </div>
+                  <div className="form-group">
+                    <input onChange={this.handleChange} name="Postal_Code" type="text" className="form-control text-center" id="postalRegisterInput" placeholder="Postal / Zip Code " required/>
+                  </div>
+                  
                   <div className="form-group">
                     <label for="selectRole">Choose your desired account type:</label>
                     <select name="role" className="form-control text-center" id="selectRole" required>
