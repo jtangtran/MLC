@@ -40,8 +40,8 @@ class RegisterModal extends Component {
             }
         });
         if(this.state.password !== this.state.confirmPass){
-          console.log("The passwords doesn't match");
-          return false; // The form won't submit
+          alert("The passwords doesn't match");
+          return false; //matching password
         }
         let response = await fetch(API_URL+"/user/register", {
           method: "POST",
@@ -117,7 +117,7 @@ class RegisterModal extends Component {
                     <input onChange={this.handleChange} name="password" type="password" className="form-control text-center" id="passwordRegisterInput" placeholder="Password" required/>
                   </div>
                   <div className="form-group">
-                    <input onChange={this.handleChange} name="confirmPass" type="password" className="form-control text-center" id="confirmPassRegisterInput" placeholder="Password" required/>
+                    <input onChange={this.handleChange} name="confirmPass" type="password" className="form-control text-center" id="confirmPassRegisterInput" placeholder="Confirm Password" required/>
                   </div>
                   <div className="form-group">
                     <input onChange={this.handleChange} name="Street_Name" type="text" className="form-control text-center" id="streetAddRegisterInput" placeholder="Street Name"/>
