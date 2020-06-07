@@ -31,6 +31,7 @@ class RegisterModal extends Component {
             user: {
               email: this.state.email,
               password: this.state.password,
+              confirmPass: this.state.confirmPass,
               fname: this.state.fname,
               lname: this.state.lname,
               Street_Name: this.state.Street_Name,
@@ -38,6 +39,10 @@ class RegisterModal extends Component {
               role: this.state.role
             }
         });
+        if(this.state.password !== this.state.confirmPass){
+          console.log("The passwords doesn't match");
+          return false; // The form won't submit
+        }
         let response = await fetch(API_URL+"/user/register", {
           method: "POST",
           headers: {"Content-Type": "application/json"},
@@ -110,6 +115,9 @@ class RegisterModal extends Component {
                   </div>
                   <div className="form-group">
                     <input onChange={this.handleChange} name="password" type="password" className="form-control text-center" id="passwordRegisterInput" placeholder="Password" required/>
+                  </div>
+                  <div className="form-group">
+                    <input onChange={this.handleChange} name="confirmPass" type="password" className="form-control text-center" id="confirmPassRegisterInput" placeholder="Password" required/>
                   </div>
                   <div className="form-group">
                     <input onChange={this.handleChange} name="Street_Name" type="text" className="form-control text-center" id="streetAddRegisterInput" placeholder="Street Name"/>
