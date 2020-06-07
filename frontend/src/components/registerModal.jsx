@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import privacyPolicyDocument from '../documents/PrivacyPolicy.pdf';
 
 const API_URL = require('../config.js');
 
@@ -134,6 +135,11 @@ class RegisterModal extends Component {
                       <option value="worker">Worker</option>
                       <option value="associate">Associate</option>
                     </select>
+                  </div>
+                  {/* Privacy Policy Check */}
+                  <div className="form-group">
+                    <input type="checkbox" id="privacyPolicy" name="privacyPolicy" value="privacyPolicyCheck" required/>
+                    <label for="privacyPolicy">&nbsp;I have read and agree to the <a href={privacyPolicyDocument} target="popup">privacy policy</a></label>
                   </div>
                   <div>
                     <button id="submitBtnRegister" type="submit" className="btn btn-primary">Register</button>
