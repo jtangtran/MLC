@@ -56,6 +56,7 @@ app.post('/user/register', auth.optional, bodyParser.json(), userController.regi
 app.post('/user/login', auth.optional, bodyParser.json(), userController.login);
 app.post('/user/logout', auth.required, userController.logout);
 app.get('/user/me', auth.required, userController.getCurrentUser);
+app.get('/users', auth.optional, userController.getUsers);
 
 
 app.get('/blogs', auth.optional, blogController.getBlogs);

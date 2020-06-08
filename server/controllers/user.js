@@ -96,9 +96,32 @@ const getCurrentUser = (req, res, next) => {
     });
 };
 
+//GET all users (required, only admin users have access)
+const getUsers = async function(req, res) {
+  try {
+    var dbUsers = await User.findAll()
+    /*
+    .then((users) => {
+      res.send(users)
+    })
+    */
+    .catch((err) => {throw err;});
+    var users = await Promise.all(dbUsers.map(user => { return {"user": user} }));
+    res.send(users);
+  }
+  catch(e) {
+    return res.status(400).json({
+      errors: {
+        error: e.stack
+      },
+    });
+  }
+}
+
 module.exports = {
   register,
   login,
   logout,
-  getCurrentUser
+  getCurrentUser,
+  getUsers
 };
