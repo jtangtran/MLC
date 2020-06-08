@@ -44,6 +44,7 @@ module.exports = (sequelize, DataTypes) => {
         location: this.location,
         latitude: this.latitude,
         longitude: this.longitude,
+        role: this.role,
         token: this.generateJWT(),
     };
   };

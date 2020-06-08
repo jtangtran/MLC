@@ -70,6 +70,7 @@ class RegisterModal extends Component {
                 console.log('Got User: ', data);
                 sessionStorage.setItem('loggedin', true);
                 sessionStorage.setItem('user', data.user.email);
+                sessionStorage.setItem('userRole', data.user.role);
                 setTimeout(function(){
                   window.location.reload();
                   }, 1500);
@@ -77,6 +78,7 @@ class RegisterModal extends Component {
                 console.log(e.stack);
                 sessionStorage.setItem('loggedin', false);
                 sessionStorage.setItem('user', data.user.email);
+                sessionStorage.setItem('userRole', data.user.role);
               });
             }
           });

@@ -39,11 +39,13 @@ class LoginModal extends Component {
             console.log('Got User: ', data);
             sessionStorage.setItem('loggedin', true);
             sessionStorage.setItem('user', data.user.email);
+            sessionStorage.setItem('userRole', data.user.role);
             this.acceptLogin();
           }).catch(e => {
             console.log(e.stack);
             sessionStorage.setItem('loggedin', false);
             sessionStorage.setItem('user', data.user.email);
+            sessionStorage.setItem('userRole', data.user.role);
             this.rejectLogin();
           });
         }
