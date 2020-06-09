@@ -130,7 +130,7 @@ class RegisterModal extends Component {
                   </div>
                   
                   <div className="form-group">
-                    <label for="selectRole">Choose your desired account type:</label>
+                    <label htmlFor="selectRole">Choose your desired account type:</label>
                     <select name="role" className="form-control text-center" id="selectRole" required>
                       <option value="guest">Guest</option>
                       <option value="resident">Resident</option>
@@ -141,7 +141,7 @@ class RegisterModal extends Component {
                   {/* Privacy Policy Check */}
                   <div className="form-group">
                     <input type="checkbox" id="privacyPolicy" name="privacyPolicy" value="privacyPolicyCheck" required/>
-                    <label for="privacyPolicy">&nbsp;I have read and agree to the <a href={privacyPolicyDocument} target="popup">privacy policy</a></label>
+                    <label htmlFor="privacyPolicy">&nbsp;I have read and agree to the <a href={privacyPolicyDocument} target="popup">privacy policy</a></label>
                   </div>
                   <div>
                     <button id="submitBtnRegister" type="submit" className="btn btn-primary">Register</button>
