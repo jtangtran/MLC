@@ -8,6 +8,7 @@ class IdeaSubmission extends Component {
         super(props);
         this.state = {
             title: '',
+            category: '',
             community_impact: '',
             nature_impact: '',
             arts_impact: '',
@@ -58,6 +59,7 @@ class IdeaSubmission extends Component {
         try{
         let data = JSON.stringify({
             title: this.state.title,
+            category: this.state.category,
             description: this.state.description,
             community_impact: this.state.community_impact,
             nature_impact: this.state.nature_impact,
@@ -113,6 +115,16 @@ render() {
             </div>
             <div className="col-8">
             <form onSubmit={this.postIdea}>
+                <div className="form-group">
+                    <p>Select Category: </p>
+                    <select name="category" className="form-control text-center" id="ideaCategoryInput" required>
+                      <option value="community_impact">Community</option>
+                      <option value="nature_impact">Nature</option>
+                      <option value="art_impact">Arts</option>
+                      <option value="energy_impact">Energy</option>
+                      <option value="manufacturing_impact">Manufacturing</option>
+                    </select>
+                </div>
                 <div className="form-group">
                     <p>Whats Your Idea?</p>
                     <input onChange={this.handleChange} name="title" type="text" className="form-control" id="ideaTitleInput" aria-describedby="ideaTitle" placeholder="Enter the title for your Idea." required/>

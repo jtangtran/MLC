@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true,
     },
+    category: DataTypes.STRING,
     title: DataTypes.STRING,
     description: DataTypes.STRING(5000),
     community_impact: DataTypes.STRING,
