@@ -146,6 +146,7 @@ const getSingleIdea = async function(req, res) {
 const postIdea = (req, res) => {
   Idea.create({
     title: req.body.title,
+    category: req.body.category,
     description: req.body.description,
     community_impact: req.body.community_impact,
     nature_impact: req.body.nature_impact,
@@ -174,6 +175,7 @@ const editIdea = (req, res) => {
   try {
     Idea.update({
       title: req.body.title,
+      category: req.body.category,
       description: req.body.description,
       community_impact: req.body.community_impact, 
       nature_impact: req.body.nature_impact,

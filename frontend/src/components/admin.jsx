@@ -99,6 +99,7 @@ class Admin extends Component {
                             <thead>
                                 <tr>
                                     <th>Id</th>
+                                    <th>Category</th>
                                     <th>Title</th>
                                     <th>Description</th>
                                     <th>Upvotes</th>
@@ -110,6 +111,7 @@ class Admin extends Component {
                                 {this.state.ideas.map((value, index) => {
                                     return <tr>
                                         <td>{value.idea.id}</td>
+                                        <td>{value.idea.category}</td>
                                         <td>{value.idea.title}</td>
                                         <td>{value.idea.description}</td>
                                         <td>{value.idea.upvotes}</td>
