@@ -4,6 +4,11 @@ import logo from '../media/MyLivingCityLogo.png';
 import Navbar from './navbar.jsx';
 import Footer from './footer.jsx';
 import Moment from 'react-moment';
+import Nature from '../media/nature-friendly.jpg';
+import Energy from '../media/energy.jpg';
+import Community from '../media/community.jpg';
+import Arts from '../media/arts.jpg';
+import Manufacturing from '../media/manufacturing.jpg';
 
 const API_URL = require('../config.js')
 
@@ -97,6 +102,84 @@ class Home extends Component {
                 <h5><a href="/conversations">View all ideas and conversations</a></h5>
                 <br/>
                 <br/>
+              </div>
+            </div>
+            <div className="Category"> <h1 className='display-4'>Category</h1>
+              <div className="row">
+                <div className="col-md-4">
+                  <div className="card medium">
+                    <div className="card-image">
+                      <img src={Nature} className='img-thumbnail'/>
+                      <span className="card-title">Nature</span>
+                    </div>
+                    <div className="card-content">
+                      <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                      <a href="#">Ideas about Nature</a>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-4">
+                  <div className="card medium">
+                    <div className="card-image">
+                      <img src={Community} className='img-thumbnail'/>
+                      <span className="card-title">Community</span>
+                    </div>
+                    <div className="card-content">
+                      <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                      <a href="#">Ideas about Community</a>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-4">
+                  <div className="card medium">
+                    <div className="card-image">
+                      <img src={Arts} className='img-thumbnail'/>
+                      <span className="card-title">Arts</span>
+                    </div>
+                    <div className="card-content">
+                      <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                      <a href="#">Ideas about Arts</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+              <div className="col-md-4">
+                  <div className="card medium">
+                  <div className="">
+                    <div className="card-image">
+                      <img src={Energy} className='img-thumbnail'/>
+                      <span className="card-title">Energy</span>
+                    </div>
+                    <div className="card-content">
+                      <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div className="card-action">
+                      <a href="#">Ideas about Energy</a>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+                <div className="col-md-4">
+                  <div className="card medium">
+                    <div className="card-image">
+                      <img src={Manufacturing} className='img-thumbnail'/>
+                      <span className="card-title">Manufacturing</span>
+                    </div>
+                    <div className="card-content">
+                      <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                      <a href="#">Ideas about Manufacturing</a>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="row" style={{"backgroundColor": "#e9ecef", "height": "500px"}}>
