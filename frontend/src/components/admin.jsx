@@ -82,7 +82,7 @@ class Admin extends Component {
                             </thead>
                             <tbody>
                                 {this.state.users.map((value, index) => {
-                                    return <tr>
+                                    return <tr key={index}>
                                         <td>{value.user.id}</td>
                                         <td>{value.user.fname}</td>
                                         <td>{value.user.lname}</td>
@@ -109,7 +109,7 @@ class Admin extends Component {
                             </thead>
                             <tbody>
                                 {this.state.ideas.map((value, index) => {
-                                    return <tr>
+                                    return <tr key={index}>
                                         <td>{value.idea.id}</td>
                                         <td>{value.idea.category}</td>
                                         <td>{value.idea.title}</td>

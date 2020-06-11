@@ -101,6 +101,32 @@ class Idea extends Component {
     });
   }
 
+  commentLike(e, id){
+    e.preventDefault();
+    fetch(API_URL + "/comment/" + this.props.match.params.id + '/upvote', {
+      method: "POST",
+    })
+    .then(res => {
+      window.location.reload();
+    })
+    .catch(error => {
+      console.log("Error: " + error);
+    });
+  }
+
+  commentDislike(e, id){
+    e.preventDefault();
+    fetch(API_URL + "/comment/" + this.props.match.params.id + '/downvote', {
+      method: "POST"
+    })
+    .then(res => {
+      window.location.reload();
+    })
+    .catch(error => {
+      console.log("Error: " + error);
+    });
+  }
+
   render() {
     const shareURL = window.location.href;
     console.log(shareURL)
@@ -234,7 +260,24 @@ class Idea extends Component {
               <h3>Comments</h3>
               <ul className="list-group">
                 {this.state.comments.map((value, index) => {
-                  return <li className="list-group-item" key={index}>{value.text}</li>
+                  return <li className="list-group-item" key={index}>{value.comment.text}
+                    <p className="lead">Likes: {value.upvoteCount}
+                      <button onClick={(e) => this.commentLike(e, value.comment.id)} type="button" className="btn btn-light">
+                        Like<span className="pl-2"></span>
+                        <span className="badge badge-success">
+                          <i className="far fa-thumbs-up"></i>
+                        </span>
+                      </button>
+                    </p>
+                    <p className="lead">Dislikes: {value.downvoteCount}
+                      <button onClick={(e) => this.commentDislike(e, value.comment.id)} type="button" className="btn btn-light">
+                        Dislike<span className="pl-2"></span>
+                        <span className="badge badge-danger">
+                          <i className="far fa-thumbs-down"></i>
+                        </span>
+                      </button>
+                    </p>
+                  </li>
                 })}
               </ul>
             </div>
