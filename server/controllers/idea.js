@@ -238,7 +238,8 @@ const upvote = async function (req, res) {
         if ((upvoteCount/downvoteCount * 100) >= 70) {
           Idea.update({state: 'proposal'}, { where: {id: req.params.id}}).catch((err) => {throw err;});
         }
-      }
+      }//else if upvote over 100 => update state: collaborations
+      //else  upvote over 500 => update state: project
       res.status(200).end();
     }
   } catch(e) {

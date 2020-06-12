@@ -137,6 +137,7 @@ class Idea extends Component {
           <div className="col-12 text-center">
             <div className="jumbotron jumbotron-fluid">
               <div className="container">
+              <h6 className="card-subtitle">Category: {this.state.idea.category} </h6>
                 <h1 className="display-4">{this.state.idea.title}</h1>
                 <h5>Posted by: {this.state.user.fname} {this.state.user.lname}</h5>
                 <Moment format="MMM Do YYYY">{this.state.idea.createdAt}</Moment>

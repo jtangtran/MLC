@@ -73,6 +73,7 @@ class Home extends Component {
                   <div className="card newTrendingCard">
                     <a href={"/idea/" + value.idea.id}>
                       <div className="card-body">
+                      <h6 className="card-subtitle">Category: {value.idea.category} </h6>
                         <h5 className="card-title">{value.idea.title}</h5>
                         <h6 className="card-subtitle mb-2 text-muted">Posted by: {value.idea.User.fname} {value.idea.User.lname}</h6>
                         <p className="card-text">{value.idea.description.length < 30 ? value.idea.description: value.idea.description.slice(0, 30) + '...'}</p>
@@ -104,84 +105,80 @@ class Home extends Component {
                 <br/>
               </div>
             </div>
-            <div className="Category"> <h1 className='display-4'>Category</h1>
+            <div className="category-container"> <h1 className='display-4'>Category</h1><br/>
               <div className="row">
                 <div className="col-md-4">
-                  <div className="card medium">
+                  <div className="card h-100">
+                    <a href={"/Nature/idea/"}>
                     <div className="card-image">
                       <img src={Nature} className='img-thumbnail'/>
-                      <span className="card-title">Nature</span>
+                      <h4><span className="card-title">Nature</span></h4>
                     </div>
+                    </a>
                     <div className="card-content">
                       <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-                    </div>
-                    <div class="card-action">
-                      <a href="#">Ideas about Nature</a>
                     </div>
                   </div>
                 </div>
                 <div className="col-md-4">
-                  <div className="card medium">
+                  <div className="card h-100">
+                    <a href={"/Community/idea/"}>
                     <div className="card-image">
                       <img src={Community} className='img-thumbnail'/>
-                      <span className="card-title">Community</span>
+                      <h4><span className="card-title">Community</span></h4>
                     </div>
+                    </a>
                     <div className="card-content">
                       <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-                    </div>
-                    <div class="card-action">
-                      <a href="#">Ideas about Community</a>
                     </div>
                   </div>
                 </div>
                 <div className="col-md-4">
-                  <div className="card medium">
+                  <div className="card h-100">
+                    <a href={"/Arts/idea/"}>
                     <div className="card-image">
                       <img src={Arts} className='img-thumbnail'/>
-                      <span className="card-title">Arts</span>
+                      <h4><span className="card-title">Arts</span></h4>
                     </div>
+                    </a>
                     <div className="card-content">
                       <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-                    </div>
-                    <div class="card-action">
-                      <a href="#">Ideas about Arts</a>
                     </div>
                   </div>
                 </div>
               </div>
+              <br/>
               <div className="row">
               <div className="col-md-4">
-                  <div className="card medium">
-                  <div className="">
+                  <div className="card h-100">
+                    <a href={"/Energy/idea/"}>
                     <div className="card-image">
                       <img src={Energy} className='img-thumbnail'/>
-                      <span className="card-title">Energy</span>
+                      <h4><span className="card-title">Energy</span></h4>
                     </div>
+                    </a>
                     <div className="card-content">
                       <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
                     </div>
-                    <div className="card-action">
-                      <a href="#">Ideas about Energy</a>
-                    </div>
-                  </div>
                   </div>
                 </div>
                 <div className="col-md-4">
-                  <div className="card medium">
+                  <div className="card h-100">
+                    <a href={"/Manufacturing/idea/"}>
                     <div className="card-image">
                       <img src={Manufacturing} className='img-thumbnail'/>
-                      <span className="card-title">Manufacturing</span>
+                      <h4><span className="card-title">Manufacturing</span></h4>
                     </div>
+                    </a>
                     <div className="card-content">
                       <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-                    </div>
-                    <div class="card-action">
-                      <a href="#">Ideas about Manufacturing</a>
                     </div>
                   </div>
                 </div>
               </div>
+              <br/>
             </div>
+
             <div className="row" style={{"backgroundColor": "#e9ecef", "height": "500px"}}>
               <div className="col-12">
                 <br/>

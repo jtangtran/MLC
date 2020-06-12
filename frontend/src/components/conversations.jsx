@@ -155,6 +155,29 @@ class Conversations extends Component {
               </div>
             </div>
           </div>
+
+          <div className="row ml-3 mr-3">
+            <div className="col-12 text-center">
+              <br/>
+              <h2>Project</h2>
+              <div className="convoRow">
+                {this.state.ideas.map((value, index) => {
+                  if (value.idea.state === "project") { 
+                    return <ConvoCard key={index} model={value}/>
+                  } 
+                  else if(value.idea.state !== "project" && index === this.state.ideas.length - 1){
+                    return <div key={index}>
+                        <br/>
+                        <p className="lead">No Active Project</p>
+                      </div>;
+                  }
+                  else{
+                    return null;
+                  }
+                })}
+              </div>
+            </div>
+          </div>
         </div>
       );
     }

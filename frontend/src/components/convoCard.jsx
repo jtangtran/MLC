@@ -8,6 +8,7 @@ class ConvoCard extends Component {
         <div className="card convoCard">
           <a href={"/idea/" + this.props.model.idea.id}>
             <div className="card-body">
+            <h6 className="card-subtitle">Category: {this.props.model.idea.category} </h6>
               <h5 className="card-title">
                 {this.props.model ? this.props.model.idea.title : '...'}
               </h5>
