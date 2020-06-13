@@ -140,7 +140,7 @@ class Idea extends Component {
               <h6 className="card-subtitle">Category: {this.state.idea.category} </h6>
                 <h1 className="display-4">{this.state.idea.title}</h1>
                 <h5>Posted by: {this.state.user.fname} {this.state.user.lname}</h5>
-                <Moment format="MMM Do YYYY">{this.state.idea.createdAt}</Moment>
+                <Moment format="L">{this.state.idea.createdAt}</Moment>
                 <br/>
                 <br/>
                 <p className="lead">{this.state.idea.description}</p>
@@ -149,6 +149,11 @@ class Idea extends Component {
                     <p className="lead">Likes</p>
                     <h3 style={{"color": "green"}}>{this.state.json.upvoteCount}</h3>
                     <br/>
+
+                    {/* <button type="button" class="btn btn-primary">
+                      Notifications <span class="badge badge-light">4</span>
+                    </button> */}
+
                     <button onClick={(e) => this.addLike(e)} type="button" className="btn btn-light">
                       Like<span className="pl-2"></span>
                       <span className="badge badge-success">

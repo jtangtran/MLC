@@ -105,77 +105,85 @@ class Home extends Component {
                 <br/>
               </div>
             </div>
-            <div className="category-container"> <h1 className='display-4'>Category</h1><br/>
+
+            <div className="container-fluid"> <h1 className='display-4'>Project Category</h1><br/>
+
               <div className="row">
                 <div className="col-md-4">
-                  <div className="card h-100">
+                  <div className="card category">
                     <a href={"/Nature/idea/"}>
-                    <div className="card-image">
-                      <img src={Nature} className='img-thumbnail'/>
-                      <h4><span className="card-title">Nature</span></h4>
-                    </div>
+                      <div className="card-image">
+                        <img src={Nature} className='img-thumbnail'alt='nature img'/>
+                        <h4><span className="card-title">Nature</span></h4>
+                      </div>
+                      <div className="card-content">
+                        <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                      </div>
                     </a>
-                    <div className="card-content">
-                      <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-                    </div>
                   </div>
                 </div>
+
                 <div className="col-md-4">
-                  <div className="card h-100">
+                  <div className="card category">
                     <a href={"/Community/idea/"}>
-                    <div className="card-image">
-                      <img src={Community} className='img-thumbnail'/>
-                      <h4><span className="card-title">Community</span></h4>
-                    </div>
+                      <div className="card-image">
+                        <img src={Community} className='img-thumbnail' alt='community img'/>
+                        <h4><span className="card-title">Community</span></h4>
+                      </div>
+                      <div className="card-content">
+                        <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                      </div>
                     </a>
-                    <div className="card-content">
-                      <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-                    </div>
                   </div>
                 </div>
+                
                 <div className="col-md-4">
-                  <div className="card h-100">
+                  <div className="card category">
                     <a href={"/Arts/idea/"}>
-                    <div className="card-image">
-                      <img src={Arts} className='img-thumbnail'/>
-                      <h4><span className="card-title">Arts</span></h4>
-                    </div>
+                      <div className="card-image">
+                        <img src={Arts} className='img-thumbnail' alt='arts img'/>
+                        <h4><span className="card-title">Arts</span></h4>
+                      </div>
+                      <div className="card-content">
+                        <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                      </div>
                     </a>
-                    <div className="card-content">
-                      <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-                    </div>
                   </div>
                 </div>
-              </div>
+              </div>    
               <br/>
+
               <div className="row">
-              <div className="col-md-4">
-                  <div className="card h-100">
+                <div className='col-md-2'></div>
+                <div className="col-md-4">
+                  <div className="card category">
                     <a href={"/Energy/idea/"}>
-                    <div className="card-image">
-                      <img src={Energy} className='img-thumbnail'/>
-                      <h4><span className="card-title">Energy</span></h4>
-                    </div>
+                      <div className="card-image">
+                        <img src={Energy} className='img-thumbnail' alt='energy img'/>
+                        <h4><span className="card-title">Energy</span></h4>
+                      </div>
+                      <div className="card-content">
+                        <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                      </div>
                     </a>
-                    <div className="card-content">
-                      <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-                    </div>
                   </div>
                 </div>
+
                 <div className="col-md-4">
-                  <div className="card h-100">
+                  <div className="card category">
                     <a href={"/Manufacturing/idea/"}>
-                    <div className="card-image">
-                      <img src={Manufacturing} className='img-thumbnail'/>
-                      <h4><span className="card-title">Manufacturing</span></h4>
-                    </div>
+                      <div className="card-image">
+                        <img src={Manufacturing} className='img-thumbnail' alt='manufacturing img'/>
+                        <h4><span className="card-title">Manufacturing</span></h4>
+                      </div>
+                      <div className="card-content">
+                        <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                      </div>
                     </a>
-                    <div className="card-content">
-                      <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-                    </div>
                   </div>
                 </div>
               </div>
+
               <br/>
             </div>
 
