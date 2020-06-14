@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from './navbar';
 import Moment from 'react-moment';
+import Ratings from 'react-ratings-declarative';
 import '../stylesheets/idea.css';
 
 const API_URL = require('../config.js')
@@ -13,13 +14,16 @@ class Idea extends Component {
       idea: {},
       comments: [],
       user: [],
-      newComment: ""
+      newComment: "",
+      rating: 0,
+      averageRating: 0
     };
     this.handleCommentChange = this.handleCommentChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.addComment = this.addComment.bind(this);
     this.addLike = this.addLike.bind(this);
     this.addDislike = this.addDislike.bind(this);
+    this.changeRating = this.changeRating.bind(this);
   }
 
   handleCommentChange(event){
@@ -36,10 +40,12 @@ class Idea extends Component {
         return response.json();
       })
       .then(json => {
+        console.log(json);
         this.setState({json: json});
         json.idea.createdAt = json.idea.createdAt.slice(0,10)
         this.setState({idea: json.idea});
         this.setState({user: json.idea.User})
+        this.setState({averageRating: parseFloat(json.averageRating.rating) || 0})
       })
       .catch(error => {
         console.log("Error: " + error);
@@ -127,6 +133,10 @@ class Idea extends Component {
     });
   }
 
+  changeRating(newRating) {
+    this.setState({rating: newRating});
+  }
+
   render() {
     const shareURL = window.location.href;
     console.log(shareURL)
@@ -172,6 +182,37 @@ class Idea extends Component {
                       </span>
                     </button>
                   </div>
+
+                  <div className="col-12">User Rating
+                    <Ratings
+                      rating={this.state.rating}
+                      changeRating={this.changeRating}
+                      widgetRatedColors="gold"
+                      widgetEmptyColors="grey"
+                      widgetHoverColors="yellow"
+                    >
+                      <Ratings.Widget />
+                      <Ratings.Widget />
+                      <Ratings.Widget />
+                      <Ratings.Widget />
+                      <Ratings.Widget />
+                    </Ratings>
+                  </div>
+                  
+                  <div className="col-12">Average Rating
+                    <Ratings
+                      rating={this.state.averageRating}
+                      widgetRatedColors="blue"
+                      widgetEmptyColors="grey"
+                    >
+                      <Ratings.Widget />
+                      <Ratings.Widget />
+                      <Ratings.Widget />
+                      <Ratings.Widget />
+                      <Ratings.Widget />
+                    </Ratings>
+                  </div>
+
                   <div className="col-12 mt-5">
                     <h5>Share</h5>
                     <a className="resp-sharing-button__link" href={"https://facebook.com/sharer/sharer.php?u=http%3A%2F%2F" + shareURL} target="_blank" rel="noopener noreferrer" aria-label="">

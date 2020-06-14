@@ -2,6 +2,8 @@ const db = require('../db/models/index');
 const Idea = db.Idea; 
 const Vote = db.Vote; 
 const User = db.User;
+const Rating = db.Rating;
+const Sequelize = db.Sequelize;
 
 // GET /ideas/:sort/:offset
 const getIdeas = async function (req, res) {
@@ -104,12 +106,40 @@ const addVotes = async idea => {
   var upvoteCount = await Vote.count({ where: {'up': true, 'IdeaId': idea.id} });
 
   var downvoteCount = await Vote.count({ where: {'down': true, 'IdeaId': idea.id} });
+
+  var averageRating = await Rating.findOne({
+    attributes: ['IdeaId', [Sequelize.fn('AVG', 
+      Sequelize.col('rating')), 'rating'
+    ]],
+    group: ['IdeaId'],
+    where: {'IdeaId': idea.id}
+  });
+
   return await {
     idea,
     upvoteCount,
     downvoteCount,
+    averageRating
   }
 }
+
+/*
+// Average rating of an idea object
+const averageRating = async idea => {
+  var averageRating = await Rating.findAll({
+    attributes: ['id', [models.sequelize.fn('AVG', 
+      models.sequelize.col('rating')), 'averageRating'
+    ]],
+    group: ['id'],
+    where: {'id': idea.id}
+  });
+  
+  return await {
+    idea,
+    averageRating
+  }
+}
+*/
 
 // GET /idea/:id
 const getSingleIdea = async function(req, res) {
@@ -291,6 +321,33 @@ getDownvoteCount = (req, res) => {
   });
 };
 
+// POST /idea/:id/rate
+const rate = async function (req, res) {
+  try {
+    var existingRating = await Rating.findOne({ where: {UserId: req.session.user.id, IdeaId: req.params.id}});
+    if (existingRating != null) {
+      return res.status(409).json({
+        errors: {
+          error: 'You have already rated',
+        },
+      });
+    } else {
+      Rating.create({
+        UserId: req.session.user.id,
+        IdeaId: req.params.id,
+        rating: req.body.rating
+      }).catch((err) => {throw err;});
+      res.status(200).end();
+    }
+  } catch(e) {
+    return res.status(400).json({
+      errors: {
+        error: e.stack,
+      }
+    });
+  }
+};
+
 // PUT /idea/:id/developer
 const assignDeveloper = async function (req, res, next) {
   await Idea.findByPk(req.params.id).then(idea => {
@@ -323,6 +380,7 @@ module.exports = {
   deleteIdea,
   upvote,
   downvote,
+  rate,
   assignDeveloper,
 };
 

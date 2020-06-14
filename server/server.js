@@ -50,6 +50,7 @@ app.put('/idea/:id', auth.required, bodyParser.json(), ideaController.editIdea);
 app.post('/idea', auth.required, bodyParser.json(), ideaController.postIdea);
 app.post('/idea/:id/upvote', auth.required, ideaController.upvote);
 app.post('/idea/:id/downvote', auth.required, ideaController.downvote);
+app.post('/idea/:id/rate', auth.required, bodyParser.json(), ideaController.rate);
 app.put('/idea/:id/developer', auth.required, bodyParser.json(), ideaController.assignDeveloper);
 
 app.post('/user/register', auth.optional, bodyParser.json(), userController.register);
