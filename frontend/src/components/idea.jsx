@@ -24,6 +24,7 @@ class Idea extends Component {
     this.addLike = this.addLike.bind(this);
     this.addDislike = this.addDislike.bind(this);
     this.changeRating = this.changeRating.bind(this);
+    this.addRating = this.addRating.bind(this);
   }
 
   handleCommentChange(event){
@@ -133,6 +134,28 @@ class Idea extends Component {
     });
   }
 
+  addRating(e) {
+    e.preventDefault();
+    if (this.state.rating > 0 && this.state.rating <= 5) {
+      const data = JSON.stringify({
+        rating: this.state.rating
+      })
+      fetch(API_URL + "/idea/" + this.props.match.params.id + '/rate', {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: data
+      })
+      .then(res => {
+        window.location.reload();
+      })
+      .catch(error => {
+        console.log("Error: " + error);
+      });
+    } else {
+      console.log("Must provide a valid rating");
+    }
+  }
+
   changeRating(newRating) {
     this.setState({rating: newRating});
   }
@@ -197,6 +220,7 @@ class Idea extends Component {
                       <Ratings.Widget />
                       <Ratings.Widget />
                     </Ratings>
+                    <button onClick={(e) => this.addRating(e)} type="button" className="btn btn-light">Add Rating</button>
                   </div>
                   
                   <div className="col-12">Average Rating
