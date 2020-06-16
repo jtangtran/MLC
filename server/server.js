@@ -7,7 +7,7 @@ var multer = require('multer');
 multer = multer({storage: multer.memoryStorage()});
 app.use(cookieParser());
 app.use(cors());
-const port = 3000;
+const port = 3001;
 
 const db = require('./db/models/index');
 const sequelize = db.sequelize;
