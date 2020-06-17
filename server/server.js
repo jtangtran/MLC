@@ -48,10 +48,20 @@ app.get('/idea/:id', auth.optional, ideaController.getSingleIdea);
 app.delete('/idea/:id', auth.required, ideaController.deleteIdea);
 app.put('/idea/:id', auth.required, bodyParser.json(), ideaController.editIdea);
 app.post('/idea', auth.required, bodyParser.json(), ideaController.postIdea);
+
+app.get('/:category/ideas/:sort/:offset', auth.optional, ideaController.getIdeasByCategory);
+
 app.post('/idea/:id/upvote', auth.required, ideaController.upvote);
 app.post('/idea/:id/downvote', auth.required, ideaController.downvote);
 app.post('/idea/:id/rate', auth.required, bodyParser.json(), ideaController.rate);
 app.put('/idea/:id/developer', auth.required, bodyParser.json(), ideaController.assignDeveloper);
+
+app.get('/:type/:id/comments', auth.optional, commentController.getComments);
+app.post('/:type/:id/comment', auth.required, bodyParser.json(), commentController.addComment);
+app.post('/comment/:id/upvote', auth.required, bodyParser.json(), commentController.upvote);
+app.post('/comment/:id/downvote', auth.required, bodyParser.json(), commentController.downvote);
+app.put('/comment/:id', auth.required, bodyParser.json(), commentController.editComment);
+app.delete('/comment/:id', auth.required, commentController.deleteComment);
 
 app.post('/user/register', auth.optional, bodyParser.json(), userController.register);
 app.post('/user/login', auth.optional, bodyParser.json(), userController.login);
@@ -66,12 +76,7 @@ app.post('/blog', auth.required, bodyParser.json(), blogController.postBlog);
 app.put('/blog/:id', auth.required, bodyParser.json(), blogController.editBlog);
 app.delete('/blog/:id', auth.required, blogController.deleteBlog);
 
-app.get('/:type/:id/comments', auth.optional, commentController.getComments);
-app.post('/:type/:id/comment', auth.required, bodyParser.json(), commentController.addComment);
-app.post('/comment/:id/upvote', auth.required, bodyParser.json(), commentController.upvote);
-app.post('/comment/:id/downvote', auth.required, bodyParser.json(), commentController.downvote);
-app.put('/comment/:id', auth.required, bodyParser.json(), commentController.editComment);
-app.delete('/comment/:id', auth.required, commentController.deleteComment);
+
 
 
 app.get('/image/:filename', auth.optional, imageController.getImage);

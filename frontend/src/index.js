@@ -15,6 +15,7 @@ import EditBlog from './components/editBlog.jsx';
 import BlogAdmin from './components/blogAdmin.jsx';
 import ViewBlog from './components/viewBlog.jsx';
 import Admin from './components/admin.jsx';
+import Category from './components/category.jsx';
 
 const routing = (
     <Router>
@@ -27,6 +28,9 @@ const routing = (
         <Route exact path="/editBlog" component={EditBlog}/>
         <Route exact path="/blogAdmin" component={BlogAdmin}/>
         <Route path="/idea/:id" component={Idea}/>
+
+        <Route path="/:category/idea" component={Category}/>
+
         <Route path="/blog/:id" component={ViewBlog}/>
         <Route path="/admin" component={Admin}/>
       </div>

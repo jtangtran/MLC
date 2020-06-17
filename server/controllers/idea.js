@@ -5,6 +5,297 @@ const User = db.User;
 const Rating = db.Rating;
 const Sequelize = db.Sequelize;
 
+// GET /:category/idea/:id
+const getIdeasByCategory = async function(req, res) {
+  try{
+    if(req.params.category === 'Nature' && req.params.sort === 'new'){
+      var dbIdeas = await Idea.findAll({
+        include: [{
+          model: User,
+          attributes: [
+            ['fname', 'fname'],
+            ['lname', 'lname']
+          ]},
+        { 
+          association: 'developer',
+          attributes: [
+            ['fname', 'fname'],
+            ['lname', 'lname']
+          ]}
+      ],
+      where: {active: true, category: 'Nature'},
+      offset: req.params.offset,
+      limit: 50,
+      order: [['createdAt', 'DESC']]
+      }).catch((err) => {
+        throw err;
+      });
+      var ideas = await Promise.all(dbIdeas.map(idea => addVotes(idea))) 
+      res.send(ideas);
+    } else if (req.params.category === 'Community' && req.params.sort === 'new'){
+        var dbIdeas = await Idea.findAll({
+          include: [{
+            model: User,
+            attributes: [
+              ['fname', 'fname'],
+              ['lname', 'lname']
+            ]},
+          { 
+            association: 'developer',
+            attributes: [
+              ['fname', 'fname'],
+              ['lname', 'lname']
+            ]}
+        ],
+        where: {active: true, category: 'Community'},
+        offset: req.params.offset,
+        limit: 50,
+        order: [['createdAt', 'DESC']]
+        }).catch((err) => {
+          throw err;
+        });
+        var ideas = await Promise.all(dbIdeas.map(idea => addVotes(idea))) 
+        res.send(ideas);      
+    } else if (req.params.category === 'Arts' && req.params.sort === 'new'){
+      var dbIdeas = await Idea.findAll({
+        include: [{
+          model: User,
+          attributes: [
+            ['fname', 'fname'],
+            ['lname', 'lname']
+          ]},
+        { 
+          association: 'developer',
+          attributes: [
+            ['fname', 'fname'],
+            ['lname', 'lname']
+          ]}
+      ],
+      where: {active: true, category: 'Arts'},
+      offset: req.params.offset,
+      limit: 50,
+      order: [['createdAt', 'DESC']]
+      }).catch((err) => {
+        throw err;
+      });
+      var ideas = await Promise.all(dbIdeas.map(idea => addVotes(idea))) 
+      res.send(ideas);      
+    } else if(req.params.category === 'Energy' && req.params.sort === 'new'){
+      var dbIdeas = await Idea.findAll({
+        include: [{
+          model: User,
+          attributes: [
+            ['fname', 'fname'],
+            ['lname', 'lname']
+          ]},
+        { 
+          association: 'developer',
+          attributes: [
+            ['fname', 'fname'],
+            ['lname', 'lname']
+          ]}
+      ],
+      where: {active: true, category: 'Energy'},
+      offset: req.params.offset,
+      limit: 50,
+      order: [['createdAt', 'DESC']]
+      }).catch((err) => {
+        throw err;
+      });
+      var ideas = await Promise.all(dbIdeas.map(idea => addVotes(idea))) 
+      res.send(ideas);
+    } else if(req.params.category === 'Manufacturing' && req.params.sort === 'new'){
+      var dbIdeas = await Idea.findAll({
+        include: [{
+          model: User,
+          attributes: [
+            ['fname', 'fname'],
+            ['lname', 'lname']
+          ]},
+        { 
+          association: 'developer',
+          attributes: [
+            ['fname', 'fname'],
+            ['lname', 'lname']
+          ]}
+      ],
+      where: {active: true, category: 'Manufacturing'},
+      offset: req.params.offset,
+      limit: 50,
+      order: [['createdAt', 'DESC']]
+      }).catch((err) => {
+        throw err;
+      });
+      var ideas = await Promise.all(dbIdeas.map(idea => addVotes(idea))) 
+      res.send(ideas);  
+    } else if(req.params.category === 'Nature' && req.params.sort === 'trending'){
+      var dbIdeas = await Idea.findAll({
+        include: [{
+          model: User,
+          attributes: [
+            ['fname', 'fname'],
+            ['lname', 'lname']
+          ]},
+          {
+            association: 'developer',
+            attributes: [
+              ['fname', 'fname'],
+              ['lname', 'lname']
+          ]}
+        ],
+        where: {active: true, category: 'Nature'},
+        offset: req.params.offset,
+        limit: 50,
+        order: [['createdAt', 'DESC']]
+      }).catch((err) => {throw err;});
+      var ideas = await Promise.all(dbIdeas.map(idea => addVotes(idea))) 
+      ideas.sort((a,b) => {
+        if (a.upvoteCount - a.downvoteCount > b.upvoteCount - b.downvoteCount) {
+          return 1;
+        }
+        if (a.upvoteCount - a.downvoteCount < b.upvoteCount - b.downvoteCount) {
+          return -1;
+        }
+        return 0;
+      }).reverse();
+      res.send(ideas);
+    } else if(req.params.category === 'Community' && req.params.sort === 'trending'){
+      var dbIdeas = await Idea.findAll({
+        include: [{
+          model: User,
+          attributes: [
+            ['fname', 'fname'],
+            ['lname', 'lname']
+          ]},
+          {
+            association: 'developer',
+            attributes: [
+              ['fname', 'fname'],
+              ['lname', 'lname']
+          ]}
+        ],
+        where: {active: true, category: 'Community'},
+        offset: req.params.offset,
+        limit: 50,
+        order: [['createdAt', 'DESC']]
+      }).catch((err) => {throw err;});
+      var ideas = await Promise.all(dbIdeas.map(idea => addVotes(idea))) 
+      ideas.sort((a,b) => {
+        if (a.upvoteCount - a.downvoteCount > b.upvoteCount - b.downvoteCount) {
+          return 1;
+        }
+        if (a.upvoteCount - a.downvoteCount < b.upvoteCount - b.downvoteCount) {
+          return -1;
+        }
+        return 0;
+      }).reverse();
+      res.send(ideas);
+    } else if(req.params.category === 'Arts' && req.params.sort === 'trending'){
+      var dbIdeas = await Idea.findAll({
+        include: [{
+          model: User,
+          attributes: [
+            ['fname', 'fname'],
+            ['lname', 'lname']
+          ]},
+          {
+            association: 'developer',
+            attributes: [
+              ['fname', 'fname'],
+              ['lname', 'lname']
+          ]}
+        ],
+        where: {active: true, category: 'Arts'},
+        offset: req.params.offset,
+        limit: 50,
+        order: [['createdAt', 'DESC']]
+      }).catch((err) => {throw err;});
+      var ideas = await Promise.all(dbIdeas.map(idea => addVotes(idea))) 
+      ideas.sort((a,b) => {
+        if (a.upvoteCount - a.downvoteCount > b.upvoteCount - b.downvoteCount) {
+          return 1;
+        }
+        if (a.upvoteCount - a.downvoteCount < b.upvoteCount - b.downvoteCount) {
+          return -1;
+        }
+        return 0;
+      }).reverse();
+      res.send(ideas);
+    } else if(req.params.category === 'Energy' && req.params.sort === 'trending'){
+      var dbIdeas = await Idea.findAll({
+        include: [{
+          model: User,
+          attributes: [
+            ['fname', 'fname'],
+            ['lname', 'lname']
+          ]},
+          {
+            association: 'developer',
+            attributes: [
+              ['fname', 'fname'],
+              ['lname', 'lname']
+          ]}
+        ],
+        where: {active: true, category: 'Energy'},
+        offset: req.params.offset,
+        limit: 50,
+        order: [['createdAt', 'DESC']]
+      }).catch((err) => {throw err;});
+      var ideas = await Promise.all(dbIdeas.map(idea => addVotes(idea))) 
+      ideas.sort((a,b) => {
+        if (a.upvoteCount - a.downvoteCount > b.upvoteCount - b.downvoteCount) {
+          return 1;
+        }
+        if (a.upvoteCount - a.downvoteCount < b.upvoteCount - b.downvoteCount) {
+          return -1;
+        }
+        return 0;
+      }).reverse();
+      res.send(ideas);
+    } else if(req.params.category === 'Manufacturing' && req.params.sort === 'trending'){
+      var dbIdeas = await Idea.findAll({
+        include: [{
+          model: User,
+          attributes: [
+            ['fname', 'fname'],
+            ['lname', 'lname']
+          ]},
+          {
+            association: 'developer',
+            attributes: [
+              ['fname', 'fname'],
+              ['lname', 'lname']
+          ]}
+        ],
+        where: {active: true, category: 'Manufacturing'},
+        offset: req.params.offset,
+        limit: 50,
+        order: [['createdAt', 'DESC']]
+      }).catch((err) => {throw err;});
+      var ideas = await Promise.all(dbIdeas.map(idea => addVotes(idea))) 
+      ideas.sort((a,b) => {
+        if (a.upvoteCount - a.downvoteCount > b.upvoteCount - b.downvoteCount) {
+          return 1;
+        }
+        if (a.upvoteCount - a.downvoteCount < b.upvoteCount - b.downvoteCount) {
+          return -1;
+        }
+        return 0;
+      }).reverse();
+      res.send(ideas);
+    } else {
+      throw 'Invalid category';
+    }
+  } catch(e) {
+    return res.status(400).json({
+      errors: {
+        error: e.stack
+      },
+    });
+  }
+}
+
+
 // GET /ideas/:sort/:offset
 const getIdeas = async function (req, res) {
   try {
@@ -141,6 +432,7 @@ const averageRating = async idea => {
 }
 */
 
+
 // GET /idea/:id
 const getSingleIdea = async function(req, res) {
   try {
@@ -171,6 +463,8 @@ const getSingleIdea = async function(req, res) {
     });
   }
 };
+
+
 
 // POST /ideas
 const postIdea = (req, res) => {
@@ -376,6 +670,7 @@ module.exports = {
   getIdeas,
   getSingleIdea,
   postIdea,
+  getIdeasByCategory,
   editIdea,
   deleteIdea,
   upvote,
