@@ -40,10 +40,19 @@ class RegisterModal extends Component {
               role: this.state.role
             }
         });
+        
+
         if(this.state.password !== this.state.confirmPass){
-          alert("The passwords doesn't match");
+          alert("Password doesn't match the confirm password");
           return false; //matching password
         }
+
+        //making sure the password count is greater than 6
+        if ((this.state.password).length <= 6 || (this.state.confirmPass).length <= 6) {
+          alert("Password must have a minimum of 6 letters");
+          return false
+        }
+
         let response = await fetch(API_URL+"/user/register", {
           method: "POST",
           headers: {"Content-Type": "application/json"},
