@@ -1,0 +1,6 @@
+/* Displays the error message below the register heading in red */
+#errorMessage {
+    color: red;
+    padding-left: 8px;
+    
+}
