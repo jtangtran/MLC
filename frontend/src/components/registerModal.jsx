@@ -51,10 +51,19 @@ class RegisterModal extends Component {
 
         //making sure the password count is greater than 6
         if ((this.state.password).length < 6 || (this.state.confirmPass).length < 6) {
-          const passwordError = <p>Password must have a minimum of 6 letters</p>;
+          const passwordError = <p>Your password must have a minimum of 6 characters</p>;
           ReactDOM.render(passwordError, document.getElementById('errorMessage'));
           return false
         }
+
+        //making sure the password contains numbers and letters to ensure a good security
+        //returns a boolean
+        if (!(/\d/.test(this.state.password))) {
+          const passwordError = <p>Your password must contain atleast a number</p>;
+          ReactDOM.render(passwordError, document.getElementById('errorMessage'));
+          return false
+        }
+
 
         let response = await fetch(API_URL+"/user/register", {
           method: "POST",
@@ -125,8 +134,8 @@ class RegisterModal extends Component {
                   </button>
 
               </div>
-              <div id="errorMessage"></div>
               <div className="modal-body text-center">
+              <div id="errorMessage"></div>
                 <form onSubmit={this.register}>
                   <div className="form-group">
                     <input onChange={this.handleChange} name="fname" type="text" className="form-control text-center" id="fnameRegisterInput" aria-describedby="firstName" placeholder="First Name" required/>
