@@ -1,2 +1,4 @@
 .vscode
-postgres/data/
+
+# Ignore database
+postgres/

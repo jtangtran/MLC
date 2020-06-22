@@ -20,42 +20,42 @@ class LoginModal extends Component {
     this.setState({[event.target.name]: event.target.value});
   }
 
-  async login(e){
-    e.preventDefault();
-    try{
-        let data = JSON.stringify({
-          user: {
-            email: this.state.email,
-            password: this.state.password,
-          }
-        });
-        await fetch(API_URL+"/user/login", {
-          method: "POST",
-          headers: {"Content-Type": "application/json"},
-          body: data
-      }).then((response) => {
-        if(response.ok){
-          response.json().then((data) => {
-            console.log('Got User: ', data);
-            sessionStorage.setItem('loggedin', true);
-            sessionStorage.setItem('user', data.user.email);
-            sessionStorage.setItem('userRole', data.user.role);
-            this.acceptLogin();
-          }).catch(e => {
-            console.log(e.stack);
-            sessionStorage.setItem('loggedin', false);
-            sessionStorage.setItem('user', data.user.email);
-            sessionStorage.setItem('userRole', data.user.role);
-            this.rejectLogin();
-          });
+async login(e){
+  e.preventDefault();
+  try{
+      let data = JSON.stringify({
+        user: {
+          email: this.state.email,
+          password: this.state.password,
         }
       });
-    }
-    catch(e){
-        console.log(e.stack);
-        this.rejectLogin();
-    }
+      await fetch(API_URL+"/user/login", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: data
+    }).then((response) => {
+      if(response.ok){
+        response.json().then((data) => {
+          console.log('Got User: ', data);
+          sessionStorage.setItem('loggedin', true);
+          sessionStorage.setItem('user', data.user.email);
+          sessionStorage.setItem('userRole', data.user.role);
+          this.acceptLogin();
+        }).catch(e => {
+          console.log(e.stack);
+          sessionStorage.setItem('loggedin', false);
+          sessionStorage.setItem('user', data.user.email);
+          sessionStorage.setItem('userRole', data.user.role);
+          this.rejectLogin();
+        });
+      }
+    });
   }
+  catch(e){
+      console.log(e.stack);
+      this.rejectLogin();
+  }
+}
 
   rejectLogin(){
     document.getElementById('submitBtn').hidden = false;

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import privacyPolicyDocument from '../documents/PrivacyPolicy.pdf';
+import ReactDOM from 'react-dom';
+import '../stylesheets/registerModal.css';
 
 const API_URL = require('../config.js');
 
@@ -24,7 +26,7 @@ class RegisterModal extends Component {
   handleChange(event) {
     this.setState({[event.target.name]: event.target.value});
   }
-
+  
   async register(e){
     e.preventDefault();
     try{
@@ -40,16 +42,27 @@ class RegisterModal extends Component {
               role: this.state.role
             }
         });
+        
         if(this.state.password !== this.state.confirmPass){
-          alert("The passwords doesn't match");
+          const passwordMatch = <p>Your password and confirmation password do not match</p>;
+          ReactDOM.render(passwordMatch, document.getElementById('errorMessage'));
           return false; //matching password
         }
+
+        //making sure the password count is greater than 6
+        if ((this.state.password).length < 6 || (this.state.confirmPass).length < 6) {
+          const passwordError = <p>Password must have a minimum of 6 letters</p>;
+          ReactDOM.render(passwordError, document.getElementById('errorMessage'));
+          return false
+        }
+
         let response = await fetch(API_URL+"/user/register", {
           method: "POST",
           headers: {"Content-Type": "application/json"},
           body: data
       });
       if (response.ok){
+        console.log(response);
           console.log('Register Success')
           document.getElementById('submitBtnRegister').hidden = true;
           document.getElementById('confirmIconRegister').hidden = false;
@@ -87,6 +100,12 @@ class RegisterModal extends Component {
             console.log(e.stack);
         }
       }
+      //the response received an error probably due to a user taking the same email
+      //will display an error message on below the register header
+      else {
+        const emailInUse = <p>Email is already taken by another user. Please use a different email</p>;
+        ReactDOM.render(emailInUse, document.getElementById('errorMessage'));
+      }
     }
     catch(e){
         console.log(e.stack);
@@ -104,7 +123,9 @@ class RegisterModal extends Component {
                   <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                   </button>
+
               </div>
+              <div id="errorMessage"></div>
               <div className="modal-body text-center">
                 <form onSubmit={this.register}>
                   <div className="form-group">
