@@ -4,6 +4,8 @@ import Moment from 'react-moment';
 import Ratings from 'react-ratings-declarative';
 import '../stylesheets/idea.css';
 
+import SponsorModal from './sponsorModal.jsx';
+
 const API_URL = require('../config.js')
 
 class Idea extends Component {
@@ -237,6 +239,8 @@ class Idea extends Component {
                     </Ratings>
                   </div>
 
+                  <button type="button" className="btn btn-primary mr-2" data-toggle="modal" data-target="#sponsorModal">Sponsor</button>
+
                   <div className="col-12 mt-5">
                     <h5>Share</h5>
                     <a className="resp-sharing-button__link" href={"https://facebook.com/sharer/sharer.php?u=http%3A%2F%2F" + shareURL} target="_blank" rel="noopener noreferrer" aria-label="">
@@ -354,6 +358,7 @@ class Idea extends Component {
             </div>
           </div>
         </div>
+        <SponsorModal/>
       </div>
     );
   }
