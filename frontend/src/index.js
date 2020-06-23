@@ -28,7 +28,6 @@ const routing = (
         <Route exact path="/editBlog" component={EditBlog}/>
         <Route exact path="/blogAdmin" component={BlogAdmin}/>
         <Route path="/idea/:id" component={Idea}/>
-
         <Route path="/:category/idea" component={Category}/>
 
         <Route path="/blog/:id" component={ViewBlog}/>

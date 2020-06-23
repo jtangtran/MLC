@@ -1,4 +1,7 @@
 .vscode
+<<<<<<< Updated upstream
 
 # Ignore database
+=======
+>>>>>>> Stashed changes
 /postgres

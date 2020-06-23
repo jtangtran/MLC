@@ -183,3 +183,8 @@ background-color: #FF6600
   background-color: #3a80c1;
   border-color: #3a80c1;
 }
+
+.time{
+  color: rgb(174, 188, 201);
+  font-size: 8pt;
+}

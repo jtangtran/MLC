@@ -318,50 +318,101 @@ class Idea extends Component {
             </div>
           </div>
         </div>
+
         <div className="col-12">
           <br/>
           <div className="row">
-            <div className="col-6">
-              <h3>Add Comment</h3>
-              <form className="text-center" onSubmit={(e) => this.addComment(e)}>
-                <div className="input-group">
-                  <textarea className="form-control" placeholder="Type your comment here" value={this.state.newComment} onChange={this.handleCommentChange}></textarea>
+          <div className="CommetModal">
+                <div className="modal fade" id='commentModal' role="dialog" aria-labelledby="commentModal" aria-hidden="true">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                    <div className="modal-header">
+                        <h4 className="modal-title">Top Five Comments!</h4>
+                        <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div className="modal-body">
+                        <ul className="list-group">
+                            {this.state.comments.map((value, index) => {
+                            if (index < 5){
+                            return <li className="list-group-item" key={index}> {value.comment.text}
+                                <p className="lead">Likes: {value.upvoteCount}
+                                <button onClick={(e) => this.commentLike(e, value.comment.id)} type="button" className="btn btn-light">
+                                    Like<span className="pl-2"></span>
+                                    <span className="badge badge-success">
+                                    <i className="far fa-thumbs-up"></i>
+                                    </span>
+                                </button>
+                                </p>
+                                <p className="lead">Dislikes: {value.downvoteCount}
+                                <button onClick={(e) => this.commentDislike(e, value.comment.id)} type="button" className="btn btn-light">
+                                    Dislike<span className="pl-2"></span>
+                                    <span className="badge badge-danger">
+                                    <i className="far fa-thumbs-down"></i>
+                                    </span>
+                                </button>
+                                </p>
+                                <Moment fromNow className='time'>{value.comment.createdAt}</Moment>
+                            </li>
+                            }})}
+                        </ul>
+                    </div>
+                    <div className="modal-footer">
+                    <div className="col-12">
+                    <h5>Comment your Thoughts!</h5>
+                    <form className="text-center" onSubmit={(e) => this.addComment(e)}>
+                        <div className="input-group">
+                        <textarea className="form-control" placeholder="Enter your comment here..." value={this.state.newComment} onChange={this.handleCommentChange}></textarea>
+                        </div>
+                        <br/>
+                        <input className="btn btn-primary" type="submit" value="Post Comment"></input>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </form>
+                    </div>
+                        
+                    </div>
+                    </div>
                 </div>
-                <br/>
-                <input className="btn btn-primary" type="submit" value="Post Comment"></input>
-              </form>
+                </div>
             </div>
+          
+            <div className='col-6'>
+            <ul className="list-group">
+                            {this.state.comments.map((value, index) => {
+                            return <li className="list-group-item" key={index}> {value.comment.text}
+                                <p className="lead">Likes: {value.upvoteCount}
+                                <button onClick={(e) => this.commentLike(e, value.comment.id)} type="button" className="btn btn-light">
+                                    Like<span className="pl-2"></span>
+                                    <span className="badge badge-success">
+                                    <i className="far fa-thumbs-up"></i>
+                                    </span>
+                                </button>
+                                </p>
+                                <p className="lead">Dislikes: {value.downvoteCount}
+                                <button onClick={(e) => this.commentDislike(e, value.comment.id)} type="button" className="btn btn-light">
+                                    Dislike<span className="pl-2"></span>
+                                    <span className="badge badge-danger">
+                                    <i className="far fa-thumbs-down"></i>
+                                    </span>
+                                </button>
+                                </p>
+                                <Moment fromNow className='time'>{value.comment.createdAt}</Moment>
+                            </li>
+                            })}
+                        </ul>
+            </div>
+            
             <div className="col-6">
-              <h3>Comments</h3>
-              <ul className="list-group">
-                {this.state.comments.map((value, index) => {
-                  return <li className="list-group-item" key={index}>{value.comment.text}
-                    <p className="lead">Likes: {value.upvoteCount}
-                      <button onClick={(e) => this.commentLike(e, value.comment.id)} type="button" className="btn btn-light">
-                        Like<span className="pl-2"></span>
-                        <span className="badge badge-success">
-                          <i className="far fa-thumbs-up"></i>
-                        </span>
-                      </button>
-                    </p>
-                    <p className="lead">Dislikes: {value.downvoteCount}
-                      <button onClick={(e) => this.commentDislike(e, value.comment.id)} type="button" className="btn btn-light">
-                        Dislike<span className="pl-2"></span>
-                        <span className="badge badge-danger">
-                          <i className="far fa-thumbs-down"></i>
-                        </span>
-                      </button>
-                    </p>
-                  </li>
-                })}
-              </ul>
+                <button id='commentModal' type="button" className="btn btn-secondary" data-toggle="modal" data-target="#commentModal">Add Comment</button>
             </div>
           </div>
+
         </div>
         <SponsorModal/>
       </div>
     );
   }
 }
+
+
 
 export default Idea;
