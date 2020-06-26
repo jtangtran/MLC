@@ -188,3 +188,18 @@ background-color: #FF6600
   color: rgb(174, 188, 201);
   font-size: 8pt;
 }
+
+.rating {
+  padding-left: 305px;
+  /* text-align: center; */
+}
+
+.test {
+  padding-left: 5px;
+}
+
+/* making the button center with the sponsor button */
+#button {
+  padding-top: 10px;
+  margin-left: -6px;
+}

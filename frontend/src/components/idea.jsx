@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import Navbar from './navbar';
 import Moment from 'react-moment';
 import Ratings from 'react-ratings-declarative';
+import ReactDOM from 'react-dom';
 import '../stylesheets/idea.css';
 
 import SponsorModal from './sponsorModal.jsx';
+import ChampionModal from './championModal.jsx';
 
 const API_URL = require('../config.js')
 
@@ -160,11 +162,27 @@ class Idea extends Component {
 
   changeRating(newRating) {
     this.setState({rating: newRating});
+
+    
   }
 
+confirmSponsor(e) {
+  //update the sponsor using post but doesn't have a row in the idea db about status 
+  alert('are you sure');
+}
+
   render() {
+    var avgRating = this.state.averageRating;
     const shareURL = window.location.href;
     console.log(shareURL)
+    // will only display the sponsor button if the average rating is over 3
+    if (avgRating > 3.0) {
+      //warning just to change the colour of the button to yellow - will change to a different colour soon
+      //when the user presses the button it displays a new window similar to sponsorship modal - WILL UPDATE SOON
+      const buttonEnabled = <button type="button" className="btn btn-warning" data-toggle="modal" data-target="#championModal">Champion</button>
+      document.getElementById('button').disabled = false;
+      ReactDOM.render(buttonEnabled, document.getElementById('button'));
+    } 
     return (
       <div className="Idea">
         <Navbar/>
@@ -180,7 +198,7 @@ class Idea extends Component {
                 <br/>
                 <p className="lead">{this.state.idea.description}</p>
                 <div className="row">
-                  <div className="col-6">
+                  {/* <div className="col-6">
                     <p className="lead">Likes</p>
                     <h3 style={{"color": "green"}}>{this.state.json.upvoteCount}</h3>
                     <br/>
@@ -188,15 +206,15 @@ class Idea extends Component {
                     {/* <button type="button" class="btn btn-primary">
                       Notifications <span class="badge badge-light">4</span>
                     </button> */}
-
+{/* 
                     <button onClick={(e) => this.addLike(e)} type="button" className="btn btn-light">
                       Like<span className="pl-2"></span>
                       <span className="badge badge-success">
                         <i className="far fa-thumbs-up"></i>
                       </span>
-                    </button>
-                  </div>
-                  <div className="col-6">
+                    </button> *}
+                  </div> 
+                  {/* <div className="col-6">
                     <p className="lead">Dislikes</p>
                     <h3 style={{"color": "red"}}>{this.state.json.downvoteCount}</h3>
                     <br/>
@@ -206,9 +224,12 @@ class Idea extends Component {
                         <i className="far fa-thumbs-down"></i>
                       </span>
                     </button>
-                  </div>
+                  </div> */}
 
-                  <div className="col-12">User Rating
+                  {/* <div className="col-12"> */}
+                  <div className="rating">
+                    User Rating:
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                     <Ratings
                       rating={this.state.rating}
                       changeRating={this.changeRating}
@@ -221,14 +242,23 @@ class Idea extends Component {
                       <Ratings.Widget />
                       <Ratings.Widget />
                       <Ratings.Widget />
+                      
                     </Ratings>
-                    <button onClick={(e) => this.addRating(e)} type="button" className="btn btn-light">Add Rating</button>
-                  </div>
-                  
-                  <div className="col-12">Average Rating
+                    &nbsp; &nbsp; &nbsp;
+                    <button onClick={(e) => this.addRating(e)} type="button" className="btn btn-light">Submit Rating</button>
+                    </div>
+                  {/* </div> */}
+                 {/*  <div className="col-12"><button onClick={(e) => this.addRating(e)} type="button" className="btn btn-light">Add Rating</button>
+                      </div>
+                   */}
+                  {/* <div className="col-12"> */}
+                  <div className="rating">
+                    Average Rating:
+                    &nbsp; 
+                    &nbsp;
                     <Ratings
                       rating={this.state.averageRating}
-                      widgetRatedColors="blue"
+                      widgetRatedColors="lightgreen"
                       widgetEmptyColors="grey"
                     >
                       <Ratings.Widget />
@@ -238,10 +268,10 @@ class Idea extends Component {
                       <Ratings.Widget />
                     </Ratings>
                   </div>
-
-                  <button type="button" className="btn btn-primary mr-2" data-toggle="modal" data-target="#sponsorModal">Sponsor</button>
-
                   <div className="col-12 mt-5">
+                    <button type="button" className="btn btn-primary mr-2" data-toggle="modal" data-target="#sponsorModal">Sponsor</button>
+                    <div id="button"></div>
+                  <br />
                     <h5>Share</h5>
                     <a className="resp-sharing-button__link" href={"https://facebook.com/sharer/sharer.php?u=http%3A%2F%2F" + shareURL} target="_blank" rel="noopener noreferrer" aria-label="">
                       <div className="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small"><div aria-hidden="true" className="resp-sharing-button__icon resp-sharing-button__icon--normal">
@@ -271,7 +301,7 @@ class Idea extends Component {
                       </div>
                     </a>
                   </div>
-                </div>
+                </div> {/* end of div className="row" */}
               </div>
             </div>
           </div>
@@ -408,7 +438,9 @@ class Idea extends Component {
 
         </div>
         <SponsorModal/>
+        <ChampionModal/>
       </div>
+      
     );
   }
 }
