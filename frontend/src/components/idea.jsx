@@ -269,7 +269,7 @@ confirmSponsor(e) {
                     </Ratings>
                   </div>
                   <div className="col-12 mt-5">
-                    <button type="button" className="btn btn-primary mr-2" data-toggle="modal" data-target="#sponsorModal">Sponsor</button>
+                    {/* <button type="button" className="btn btn-primary mr-2" data-toggle="modal" data-target="#sponsorModal">Sponsor</button> */}
                     <div id="button"></div>
                   <br />
                     <h5>Share</h5>
