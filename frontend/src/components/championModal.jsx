@@ -36,9 +36,11 @@ class ChampionModal extends Component {
                             <div className="modal-body text-center">
                                 <form onSubmit={this.champion}>
                                     <div className="form-group">
+                                        Name:
                                         <input onChange={this.handleChange} type="text" name="description" className="form-control text-center" id="descriptionInput" placeholder="e.g. My name is..." required/>
                                     </div>
                                     <div className="form-group">
+                                        Reason:
                                         <input onChange={this.handleChange} type="text" name="reasons" className="form-control text-center" id="reasonsInput" placeholder="e.g. I love my community" required/>
                                     </div>
                                     <div id="statusContainer">
