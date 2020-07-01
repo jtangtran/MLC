@@ -6,11 +6,18 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    rating: DataTypes.INTEGER
+    score: DataTypes.INTEGER
   }, {});
   Rating.associate = function(models) {
-    Rating.belongsTo(models.User);
-    Rating.belongsTo(models.Idea);
+    Rating.belongsTo(models.User, {
+      foreignKey: User.id,
+      allowNull: true
+    });
+    Rating.belongsTo(models.Idea, {
+      foreignKey: Idea.id,
+      allowNull: true
+    });
+    Rating.belongsTo(models.Comment);
   };
   return Rating;
 };

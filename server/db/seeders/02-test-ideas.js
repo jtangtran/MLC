@@ -10,6 +10,7 @@ const User = db.User;
 
 var testIdeas = [
   {
+    "category": "Nature",
     "title": "Test Idea 1",
     "description": "Placeholder text for a description",
     "community_impact": "Low",
@@ -22,6 +23,7 @@ var testIdeas = [
     "updatedAt": new Date()
   },
   {
+    "category": "Nature",
     "title": "Test Idea 2",
     "description": "Placeholder text for a description",
     "community_impact": "Medium",
@@ -34,6 +36,7 @@ var testIdeas = [
     "updatedAt": new Date()
   },
   {
+    "category": "Community",
     "title": "Test Idea 3",
     "description": "Placeholder text for a description",
     "community_impact": "High",
@@ -46,6 +49,7 @@ var testIdeas = [
     "updatedAt": new Date()
   },
   {
+    "category": "Community",
     "title": "Test Idea 4",
     "description": "Placeholder text for a description",
     "community_impact": "Low",
@@ -58,6 +62,7 @@ var testIdeas = [
     "updatedAt": new Date()
   },
   {
+    "category": "Energy",
     "title": "Test Idea 5",
     "description": "Placeholder text for a description",
     "community_impact": "Medium",
@@ -70,6 +75,7 @@ var testIdeas = [
     "updatedAt": new Date()
   },
   {
+    "category": "Energy",
     "title": "Test Idea 6",
     "description": "Placeholder text for a description",
     "community_impact": "High",
@@ -82,6 +88,7 @@ var testIdeas = [
     "updatedAt": new Date()
   },
   {
+    "category": "Arts",
     "title": "Test Idea 7",
     "description": "Placeholder text for a description",
     "community_impact": "Low",
@@ -94,6 +101,7 @@ var testIdeas = [
     "updatedAt": new Date()
   },
   {
+    "category": "Arts",
     "title": "Test Idea 8",
     "description": "Placeholder text for a description",
     "community_impact": "Medium",
@@ -106,6 +114,7 @@ var testIdeas = [
     "updatedAt": new Date()
   },
   {
+    "category": "Manufacturing",
     "title": "Test Idea 9",
     "description": "Placeholder text for a description",
     "community_impact": "High",
@@ -118,6 +127,7 @@ var testIdeas = [
     "updatedAt": new Date()
   },
   {
+    "category": "Manufacturing",
     "title": "Test Idea 10",
     "description": "Placeholder text for a description",
     "community_impact": "Low",
@@ -130,6 +140,7 @@ var testIdeas = [
     "updatedAt": new Date()
   },
   {
+    "category": "Nature",
     "title": "Test Idea 11",
     "description": "Placeholder text for a description",
     "community_impact": "Medium",
@@ -142,6 +153,7 @@ var testIdeas = [
     "updatedAt": new Date()
   },
   {
+    "category": "Community",
     "title": "Test Idea 12",
     "description": "Placeholder text for a description",
     "community_impact": "High",
@@ -154,6 +166,7 @@ var testIdeas = [
     "updatedAt": new Date()
   },
   {
+    "category": "Energy",
     "title": "Test Idea 13",
     "description": "Placeholder text for a description",
     "community_impact": "Low",
@@ -166,6 +179,7 @@ var testIdeas = [
     "updatedAt": new Date()
   },
   {
+    "category": "Arts",
     "title": "Test Idea 14",
     "description": "Placeholder text for a description",
     "community_impact": "Medium",
@@ -178,6 +192,7 @@ var testIdeas = [
     "updatedAt": new Date()
   },
   {
+    "category": "Manufacturing",
     "title": "Test Idea 15",
     "description": "Placeholder text for a description",
     "community_impact": "High",
@@ -190,6 +205,7 @@ var testIdeas = [
     "updatedAt": new Date()
   },
   {
+    "category": "Nature",
     "title": "Test Idea 16",
     "description": "Placeholder text for a description",
     "community_impact": "Low",
@@ -202,6 +218,7 @@ var testIdeas = [
     "updatedAt": new Date()
   },
   {
+    "category": "Community",
     "title": "Test Idea 17",
     "description": "Placeholder text for a description",
     "community_impact": "Medium",
@@ -214,6 +231,7 @@ var testIdeas = [
     "updatedAt": new Date()
   },
   {
+    "category": "Arts",
     "title": "Test Idea 18",
     "description": "Placeholder text for a description",
     "community_impact": "High",
