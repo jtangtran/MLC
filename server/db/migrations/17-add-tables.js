@@ -5,23 +5,18 @@ var Sequelize = require('sequelize');
 /**
  * Actions summary:
  *
- * createTable "Votes", deps: [Users, Ideas]
- * addColumn "UserId" to table "Blogs"
- * addColumn "UserId" to table "Ideas"
+ * createTable "Roles", deps: []
+ * createTable "Impact_Areas", deps: []
+ * createTable "Impacts", deps: []
+ * createTable "Ideas_Impact_Areas", deps: [Ideas, Impact_Areas, Impacts]
  *
  **/
 
-var info = {
-    "revision": 4,
-    "name": "blogidea-user",
-    "created": "2019-05-30T20:58:26.259Z",
-    "comment": ""
-};
-
-var migrationCommands = [{
+var migrationCommands = [
+    {
         fn: "createTable",
         params: [
-            "Votes",
+            "Roles",
             {
                 "id": {
                     "type": Sequelize.INTEGER,
@@ -29,107 +24,115 @@ var migrationCommands = [{
                     "autoIncrement": true,
                     "primaryKey": true
                 },
-                "up": {
-                    "type": Sequelize.BOOLEAN,
-                    "field": "up"
+                "role_name": {
+                    "type": Sequelize.STRING,
+                    "field": "role_name"
                 },
-                "down": {
-                    "type": Sequelize.BOOLEAN,
-                    "field": "down"
-                },
-                "createdAt": {
-                    "type": Sequelize.DATE,
-                    "field": "createdAt",
-                    "allowNull": false
-                },
-                "updatedAt": {
-                    "type": Sequelize.DATE,
-                    "field": "updatedAt",
-                    "allowNull": false
-                },
-                "UserId": {
+            }
+        ]
+    },
+    {
+        fn: "createTable",
+        params: [
+            "Impact_Areas",
+            {
+                "id": {
                     "type": Sequelize.INTEGER,
-                    "field": "UserId",
-                    "onUpdate": "CASCADE",
-                    "onDelete": "SET NULL",
-                    "references": {
-                        "model": "Users",
-                        "key": "id"
-                    },
-                    "allowNull": true
+                    "field": "id",
+                    "autoIncrement": true,
+                    "primaryKey": true
                 },
-                "IdeaId": {
+                "area_name": {
+                    "type": Sequelize.STRING,
+                    "field": "area_name"
+                },
+            }
+        ]
+    },
+    {
+        fn: "createTable",
+        params: [
+            "Impacts",
+            {
+                "id": {
                     "type": Sequelize.INTEGER,
-                    "field": "IdeaId",
+                    "field": "id",
+                    "autoIncrement": true,
+                    "primaryKey": true
+                },
+                "impact_name": {
+                    "type": Sequelize.STRING,
+                    "field": "impact_name"
+                },
+            }
+        ]
+    },
+    {
+        fn: "createTable",
+        params: [
+            "Ideas_Impact_Areas",
+            {
+                "idea_id": {
+                    "type": Sequelize.INTEGER,
+                    "field": "idea_id",
+                    "primaryKey": true,
                     "onUpdate": "CASCADE",
                     "onDelete": "SET NULL",
                     "references": {
                         "model": "Ideas",
                         "key": "id"
+                    }
+                },
+                "impact_area_id": {
+                    "type": Sequelize.INTEGER,
+                    "field": "impact_area_id",
+                    "primaryKey": true,
+                    "onUpdate": "CASCADE",
+                    "onDelete": "SET NULL",
+                    "references": {
+                        "model": "Impact_Areas",
+                        "key": "id"
+                    }
+                },
+                "impact_id": {
+                    "type": Sequelize.INTEGER,
+                    "field": "impact_area_id",
+                    "onUpdate": "CASCADE",
+                    "onDelete": "SET NULL",
+                    "references": {
+                        "model": "Impacts",
+                        "key": "id"
                     },
-                    "allowNull": true
-                }
-            },
-            {}
-        ]
-    },
-    {
-        fn: "addColumn",
-        params: [
-            "Blogs",
-            "UserId",
-            {
-                "type": Sequelize.INTEGER,
-                "field": "UserId",
-                "onUpdate": "CASCADE",
-                "onDelete": "SET NULL",
-                "references": {
-                    "model": "Users",
-                    "key": "id"
+                    "allowNull": false
                 },
-                "allowNull": true
             }
         ]
     },
-    {
-        fn: "addColumn",
-        params: [
-            "Ideas",
-            "UserId",
-            {
-                "type": Sequelize.INTEGER,
-                "field": "UserId",
-                "onUpdate": "CASCADE",
-                "onDelete": "SET NULL",
-                "references": {
-                    "model": "Users",
-                    "key": "id"
-                },
-                "allowNull": true
-            }
-        ]
-    }
 ];
 
 var undoMigrationCommands = [
     {
-        fn: "removeColumn",
+        fn: "dropTable",
         params: [
-            "Ideas",
-            "UserId"
-        ]
-    },
-    {
-        fn: "removeColumn",
-        params: [
-            "Blogs",
-            "UserId"
+            "Ideas_Impact_Areas"
         ]
     },
     {
         fn: "dropTable",
         params: [
-            "Votes"
+            "Impacts"
+        ]
+    },
+    {
+        fn: "dropTable",
+        params: [
+            "Impact_Areas"
+        ]
+    },
+    {
+        fn: "dropTable",
+        params: [
+            "Roles"
         ]
     },
 ];
@@ -171,6 +174,5 @@ module.exports = {
             }
             next();
         });
-    },
-    info: info
+    }
 };

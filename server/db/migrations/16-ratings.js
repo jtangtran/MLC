@@ -69,6 +69,15 @@ var migrationCommands = [{
     ]
 }];
 
+var undoMigrationCommands = [
+    {
+        fn: "dropTable",
+        params: [
+            "Ratings"
+        ]
+    },
+];
+
 module.exports = {
     pos: 0,
     up: function(queryInterface, Sequelize)
@@ -79,6 +88,24 @@ module.exports = {
                 if (index < migrationCommands.length)
                 {
                     let command = migrationCommands[index];
+                    console.log("[#"+index+"] execute: " + command.fn);
+                    index++;
+                    queryInterface[command.fn].apply(queryInterface, command.params).then(next, reject);
+                }
+                else
+                    resolve();
+            }
+            next();
+        });
+    },
+    down: function(queryInterface, Sequelize)
+    {
+        var index = this.pos;
+        return new Promise(function(resolve, reject) {
+            function next() {
+                if (index < undoMigrationCommands.length)
+                {
+                    let command = undoMigrationCommands[index];
                     console.log("[#"+index+"] execute: " + command.fn);
                     index++;
                     queryInterface[command.fn].apply(queryInterface, command.params).then(next, reject);
