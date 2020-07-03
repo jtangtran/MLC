@@ -25,10 +25,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Idea.associate = function(models) {
     Idea.belongsTo(models.User);
-    // Idea.belongsTo(models.User, {
-    //   as: 'developer',
-    //   foreignKey: 'developerId'
-    // });
+    Idea.belongsTo(models.User, {
+      as: 'developer',
+      foreignKey: 'developerId'
+    });
   };
   return Idea;
 };
