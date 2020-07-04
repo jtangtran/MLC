@@ -1,6 +1,8 @@
 'use strict';
 
 var Sequelize = require('sequelize');
+const db = require('../models/index');
+const Role = db.Role;
 
 /** 
  * Bulk inserts test users into "Users" table
@@ -14,6 +16,7 @@ var testUsers = [
     "lname": "A",
     "Street_Name": "123 Road",
     "Postal_Code": "A1B 2C3",
+    "role": 0,
     "createdAt": new Date(),
     "updatedAt": new Date()
   },
@@ -24,6 +27,7 @@ var testUsers = [
     "lname": "B",
     "Street_Name": "456 Road",
     "Postal_Code": "D4E 5F6",
+    "role": 0,
     "createdAt": new Date(),
     "updatedAt": new Date()
   },
@@ -34,6 +38,7 @@ var testUsers = [
     "lname": "C",
     "Street_Name": "789 Road",
     "Postal_Code": "G7H 8I9",
+    "role": 0,
     "createdAt": new Date(),
     "updatedAt": new Date()
   },
@@ -44,6 +49,7 @@ var testUsers = [
     "lname": "D",
     "Street_Name": "123 Street",
     "Postal_Code": "B1C 2D3",
+    "role": 0,
     "createdAt": new Date(),
     "updatedAt": new Date()
   },
@@ -54,6 +60,7 @@ var testUsers = [
     "lname": "E",
     "Street_Name": "456 Street",
     "Postal_Code": "E4F 5G6",
+    "role": 0,
     "createdAt": new Date(),
     "updatedAt": new Date()
   },
@@ -64,6 +71,7 @@ var testUsers = [
     "lname": "G",
     "Street_Name": "789 Street",
     "Postal_Code": "H7I 8J9",
+    "role": 0,
     "createdAt": new Date(),
     "updatedAt": new Date()
   },
@@ -74,6 +82,7 @@ var testUsers = [
     "lname": "H",
     "Street_Name": "123 Avenue",
     "Postal_Code": "C1D 2E3",
+    "role": 0,
     "createdAt": new Date(),
     "updatedAt": new Date()
   },
@@ -84,6 +93,7 @@ var testUsers = [
     "lname": "I",
     "Street_Name": "456 Avenue",
     "Postal_Code": "F4G 5H6",
+    "role": 0,
     "createdAt": new Date(),
     "updatedAt": new Date()
   },
@@ -94,6 +104,7 @@ var testUsers = [
     "lname": "J",
     "Street_Name": "789 Avenue",
     "Postal_Code": "I7J 8K9",
+    "role": 0,
     "createdAt": new Date(),
     "updatedAt": new Date()
   },
@@ -102,6 +113,22 @@ var testUsers = [
 module.exports = {
   up: async function(queryInterface, Sequelize)
   {
+    var roleIds = await Role.findAll({
+      attributes: ['id'],
+      raw: true
+    });
+    console.log(roleIds);
+
+    var index = 0;
+    for (let user of testUsers) {
+      user.role = roleIds[index].id
+      if (index < roleIds.length - 1) {
+        index++;
+      } else {
+        index = 0;
+      }
+    }
+
     await queryInterface.bulkInsert('Users', testUsers);
   },
   down: function(queryInterface, Sequelize)
