@@ -42,38 +42,15 @@ var impactAreas = [
     },
 ];
 
-var impacts = [
-    {
-        "impact_name": "Positive - Low"
-    },
-    {
-        "impact_name": "Positive - Medium"
-    },
-    {
-        "impact_name": "Positive - High"
-    },
-    {
-        "impact_name": "Negative - Low"
-    },
-    {
-        "impact_name": "Negative - Medium"
-    },
-    {
-        "impact_name": "Negative - High"
-    },
-];
-
 module.exports = {
     up: async function(queryInterface, Sequelize)
     {
       await queryInterface.bulkInsert('Roles', roles);
       await queryInterface.bulkInsert('Impact_Areas', impactAreas);
-      return await queryInterface.bulkInsert('Impacts', impacts);
     },
     down: async function(queryInterface, Sequelize)
     {
       await queryInterface.bulkDelete('Roles', null, {});
       await queryInterface.bulkDelete('Impact_Areas', null, {});
-      return await queryInterface.bulkDelete('Impacts', null, {});
     }
   };

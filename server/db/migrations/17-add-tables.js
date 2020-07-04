@@ -52,24 +52,6 @@ var migrationCommands = [
     {
         fn: "createTable",
         params: [
-            "Impacts",
-            {
-                "id": {
-                    "type": Sequelize.INTEGER,
-                    "field": "id",
-                    "autoIncrement": true,
-                    "primaryKey": true
-                },
-                "impact_name": {
-                    "type": Sequelize.STRING,
-                    "field": "impact_name"
-                },
-            }
-        ]
-    },
-    {
-        fn: "createTable",
-        params: [
             "Ideas_Impact_Areas",
             {
                 "idea_id": {
@@ -94,15 +76,9 @@ var migrationCommands = [
                         "key": "id"
                     }
                 },
-                "impact_id": {
-                    "type": Sequelize.INTEGER,
-                    "field": "impact_area_id",
-                    "onUpdate": "CASCADE",
-                    "onDelete": "SET NULL",
-                    "references": {
-                        "model": "Impacts",
-                        "key": "id"
-                    },
+                "impact": {
+                    "type": Sequelize.STRING,
+                    "field": "impact",
                     "allowNull": false
                 },
             }
@@ -115,12 +91,6 @@ var undoMigrationCommands = [
         fn: "dropTable",
         params: [
             "Ideas_Impact_Areas"
-        ]
-    },
-    {
-        fn: "dropTable",
-        params: [
-            "Impacts"
         ]
     },
     {
