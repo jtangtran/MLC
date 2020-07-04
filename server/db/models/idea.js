@@ -29,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       as: 'developer',
       foreignKey: 'developerId'
     });
+    Idea.hasMany(models.Idea_Impact_Area)
   };
   return Idea;
 };
