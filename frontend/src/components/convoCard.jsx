@@ -26,7 +26,7 @@ class ConvoCard extends Component {
                     Average Rating:
                     <br/>
                     <Ratings
-                      rating={this.props.model.idea.averageRating}
+                      // rating={this.props.model.averageRating.rating}
                       widgetRatedColors="lightgreen"
                       widgetEmptyColors="grey"
                       widgetDimensions="30px"
