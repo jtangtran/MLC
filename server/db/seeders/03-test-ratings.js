@@ -262,6 +262,566 @@ var testRatings = [
     "createdAt": new Date(),
     "updatedAt": new Date()
   },
+  {
+    "rating": 1,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 2,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 3,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 4,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 5,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 1,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 2,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 3,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 4,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 5,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 1,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 2,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 3,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 4,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 5,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 1,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 2,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 3,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 4,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 5,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 1,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 2,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 3,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 4,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 5,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 1,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 2,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 3,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 4,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 5,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 1,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 2,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 3,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 4,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 5,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 1,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 2,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 3,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 4,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 5,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 1,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 2,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 3,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 4,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 5,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 1,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 2,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 3,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 4,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 5,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 1,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 2,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 3,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 4,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 5,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 1,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 2,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 3,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 4,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 5,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 1,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 2,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 3,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 4,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 5,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 1,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 2,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 3,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 4,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 5,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 1,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 2,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 3,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 4,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 5,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 1,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 2,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 3,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 4,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "rating": 5,
+    "UserId": 0,
+    "IdeaId": 0,
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  }
 ];
 
 module.exports = {

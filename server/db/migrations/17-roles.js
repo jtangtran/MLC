@@ -1,6 +1,8 @@
 'use strict';
 
 var Sequelize = require('sequelize');
+const { DataTypes } = require('sequelize/lib/sequelize');
+const { STRING } = require('sequelize');
 
 var migrationCommands = [
     {
@@ -18,6 +20,8 @@ var migrationCommands = [
                     "type": Sequelize.STRING,
                     "field": "role_name"
                 },
+                "createdAt": DataTypes.DATE,
+                "updatedAt": DataTypes.DATE
             }
         ]
     },

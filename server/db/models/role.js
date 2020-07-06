@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     role_name: DataTypes.STRING
   }, {});
-  Role.associate = function(models) {
-  };
+  // Role.associate = function(models) {
+  // };
   return Role;
 };

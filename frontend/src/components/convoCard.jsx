@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment';
 import Ratings from 'react-ratings-declarative';
-const API_URL = require('../config.js');
 
 class ConvoCard extends Component {
 
