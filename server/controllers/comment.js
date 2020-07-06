@@ -200,12 +200,40 @@ const downvote = async function(req, res) {
   }
 };
 
+// POST /comment/:id/rate
+const rate = async function (req, res) {
+  try {
+    var existingRating = await Rating.findOne({ where: {UserId: req.session.user.id, CommentId: req.params.id}});
+    if (existingRating != null) {
+      return res.status(409).json({
+        errors: {
+          error: 'You have already rated',
+        },
+      });
+    } else {
+      Rating.create({
+        UserId: req.session.user.id,
+        CommentId: req.params.id,
+        rating: req.body.rating
+      }).catch((err) => {throw err;});
+      res.status(200).end();
+    }
+  } catch(e) {
+    return res.status(400).json({
+      errors: {
+        error: e.stack,
+      }
+    });
+  }
+};
+
 module.exports = {
   getComments,
   addComment,
   editComment,
   deleteComment,
   upvote,
-  downvote
+  downvote,
+  rate
 };
 

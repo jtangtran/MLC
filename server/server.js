@@ -60,6 +60,7 @@ app.get('/:type/:id/comments', auth.optional, commentController.getComments);
 app.post('/:type/:id/comment', auth.required, bodyParser.json(), commentController.addComment);
 app.post('/comment/:id/upvote', auth.required, bodyParser.json(), commentController.upvote);
 app.post('/comment/:id/downvote', auth.required, bodyParser.json(), commentController.downvote);
+app.post('/comment/:id/rate', auth.required, bodyParser.json(), commentController.rate);
 app.put('/comment/:id', auth.required, bodyParser.json(), commentController.editComment);
 app.delete('/comment/:id', auth.required, commentController.deleteComment);
 
