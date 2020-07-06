@@ -9,6 +9,7 @@ import Energy from '../media/energy.jpg';
 import Community from '../media/community.jpg';
 import Arts from '../media/arts.jpg';
 import Manufacturing from '../media/manufacturing.jpg';
+import Ratings from 'react-ratings-declarative';
 
 const API_URL = require('../config.js')
 
@@ -77,13 +78,27 @@ class Home extends Component {
                         <h5 className="card-title">{value.idea.title}</h5>
                         <h6 className="card-subtitle mb-2 text-muted">Posted by: {value.idea.User.fname} {value.idea.User.lname}</h6>
                         <p className="card-text">{value.idea.description.length < 30 ? value.idea.description: value.idea.description.slice(0, 30) + '...'}</p>
-                        <div className="row">
-                          <div className="col-6">
+                        <div className="rcard-text">
+                          {/* <div className="col-6">
                               <p className="likeText">{value.idea.upvotes} Likes</p>
                           </div>
                           <div className="col-6">
                               <p className="dislikeText">{value.idea.downvotes} Dislikes</p>
-                          </div>
+                          </div> */}
+                            Average Rating:
+                            <br/>
+                            <Ratings
+                              // rating={value.averageRating.rating}
+                              widgetRatedColors="lightgreen"
+                              widgetEmptyColors="grey"
+                              widgetDimensions="30px"
+                                  >
+                              <Ratings.Widget />
+                              <Ratings.Widget />
+                              <Ratings.Widget />
+                              <Ratings.Widget />
+                              <Ratings.Widget />
+                            </Ratings>
                           <div className="col-12">
                             <Moment format="MMM Do YYYY">{value.idea.createdAt}</Moment>
                           </div>
