@@ -24,11 +24,22 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
   Idea.associate = function(models) {
+    // Belongs-To associations
     Idea.belongsTo(models.User);
     Idea.belongsTo(models.User, {
       as: 'developer',
       foreignKey: 'developerId'
     });
+
+    // Belongs-To-Many associations
+
+    // Has-One associations
+
+    // Has-Many associations
+    Idea.hasMany(models.Comment);
+    Idea.hasMany(models.Image);
+    Idea.hasMany(models.Rating);
+    Idea.hasMany(models.Vote);
   };
   return Idea;
 };

@@ -9,9 +9,16 @@ module.exports = (sequelize, DataTypes) => {
     rating: DataTypes.INTEGER
   }, {});
   Rating.associate = function(models) {
+    // Belongs-To associations
     Rating.belongsTo(models.User);
     Rating.belongsTo(models.Idea);
     Rating.belongsTo(models.Comment);
+
+    // Belongs-To-Many associations
+
+    // Has-One associations
+
+    // Has-Many associations
   };
   return Rating;
 };

@@ -8,7 +8,15 @@ module.exports = (sequelize, DataTypes) => {
     },
     role_name: DataTypes.STRING
   }, {});
-  // Role.associate = function(models) {
-  // };
+  Role.associate = function(models) {
+    // Belongs-To associations
+    
+    // Belongs-To-Many associations
+
+    // Has-One associations
+
+    // Has-Many associations
+    Role.hasMany(models.User);
+  };
   return Role;
 };

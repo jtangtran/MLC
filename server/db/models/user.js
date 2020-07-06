@@ -45,8 +45,20 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.associate = function(models) {
+    // Belongs-To associations
     User.belongsTo(models.Role);
-    // associations can be defined here
+
+    // Belongs-To-Many associations
+
+    // Has-One associations
+
+    // Has-Many associations
+    User.hasMany(models.Idea);
+    User.hasMany(models.Comment);
+    User.hasMany(models.Rating);
+    User.hasMany(models.Image);
+    User.hasMany(models.Blog);
+    User.hasMany(models.Vote);
   };
 
   User.beforeCreate((user, options) => {
