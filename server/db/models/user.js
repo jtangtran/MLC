@@ -18,11 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     Postal_Code: DataTypes.STRING,
     location: DataTypes.STRING,
     latitude: DataTypes.DECIMAL,
-    longitude: DataTypes.DECIMAL,
-    role: {
-        type: DataTypes.STRING,
-        defaultValue: 'user'
-    }
+    longitude: DataTypes.DECIMAL
   });
   User.prototype.validatePassword = function (password) {
     return bcrypt.compareSync(password, this.password);
@@ -44,12 +40,12 @@ module.exports = (sequelize, DataTypes) => {
         location: this.location,
         latitude: this.latitude,
         longitude: this.longitude,
-        role: this.role,
         token: this.generateJWT(),
     };
   };
 
   User.associate = function(models) {
+    User.belongsTo(models.Role);
     // associations can be defined here
   };
 
