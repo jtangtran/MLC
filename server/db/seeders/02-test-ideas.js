@@ -234,7 +234,6 @@ module.exports = {
       attributes: ['id'],
       raw: true
     });
-    console.log(userIds);
 
     var index = 0;
     for (let idea of testIdeas) {

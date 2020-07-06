@@ -147,7 +147,6 @@ module.exports = {
       attributes: ['id'],
       raw: true
     });
-    console.log(roleIds);
 
     var index = 0;
     for (let user of testUsers) {

@@ -9,197 +9,7 @@ const Idea = db.Idea;
  * Bulk inserts test comments into "Comments" table
 */
 
-var testComments = [
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-  {
-    "text": "This is placeholder text for a comment",
-    "UserId": 0,
-    "IdeaId": 0,
-    "createdAt": new Date(),
-    "updatedAt": new Date()
-  },
-];
+var testComments = [];
 
 module.exports = {
   up: async function(queryInterface, Sequelize)
@@ -208,28 +18,21 @@ module.exports = {
       attributes: ['id'],
       raw: true
     });
-    console.log(userIds);
 
     var ideaIds = await Idea.findAll({
       attributes: ['id'],
       raw: true
     });
-    console.log(userIds);
 
-    var userIndex = 0;
-    var ideaIndex = 0;
-    for (let comment of testComments) {
-      comment.UserId = userIds[userIndex].id;
-      comment.IdeaId = ideaIds[ideaIndex].id;
-      if (userIndex < userIds.length - 1) {
-        userIndex++;
-      } else {
-        userIndex = 0;
-        if (ideaIndex < ideaIds.length -1) {
-          ideaIndex++;
-        } else {
-          ideaIndex = 0;
-        }
+    for (let ideaIndex = 0; ideaIndex < ideaIds.length; ideaIndex++) {
+      for (let userIndex = 0; userIndex < userIds.length; userIndex++) {
+        testComments.push({
+          "text": "This is placeholder text for a comment",
+          "UserId": userIds[userIndex].id,
+          "IdeaId": ideaIds[ideaIndex].id,
+          "createdAt": new Date(),
+          "updatedAt": new Date()
+        });
       }
     }
 
