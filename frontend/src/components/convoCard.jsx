@@ -26,7 +26,7 @@ class ConvoCard extends Component {
                     Average Rating:
                     <br/>
                     <Ratings
-                      // rating={this.props.model.averageRating.rating}
+                      rating={this.props.model.averageRating != null ? parseFloat(this.props.model.averageRating.rating) : 0}
                       widgetRatedColors="lightgreen"
                       widgetEmptyColors="grey"
                       widgetDimensions="30px"
