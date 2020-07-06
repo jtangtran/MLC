@@ -1,8 +1,6 @@
 'use strict';
 
 var Sequelize = require('sequelize');
-const db = require('../models/index');
-const Role = db.Role;
 
 /** 
  * Bulk inserts test users into "Users" table
@@ -113,22 +111,6 @@ var testUsers = [
 module.exports = {
   up: async function(queryInterface, Sequelize)
   {
-    var roleIds = await Role.findAll({
-      attributes: ['id'],
-      raw: true
-    });
-    console.log(roleIds);
-
-    var index = 0;
-    for (let user of testUsers) {
-      user.role = roleIds[index].id
-      if (index < roleIds.length - 1) {
-        index++;
-      } else {
-        index = 0;
-      }
-    }
-
     await queryInterface.bulkInsert('Users', testUsers);
   },
   down: function(queryInterface, Sequelize)
