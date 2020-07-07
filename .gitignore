@@ -1,7 +1,12 @@
+# ide
 .vscode
-<<<<<<< Updated upstream
 
-# Ignore database
-=======
->>>>>>> Stashed changes
+# database
 /postgres
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
