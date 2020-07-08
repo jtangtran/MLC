@@ -27,7 +27,7 @@ module.exports = {
     for (let commentIndex = 0; commentIndex < commentIds.length; commentIndex++) {
       for (let userIndex = 0; userIndex < userIds.length; userIndex++) {
         testRatings.push({
-          "rating": 3,
+          "rating": Math.floor(Math.random() * (5 - (-5) + 1) + (-5) ),
           "UserId": userIds[userIndex].id,
           "CommentId": commentIds[commentIndex].id,
           "createdAt": new Date(),
