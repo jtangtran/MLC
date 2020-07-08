@@ -2,6 +2,8 @@ const db = require('../db/models/index');
 const Comment = db.Comment; 
 const User = db.User;
 const Vote = db.Vote;
+const Rating = db.Rating;
+const Sequelize = db.Sequelize;
 
 // GET /:type/:id/comments
 const getComments = async function(req, res) {
@@ -68,10 +70,21 @@ const addVotes = async comment => {
   var upvoteCount = await Vote.count({ where: {'up': true, 'CommentId': comment.id} });
 
   var downvoteCount = await Vote.count({ where: {'down': true, 'CommentId': comment.id} });
+
+  var countRating = await Rating.findAll({
+    attributes: ['rating', [Sequelize.fn('COUNT',
+      Sequelize.col('*')), 'row_count'
+    ]],
+    group: ['rating'],
+    where: {'CommentId': comment.id},
+    order: [['rating', 'ASC']]
+  });
+
   return await {
     comment,
     upvoteCount,
     downvoteCount,
+    countRating
   }
 }
 

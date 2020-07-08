@@ -19,7 +19,7 @@ class Navbar extends Component {
   componentDidMount(){
     const loginButtons = document.getElementById('loginButtons');
     const loggedIn = document.getElementById('loggedIn');
-    const adminLink = document.getElementById('adminLink');
+    // const adminLink = document.getElementById('adminLink');
     let userLoggedIn = sessionStorage.getItem('loggedin');
     let user = sessionStorage.getItem('user');
     let userRole = sessionStorage.getItem('userRole');
@@ -28,16 +28,16 @@ class Navbar extends Component {
       loginButtons.hidden = true;
       loggedIn.hidden = false;
       if(userRole === "admin") {
-        adminLink.hidden = false;
+        // adminLink.hidden = false;
       } 
       else {
-        adminLink.hidden = true;
+        // adminLink.hidden = true;
       }
     }
     else{
       loginButtons.hidden = false;
       loggedIn.hidden = true;
-      adminLink.hidden = true;
+      // adminLink.hidden = true;
     }
   }
 
