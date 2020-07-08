@@ -5,6 +5,7 @@ import Ratings from 'react-ratings-declarative';
 class ConvoCard extends Component {
 
   render() {
+    const averageRating = this.props.model.averageRating != null ? parseFloat(this.props.model.averageRating.rating) : 0;
     return (
         <div className="card convoCard">
           <a href={"/idea/" + this.props.model.idea.id}>
@@ -25,8 +26,8 @@ class ConvoCard extends Component {
                     Average Rating:
                     <br/>
                     <Ratings
-                      rating={this.props.model.averageRating != null ? parseFloat(this.props.model.averageRating.rating) : 0}
-                      widgetRatedColors="lightgreen"
+                      rating={Math.abs(averageRating)/*this.props.model.averageRating != null ? parseFloat(this.props.model.averageRating.rating) : 0*/}
+                      widgetRatedColors={averageRating > 0 ? "lightgreen" : "red"}
                       widgetEmptyColors="grey"
                       widgetDimensions="30px"
                     >

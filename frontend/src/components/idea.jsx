@@ -257,8 +257,8 @@ confirmSponsor(e) {
                     &nbsp; 
                     &nbsp;
                     <Ratings
-                      rating={this.state.averageRating}
-                      widgetRatedColors="lightgreen"
+                      rating={Math.abs(this.state.averageRating)}
+                      widgetRatedColors={this.state.averageRating > 0 ? "lightgreen" : "red"}
                       widgetEmptyColors="grey"
                     >
                       <Ratings.Widget />
