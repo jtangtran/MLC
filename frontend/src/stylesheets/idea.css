@@ -189,9 +189,9 @@ background-color: #FF6600
   font-size: 8pt;
 }
 
-.rating {
-  padding-left: 305px;
-  /* text-align: center; */
+/*Making the rating text center with the stars */
+#ratingText {
+  padding-left: 100px;
 }
 
 .test {
@@ -202,4 +202,9 @@ background-color: #FF6600
 #button {
   padding-top: 10px;
   margin-left: -6px;
+}
+
+.impactAreas {
+  padding-left: 8px;
+  color: black;
 }
