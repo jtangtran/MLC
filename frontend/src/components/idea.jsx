@@ -157,12 +157,13 @@ class Idea extends Component {
     e.preventDefault();
     var data = 0;
     if (this.state.rating > 0 && this.state.rating <= 10) {
+      //checks if the rating is the negative rating
       if (this.state.rating > 0 && this.state.rating < 5) {
-        // negRating = this.state.rating;
          data = JSON.stringify({
           rating: this.state.rating
         })
       }
+            //checks if the rating is the positive rating
       else if (this.state.rating < 10 && this.state.rating >= 5) {
           data = JSON.stringify({
           rating: this.state.rating
