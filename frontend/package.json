@@ -6,6 +6,7 @@
     "bcryptjs": "^2.4.3",
     "moment": "^2.26.0",
     "react": "^16.13.1",
+    "react-bar-chart": "^0.1.2",
     "react-dom": "^16.13.1",
     "react-markdown": "^4.3.1",
     "react-mde": "^7.9.0",
