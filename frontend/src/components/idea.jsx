@@ -155,21 +155,20 @@ class Idea extends Component {
 
   addRating(e) {
     e.preventDefault();
+    var data = 0;
     if (this.state.rating > 0 && this.state.rating <= 10) {
       if (this.state.rating > 5) {
         // negRating = this.state.rating;
-        const data = JSON.stringify({
-          negRating: this.state.rating
+         data = JSON.stringify({
+          rating: this.state.rating
         })
       }
       else if (this.state.rating < 10) {
-        const data = JSON.stringify({
-          posRating: this.state.rating
+          data = JSON.stringify({
+          rating: this.state.rating
         })
       }
-      // const data = JSON.stringify({
-      //   rating: this.state.rating
-      // })
+
       fetch(API_URL + "/idea/" + this.props.match.params.id + '/rate', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
