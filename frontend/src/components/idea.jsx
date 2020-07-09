@@ -157,11 +157,19 @@ class Idea extends Component {
     e.preventDefault();
     if (this.state.rating > 0 && this.state.rating <= 10) {
       if (this.state.rating > 5) {
-        negRating = this.state.rating;
+        // negRating = this.state.rating;
+        const data = JSON.stringify({
+          negRating: this.state.rating
+        })
       }
-      const data = JSON.stringify({
-        rating: this.state.rating
-      })
+      else if (this.state.rating < 10) {
+        const data = JSON.stringify({
+          posRating: this.state.rating
+        })
+      }
+      // const data = JSON.stringify({
+      //   rating: this.state.rating
+      // })
       fetch(API_URL + "/idea/" + this.props.match.params.id + '/rate', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -302,29 +310,6 @@ class Idea extends Component {
                   {/* </div> */}
                   {/* </div> */}
                   {/* </div> */}
-<<<<<<< HEAD
-=======
-                 {/*  <div className="col-12"><button onClick={(e) => this.addRating(e)} type="button" className="btn btn-light">Add Rating</button>
-                      </div>
-                   */}
-                  {/* <div className="col-12"> */}
-                  <div className="rating">
-                    Average Rating:
-                    &nbsp; 
-                    &nbsp;
-                    <Ratings
-                      rating={Math.abs(this.state.averageRating)}
-                      widgetRatedColors={this.state.averageRating > 0 ? "lightgreen" : "red"}
-                      widgetEmptyColors="grey"
-                    >
-                      <Ratings.Widget />
-                      <Ratings.Widget />
-                      <Ratings.Widget />
-                      <Ratings.Widget />
-                      <Ratings.Widget />
-                    </Ratings>
-                  </div>
->>>>>>> 44d1c7cb44035f7b41999a916bb2aa82307e9ac4
                   <div className="col-12 mt-5">
                     {/* <button type="button" className="btn btn-primary mr-2" data-toggle="modal" data-target="#sponsorModal">Sponsor</button> */}
                     <div id="button"></div>
