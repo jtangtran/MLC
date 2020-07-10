@@ -4,6 +4,7 @@ const Vote = db.Vote;
 const User = db.User;
 const Rating = db.Rating;
 const Sequelize = db.Sequelize;
+const { Op } = require('sequelize');
 
 // GET /:category/idea/:id
 const getIdeasByCategory = async function(req, res) {
@@ -408,18 +409,28 @@ const addVotes = async idea => {
 
   var posAverageRating = await Rating.findOne({
     attributes: ['IdeaId', [Sequelize.fn('AVG', 
-      Sequelize.col('posRating')), 'posRating'
+      Sequelize.col('rating')), 'posRating'
     ]],
     group: ['IdeaId'],
-    where: {'IdeaId': idea.id}
+    where: {
+      'IdeaId': idea.id,
+      'rating': {
+        [Op.gt]: 0
+      }
+    }
   });
 
   var negAverageRating = await Rating.findOne({
     attributes: ['IdeaId', [Sequelize.fn('AVG', 
-      Sequelize.col('negRating')), 'negRating'
+      Sequelize.col('rating')), 'negRating'
     ]],
     group: ['IdeaId'],
-    where: {'IdeaId': idea.id}
+    where: {
+      'IdeaId': idea.id,
+      'rating': {
+        [Op.lt]: 0
+      }
+    }
   });
 
   return await {
@@ -427,9 +438,8 @@ const addVotes = async idea => {
     upvoteCount,
     downvoteCount,
     averageRating,
-
-    posAverageRating  
-    // negAverageRating
+    posAverageRating,  
+    negAverageRating
   }
 }
 

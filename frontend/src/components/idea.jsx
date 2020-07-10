@@ -65,8 +65,9 @@ class Idea extends Component {
         json.idea.createdAt = json.idea.createdAt.slice(0, 10)
         this.setState({ idea: json.idea });
         this.setState({ user: json.idea.User })
-        this.setState({ averageRating: parseFloat(json.averageRating.rating) || 0 })
-        this.setState({ posAvgRating: parseFloat(json.posAvgRating.posRating) || 0})
+        this.setState({ averageRating: Math.abs(parseFloat(json.averageRating.rating)) || 0 })
+        this.setState({ posAvgRating: Math.abs(parseFloat(json.posAverageRating.posRating)) || 0})
+        this.setState({ negAvgRating: Math.abs(parseFloat(json.negAverageRating.negRating)) || 0})
       })
       .catch(error => {
         console.log("Error: " + error);
