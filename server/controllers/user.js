@@ -40,6 +40,10 @@ const register = (req, res, next) => {
 const login = (req, res, next) => {
   const { body: { user } } = req;
 
+  /*******DEBUG*********/
+  console.log(user);
+  /********************/
+
   if(!user.email) {
     return res.status(422).json({
       errors: {
@@ -57,11 +61,19 @@ const login = (req, res, next) => {
   }
 
   return passport.authenticate('local', { session: true }, (err, passportUser, info) => {
+    /*******DEBUG*********/
+    console.log("Authenticating...");
+    /********************/
+
     if(err) {
       return next(err);
     }
 
     if(passportUser) {
+      /*******DEBUG*********/
+      console.log("Valid user found");
+      /********************/
+
       const user = passportUser;
       user.token = passportUser.generateJWT();
       req.session.user = user;

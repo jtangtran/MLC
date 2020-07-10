@@ -2,6 +2,7 @@
 
 var Sequelize = require('sequelize');
 const db = require('../models/index');
+const User = db.User;
 const Role = db.Role; 
 
 /** 
@@ -151,17 +152,17 @@ module.exports = {
     var index = 0;
     for (let user of testUsers) {
       user.RoleId = roleIds[index].id
+      await User.create(user);
       if (index < roleIds.length - 1) {
         index++;
       } else {
         index = 0;
       }
     }
-
-    await queryInterface.bulkInsert('Users', testUsers);
   },
-  down: function(queryInterface, Sequelize)
+  down: async function(queryInterface, Sequelize)
   {
+    await queryInterface.bulkDelete('Roles', null, {});
     return queryInterface.bulkDelete('Users', null, {});
   }
 };
