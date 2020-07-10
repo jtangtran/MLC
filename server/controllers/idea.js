@@ -406,11 +406,30 @@ const addVotes = async idea => {
     where: {'IdeaId': idea.id}
   });
 
+  var posAverageRating = await Rating.findOne({
+    attributes: ['IdeaId', [Sequelize.fn('AVG', 
+      Sequelize.col('posRating')), 'posRating'
+    ]],
+    group: ['IdeaId'],
+    where: {'IdeaId': idea.id}
+  });
+
+  var negAverageRating = await Rating.findOne({
+    attributes: ['IdeaId', [Sequelize.fn('AVG', 
+      Sequelize.col('negRating')), 'negRating'
+    ]],
+    group: ['IdeaId'],
+    where: {'IdeaId': idea.id}
+  });
+
   return await {
     idea,
     upvoteCount,
     downvoteCount,
-    averageRating
+    averageRating,
+
+    posAverageRating  
+    // negAverageRating
   }
 }
 
@@ -626,11 +645,29 @@ const rate = async function (req, res) {
         },
       });
     } else {
-      Rating.create({
-        UserId: req.session.user.id,
-        IdeaId: req.params.id,
-        rating: req.body.rating
-      }).catch((err) => {throw err;});
+      console.log(req.body.rating);
+      //adding the rating body to the correct row
+      if (req.body.rating > 0 && req.body.rating < 5) {
+        Rating.create({
+          UserId: req.session.user.id,
+          IdeaId: req.params.id,
+          negRating: req.body.rating,
+          //causes a fk constraint issue
+          // rating: req.body.rating
+        }).catch((err) => {throw err;});
+      } else if (req.body.rating >= 5 && req.body.rating < 10) {
+        Rating.create({
+          UserId: req.session.user.id,
+          IdeaId: req.params.id,
+          posRating: req.body.rating,
+          // rating: req.body.rating
+        }).catch((err) => {throw err;});
+      }
+      // Rating.create({
+      //   UserId: req.session.user.id,
+      //   IdeaId: req.params.id,
+      //   rating: req.body.rating
+      // }).catch((err) => {throw err;});
       res.status(200).end();
     }
   } catch(e) {

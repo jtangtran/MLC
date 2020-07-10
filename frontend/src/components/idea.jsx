@@ -66,6 +66,7 @@ class Idea extends Component {
         this.setState({ idea: json.idea });
         this.setState({ user: json.idea.User })
         this.setState({ averageRating: parseFloat(json.averageRating.rating) || 0 })
+        this.setState({ posAvgRating: parseFloat(json.posAvgRating.posRating) || 0})
       })
       .catch(error => {
         console.log("Error: " + error);
@@ -428,9 +429,8 @@ class Idea extends Component {
                   <h3>Submit Your Rating:</h3>
                 </div>
                 <div className="d-flex justify-content-center">
-                  {/*Negative Rating */}
                   <Ratings
-                    rating={this.state.rating}
+                    rating={this.state.rating > 6 ? this.state.posRating : this.state.negRating}
                     changeRating={this.changeRating}
                     widgetRatedColors={this.state.rating > 6 ? "lightgreen" : "red"}
                     widgetEmptyColors="grey"
@@ -447,22 +447,6 @@ class Idea extends Component {
                     <Ratings.Widget />
                     <Ratings.Widget />
                   </Ratings>
-                      {/* &nbsp;&nbsp;&nbsp; */}
-
-                      {/*Positive Rating */}
-                  {/* <Ratings
-                    rating={this.state.rating}
-                    changeRating={this.changeRating}
-                    widgetRatedColors="green"
-                    widgetEmptyColors="grey"
-                    widgetHoverColors="green"
-                  >
-                    <Ratings.Widget />
-                    <Ratings.Widget />
-                    <Ratings.Widget />
-                    <Ratings.Widget />
-                    <Ratings.Widget />
-                  </Ratings> */}
                 </div>
                 <div className="d-flex justify-content-center">
                   <button onClick={(e) => this.addRating(e)} type="button" className="btn btn-light">Submit Rating</button>
@@ -472,8 +456,6 @@ class Idea extends Component {
             </div>
           </div>
         </div>
-
-
 
         <br />
         {/* COMMENT PORTION OF THE IDEA */}
