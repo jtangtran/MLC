@@ -13,7 +13,7 @@ import ChampionModal from './championModal.jsx';
 const API_URL = require('../config.js')
 
 //specifying the width for the bar chart
-const width = 200;
+const width = 400;
 
 //specifying the margin of the bar graphs
 const margin = { top: 10, right: 5, bottom: 30, left: 5 };
