@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     Postal_Code: DataTypes.STRING,
     location: DataTypes.STRING,
     latitude: DataTypes.DECIMAL,
-    longitude: DataTypes.DECIMAL
+    longitude: DataTypes.DECIMAL,
+    RoleId: DataTypes.INTEGER
   });
   User.prototype.validatePassword = function (password) {
     return bcrypt.compareSync(password, this.password);
@@ -41,6 +42,7 @@ module.exports = (sequelize, DataTypes) => {
         latitude: this.latitude,
         longitude: this.longitude,
         token: this.generateJWT(),
+        RoleId: this.RoleId
     };
   };
 

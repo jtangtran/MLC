@@ -2,6 +2,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const db = require('../db/models/index');
 const User = db.User;
+const Role = db.Role;
 const sequelize = db.sequelize;
 
 //POST new user route (optional, everyone has access)

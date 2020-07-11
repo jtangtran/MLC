@@ -17,7 +17,7 @@ class RegisterModal extends Component {
         lname: '',
         Street_Name:'',
         Postal_Code:'',
-        role: ''
+        RoleId: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.register = this.register.bind(this);
@@ -39,10 +39,11 @@ class RegisterModal extends Component {
               lname: this.state.lname,
               Street_Name: this.state.Street_Name,
               Postal_Code: this.state.Postal_Code,
-              role: this.state.role
+              RoleId: parseInt(this.state.RoleId)
             }
         });
         
+        //password confirmation
         if(this.state.password !== this.state.confirmPass){
           const passwordMatch = <p>Your password and confirmation password do not match</p>;
           ReactDOM.render(passwordMatch, document.getElementById('errorMessage'));
@@ -92,7 +93,7 @@ class RegisterModal extends Component {
                 console.log('Got User: ', data);
                 sessionStorage.setItem('loggedin', true);
                 sessionStorage.setItem('user', data.user.email);
-                sessionStorage.setItem('userRole', data.user.role);
+                sessionStorage.setItem('userRole', data.user.RoleId);
                 setTimeout(function(){
                   window.location.reload();
                   }, 1500);
@@ -100,7 +101,7 @@ class RegisterModal extends Component {
                 console.log(e.stack);
                 sessionStorage.setItem('loggedin', false);
                 sessionStorage.setItem('user', data.user.email);
-                sessionStorage.setItem('userRole', data.user.role);
+                sessionStorage.setItem('userRole', data.user.RoleId);
               });
             }
           });
@@ -161,11 +162,11 @@ class RegisterModal extends Component {
                   
                   <div className="form-group">
                     <label htmlFor="selectRole">Choose your desired account type:</label>
-                    <select name="role" className="form-control text-center" id="selectRole" required>
-                      <option value="guest">Guest</option>
-                      <option value="resident">Resident</option>
-                      <option value="worker">Worker</option>
-                      <option value="associate">Associate</option>
+                    <select onChange={this.handleChange} name="RoleId" className="form-control text-center" id="selectRole" required>
+                      <option value="1">Guest</option>
+                      <option value="2">Resident</option>
+                      <option value="3">Worker</option>
+                      <option value="4">Associate</option>
                     </select>
                   </div>
                   {/* Privacy Policy Check */}
