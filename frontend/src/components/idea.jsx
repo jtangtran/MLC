@@ -33,6 +33,9 @@ class Idea extends Component {
       posAvgRating: 0,
       negAvgRating: 0,
       averageRating: 0,
+      totalVotes: [],
+      posVotes: [],
+      negVotes: [],
       posRating: 0,
       negRating: 0,
       rating: 0
@@ -65,9 +68,13 @@ class Idea extends Component {
         json.idea.createdAt = json.idea.createdAt.slice(0, 10)
         this.setState({ idea: json.idea });
         this.setState({ user: json.idea.User })
-        this.setState({ averageRating: Math.abs(parseFloat(json.averageRating.rating)) || 0 })
-        this.setState({ posAvgRating: Math.abs(parseFloat(json.posAverageRating.posRating)) || 0})
-        this.setState({ negAvgRating: Math.abs(parseFloat(json.negAverageRating.negRating)) || 0})
+        this.setState({ averageRating: Math.abs(parseFloat(json.totalRating.average)) || 0 })
+        this.setState({ posAvgRating: Math.abs(parseFloat(json.positiveRating.average)) || 0})
+        this.setState({ negAvgRating: Math.abs(parseFloat(json.negativeRating.average)) || 0})
+        this.setState({ totalVotes: json.totalRating.votes})
+        this.setState({ posVotes: json.positiveRating.votes})
+        this.setState({ negVotes: json.negativeRating.votes})
+        console.log(json.positiveRating.votes)
       })
       .catch(error => {
         console.log("Error: " + error);
@@ -231,89 +238,29 @@ class Idea extends Component {
                 <p className="lead">{this.state.idea.description}</p>
                 <div id="impactAreaGroup">
                   <div className="col-12">
-                    {/* <div className="row"> */}
-                    {/* <div className="col-lg-4 col-md-12 col-sm-12 col-xs-12"> */}
-                    {/* <div className="row"> */}
-                    {/* <div className="col-6 text-center"> */}
                     <p>Community and Place:
                     <span className="impactAreas">{this.state.idea.community_impact}</span></p>
                   </div>
                   <div className="col-12">
                     <p>Nature and Food Security:
-                      {/* <span className="badge badge-pill badge-primary p-2">{this.state.idea.nature_impact}</span> */}
                       <span className="impactAreas">{this.state.idea.nature_impact}</span>
                     </p>
                   </div>
-                  {/* </div> */}
-                  {/* </div> */}
-                  {/* </div> */}
-                  {/* <div className="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                <div className="row">
-                  <div className="col-6 text-center"> */}
                   <div className="col-12">
                     <p>Arts, Culture, and Education:
-                    {/* <span className="badge badge-pill badge-primary p-2">{this.state.idea.arts_impact}</span> */}
                       <span className="impactAreas">{this.state.idea.arts_impact}</span></p>
                   </div>
-                  {/* <div className="col-6 text-center"> */}
                   <div className="col-12">
                     <p>Water and Energy:
-                    {/* <span className="badge badge-pill badge-primary p-2">{this.state.idea.energy_impact}</span> */}
                       <span className="impactAreas">{this.state.idea.energy_impact}</span></p>
-                    {/* </div> */}
-                    {/* </div> */}
                   </div>
-                  {/* <div className="col-lg-4 col-md-12 col-sm-12 col-xs-12"> */}
-                  {/* <div className="row"> */}
-                  {/* <div className="col-6 text-center"> */}
                   <div className="col-12">
                     <p>Manufacturing and Waste:
-                    {/* <span className="badge badge-pill badge-primary p-2">{this.state.idea.manufacturing_impact}</span> */}
                       <span className="impactAreas">{this.state.idea.manufacturing_impact}</span></p>
                   </div>
                 </div>
                 <div className="row">
-                  {/* <div className="col-6">
-                    <p className="lead">Likes</p>
-                    <h3 style={{"color": "green"}}>{this.state.json.upvoteCount}</h3>
-                    <br/>
-
-                    {/* <button type="button" class="btn btn-primary">
-                      Notifications <span class="badge badge-light">4</span>
-                    </button> */}
-                  {/* 
-                    <button onClick={(e) => this.addLike(e)} type="button" className="btn btn-light">
-                      Like<span className="pl-2"></span>
-                      <span className="badge badge-success">
-                        <i className="far fa-thumbs-up"></i>
-                      </span>
-                    </button> *}
-                  </div> 
-                  {/* <div className="col-6">
-                    <p className="lead">Dislikes</p>
-                    <h3 style={{"color": "red"}}>{this.state.json.downvoteCount}</h3>
-                    <br/>
-                    <button onClick={(e) => this.addDislike(e)} type="button" className="btn btn-light">
-                      Dislike<span className="pl-2"></span>
-                      <span className="badge badge-danger">
-                        <i className="far fa-thumbs-down"></i>
-                      </span>
-                    </button>
-                  </div> */}
-                  {/* <div className="col-12"> */}
-
-                  {/*
-                    <div className="col-6 text-center">
-                      <p>Equity Petal:</p> 
-                      <span className="badge badge-pill badge-primary p-2">{this.state.idea.equity_petal}</span>
-                    </div>
-                  */}
-                  {/* </div> */}
-                  {/* </div> */}
-                  {/* </div> */}
-                  {/* </div> */}
                   <div className="col-12 mt-5">
-                    {/* <button type="button" className="btn btn-primary mr-2" data-toggle="modal" data-target="#sponsorModal">Sponsor</button> */}
                     <div id="button"></div>
                     <br />
                     <h5>Share</h5>
@@ -360,7 +307,6 @@ class Idea extends Component {
             </div>
           <div className="row">
             
-            {/* <div className="rating"> */}
             <div className="col-md">
               <div id="ratingText">
                 Positive Rating:
@@ -377,6 +323,7 @@ class Idea extends Component {
                 <Ratings.Widget />
               </Ratings>
             </div>
+            
             <div className="col-md">
               <div id="ratingText">
                 Negative Rating:
@@ -395,28 +342,27 @@ class Idea extends Component {
             </div>
 
             <div className="col-md">
-              {/* </div> */}
-              {/* </div> */}
-              {/*  <div className="col-12"><button onClick={(e) => this.addRating(e)} type="button" className="btn btn-light">Add Rating</button>
-                      </div>
-                   */}
-              {/* <div className="col-12"> */}
-              {/* <div className="rating"> */}
-                Average Rating: {this.state.averageRating}
+              Average Rating: {this.state.averageRating}
             </div>
-                   <br />
-            {/* <Ratings
-                      rating={this.state.averageRating}
-                      widgetRatedColors="lightgreen"
-                      widgetEmptyColors="grey"
-                    >
-                      <Ratings.Widget />
-                      <Ratings.Widget />
-                      <Ratings.Widget />
-                      <Ratings.Widget />
-                      <Ratings.Widget />
-                    </Ratings> */}
-            {/* </div> */}
+            <br />
+          </div>
+          <div className="row">
+            <div className="col-md">
+              {this.state.posVotes.map((value, id) => {
+                console.log(value);
+                return (
+                  <p>Rating: {value.rating} &nbsp; Count: {value.count}</p>
+                );
+              })}
+            </div>
+            <div className="col-md">
+              {this.state.posVotes.map((value, id) => {
+                console.log(value);
+                return (
+                  <p>Rating: {value.rating} &nbsp; Count: {value.count}</p>
+                );
+              })}
+            </div>
           </div>
         </div>
         <br />
