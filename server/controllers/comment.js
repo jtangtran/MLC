@@ -71,20 +71,39 @@ const addVotes = async comment => {
 
   var downvoteCount = await Vote.count({ where: {'down': true, 'CommentId': comment.id} });
 
-  var countRating = await Rating.findAll({
-    attributes: ['rating', [Sequelize.fn('COUNT',
-      Sequelize.col('*')), 'row_count'
+  var votes = await Rating.findAll({
+    attributes: ['rating', [Sequelize.fn('COUNT', 
+      Sequelize.col('*')), 'count'
     ]],
     group: ['rating'],
     where: {'CommentId': comment.id},
-    order: [['rating', 'ASC']]
+    order: [['rating', 'ASC']],
+    raw: true
+  }).then((success) => {
+    var queryVotes = {
+      "5": "0",
+      "4": "0",
+      "3": "0",
+      "2": "0",
+      "1": "0",
+      "0": "0",
+      "-1": "0",
+      "-2": "0",
+      "-3": "0",
+      "-4": "0",
+      "-5": "0",
+    };
+    success.map((value, id) => {
+      queryVotes[value.rating] = value.count;
+    });
+    return queryVotes;
   });
 
   return await {
     comment,
     upvoteCount,
     downvoteCount,
-    countRating
+    votes
   }
 }
 

@@ -207,10 +207,12 @@ class Idea extends Component {
     console.log(shareURL)
     //WILL CHANGE SOON TO THE STAR RATING DATA
     //data from the positive likes and dislikes in the comments
+    /*
     const data = [
       { text: 'Likes', value: this.state.json.upvoteCount },
       { text: 'Dislikes', value: this.state.json.downvoteCount }
     ];
+    */
     // will only display the sponsor button if the average rating is over 3
     if (avgRating > 3.0) {
       //warning just to change the colour of the button to yellow - will change to a different colour soon
@@ -463,6 +465,10 @@ class Idea extends Component {
             <div className='col-6'>
               <ul className="list-group">
                 {this.state.comments.map((value, index) => {
+                  var data = [];
+                  for (let rating in value.votes) {
+                    data.push({ text: rating, value: value.votes[rating]});
+                  }
                   return <li className="list-group-item" key={index}> {value.comment.text}
                     <p className="lead">Likes: {value.upvoteCount}
                       <button onClick={(e) => this.commentLike(e, value.comment.id)} type="button" className="btn btn-light">
