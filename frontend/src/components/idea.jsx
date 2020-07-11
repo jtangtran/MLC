@@ -34,6 +34,7 @@ class Idea extends Component {
       negAvgRating: 0,
       averageRating: 0,
       votes: [],
+      interactivity: 0,
       posRating: 0,
       negRating: 0,
       rating: 0
@@ -70,6 +71,7 @@ class Idea extends Component {
         this.setState({ posAvgRating: Math.abs(parseFloat(json.rating.positiveAverage)) || 0})
         this.setState({ negAvgRating: Math.abs(parseFloat(json.rating.negativeAverage)) || 0})
         this.setState({ votes: json.rating.votes})
+        this.setState({ interactivity: json.rating.interactivity})
       })
       .catch(error => {
         console.log("Error: " + error);
@@ -338,6 +340,8 @@ class Idea extends Component {
 
             <div className="col-md">
               Average Rating: {this.state.averageRating}
+              <br />
+              {this.state.interactivity} Users have Voted 
             </div>
             <br />
           </div>

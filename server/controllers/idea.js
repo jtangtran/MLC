@@ -502,11 +502,14 @@ const addVotes = async idea => {
   });
   */
 
+  var interactivity = await Rating.count({ where: {'IdeaId': idea.id} });
+
   var rating = {
     totalAverage: averageRating,
     positiveAverage: posAverageRating,
     negativeAverage: negAverageRating,
-    votes: votes
+    votes: votes,
+    interactivity: interactivity
   };
 
   return await {
