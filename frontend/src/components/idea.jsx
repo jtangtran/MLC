@@ -33,9 +33,7 @@ class Idea extends Component {
       posAvgRating: 0,
       negAvgRating: 0,
       averageRating: 0,
-      totalVotes: [],
-      posVotes: [],
-      negVotes: [],
+      votes: [],
       posRating: 0,
       negRating: 0,
       rating: 0
@@ -68,13 +66,10 @@ class Idea extends Component {
         json.idea.createdAt = json.idea.createdAt.slice(0, 10)
         this.setState({ idea: json.idea });
         this.setState({ user: json.idea.User })
-        this.setState({ averageRating: Math.abs(parseFloat(json.totalRating.average)) || 0 })
-        this.setState({ posAvgRating: Math.abs(parseFloat(json.positiveRating.average)) || 0})
-        this.setState({ negAvgRating: Math.abs(parseFloat(json.negativeRating.average)) || 0})
-        this.setState({ totalVotes: json.totalRating.votes})
-        this.setState({ posVotes: json.positiveRating.votes})
-        this.setState({ negVotes: json.negativeRating.votes})
-        console.log(json.positiveRating.votes)
+        this.setState({ averageRating: Math.abs(parseFloat(json.rating.totalAverage)) || 0 })
+        this.setState({ posAvgRating: Math.abs(parseFloat(json.rating.positiveAverage)) || 0})
+        this.setState({ negAvgRating: Math.abs(parseFloat(json.rating.negativeAverage)) || 0})
+        this.setState({ votes: json.rating.votes})
       })
       .catch(error => {
         console.log("Error: " + error);
@@ -348,20 +343,18 @@ class Idea extends Component {
           </div>
           <div className="row">
             <div className="col-md">
-              {this.state.posVotes.map((value, id) => {
-                console.log(value);
-                return (
-                  <p>Rating: {value.rating} &nbsp; Count: {value.count}</p>
-                );
-              })}
+              <p>Rating: 1 &nbsp; Count: {this.state.votes["1"]}</p>
+              <p>Rating: 2 &nbsp; Count: {this.state.votes["2"]}</p>
+              <p>Rating: 3 &nbsp; Count: {this.state.votes["3"]}</p>
+              <p>Rating: 4 &nbsp; Count: {this.state.votes["4"]}</p>
+              <p>Rating: 5 &nbsp; Count: {this.state.votes["5"]}</p>
             </div>
             <div className="col-md">
-              {this.state.posVotes.map((value, id) => {
-                console.log(value);
-                return (
-                  <p>Rating: {value.rating} &nbsp; Count: {value.count}</p>
-                );
-              })}
+              <p>Rating: -1 &nbsp; Count: {this.state.votes["-1"]}</p>
+              <p>Rating: -2 &nbsp; Count: {this.state.votes["-2"]}</p>
+              <p>Rating: -3 &nbsp; Count: {this.state.votes["-3"]}</p>
+              <p>Rating: -4 &nbsp; Count: {this.state.votes["-4"]}</p>
+              <p>Rating: -5 &nbsp; Count: {this.state.votes["-5"]}</p>
             </div>
           </div>
         </div>

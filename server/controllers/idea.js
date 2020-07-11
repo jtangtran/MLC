@@ -416,13 +416,27 @@ const addVotes = async idea => {
     ]],
     group: ['rating'],
     where: {'IdeaId': idea.id},
-    order: [['rating', 'ASC']]
+    order: [['rating', 'ASC']],
+    raw: true
+  }).then((success) => {
+    var queryVotes = {
+      "5": "0",
+      "4": "0",
+      "3": "0",
+      "2": "0",
+      "1": "0",
+      "0": "0",
+      "-1": "0",
+      "-2": "0",
+      "-3": "0",
+      "-4": "0",
+      "-5": "0",
+    };
+    success.map((value, id) => {
+      queryVotes[value.rating] = value.count;
+    });
+    return queryVotes;
   });
-
-  var totalRating = {
-    average: averageRating,
-    votes: votes
-  };
 
   var posAverageRating = await Rating.findOne({
     attributes: [[Sequelize.fn('AVG', 
@@ -440,6 +454,7 @@ const addVotes = async idea => {
     return success.average;
   });
 
+  /*
   var posVotes = await Rating.findAll({
     attributes: ['rating', [Sequelize.fn('COUNT', 
       Sequelize.col('*')), 'count'
@@ -453,11 +468,7 @@ const addVotes = async idea => {
     },
     order: [['rating', 'ASC']]
   });
-
-  var positiveRating = {
-    average: posAverageRating,
-    votes: posVotes
-  };
+  */
 
   var negAverageRating = await Rating.findOne({
     attributes: [[Sequelize.fn('AVG', 
@@ -475,6 +486,7 @@ const addVotes = async idea => {
     return success.average;
   });
 
+  /*
   var negVotes = await Rating.findAll({
     attributes: ['rating', [Sequelize.fn('COUNT', 
       Sequelize.col('*')), 'count'
@@ -488,19 +500,20 @@ const addVotes = async idea => {
     },
     order: [['rating', 'ASC']]
   });
+  */
 
-  var negativeRating = {
-    average: negAverageRating,
-    votes: negVotes
+  var rating = {
+    totalAverage: averageRating,
+    positiveAverage: posAverageRating,
+    negativeAverage: negAverageRating,
+    votes: votes
   };
 
   return await {
     idea,
     upvoteCount,
     downvoteCount,
-    totalRating,
-    positiveRating,
-    negativeRating
+    rating
   }
 }
 
