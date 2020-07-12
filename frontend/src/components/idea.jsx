@@ -469,7 +469,9 @@ class Idea extends Component {
                   for (let rating in value.votes) {
                     data.push({ text: rating, value: value.votes[rating]});
                   }
-                  return <li className="list-group-item" key={index}> {value.comment.text}
+                  return <li className="list-group-item" key={index}>
+                    <h5>Posted by: {value.comment.User.fname} {value.comment.User.lname}</h5>
+                    <p>{value.comment.text}</p>
                     <p className="lead">Likes: {value.upvoteCount}
                       <button onClick={(e) => this.commentLike(e, value.comment.id)} type="button" className="btn btn-light">
                         Like<span className="pl-2"></span>
