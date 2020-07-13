@@ -3,7 +3,6 @@ import Navbar from './navbar';
 import Moment from 'react-moment';
 import Ratings from 'react-ratings-declarative';
 import BarChart from 'react-bar-chart';
-import ReactDOM from 'react-dom';
 import '../stylesheets/idea.css';
 
 //sponsor button not needed only the champion button sponsor button is needed for the proposals 
@@ -91,6 +90,20 @@ class Idea extends Component {
       .catch(error => {
         console.log("Error: " + error);
       });
+
+      var requiredRatio = this.state.idea.ratio;
+      var ratio = this.state.ratio;
+      var interactivity = this.state.interactivity;
+      var champ = document.getElementById('champ');
+      console.log(requiredRatio)
+      console.log(ratio)
+      console.log(interactivity)
+      if(ratio >= requiredRatio && interactivity >= 5){
+        champ.hidden = false;
+      } else{
+        champ.hidden = true;
+      }
+
   }
 
   addComment(e) {
@@ -206,7 +219,7 @@ class Idea extends Component {
   }
 
   render() {
-    var avgRating = this.state.averageRating;
+    // var avgRating = this.state.averageRating;
     const shareURL = window.location.href;
     console.log(shareURL)
     //WILL CHANGE SOON TO THE STAR RATING DATA
@@ -218,13 +231,13 @@ class Idea extends Component {
     ];
     */
     // will only display the sponsor button if the average rating is over 3
-    if (avgRating > 3.0) {
+    // if (avgRating > 3.0) {
       //warning just to change the colour of the button to yellow - will change to a different colour soon
       //when the user presses the button it displays a new window similar to sponsorship modal - WILL UPDATE SOON
-      const buttonEnabled = <button type="button" className="btn btn-warning" data-toggle="modal" data-target="#championModal">Champion</button>
-      document.getElementById('button').disabled = false;
-      ReactDOM.render(buttonEnabled, document.getElementById('button'));
-    }
+      // const buttonEnabled = <button type="button" className="btn btn-warning" data-toggle="modal" data-target="#championModal">Champion</button>
+      // document.getElementById('button').disabled = false;
+      // ReactDOM.render(buttonEnabled, document.getElementById('button'));
+    // }
     return (
       <div className="Idea">
         <Navbar />
@@ -270,7 +283,9 @@ class Idea extends Component {
                 </div>
                 <div className="row">
                   <div className="col-12 mt-5">
-                    <div id="button"></div>
+                    <div id="champ">
+                      <button type="button" className="btn btn-warning" data-toggle="modal" data-target="#championModal">Promote Idea</button>
+                    </div>
                     <br />
                     <h5>Share</h5>
                     <a className="resp-sharing-button__link" href={"https://facebook.com/sharer/sharer.php?u=http%3A%2F%2F" + shareURL} target="_blank" rel="noopener noreferrer" aria-label="">
@@ -305,7 +320,6 @@ class Idea extends Component {
               </div>
             </div>
           </div> {/* end of jumbotron */}
-
         </div> {/* end of the first div className="row" */}
 
         {/*Community Rating Row */}
@@ -514,7 +528,7 @@ class Idea extends Component {
           </div>
         </div>
         {/* <SponsorModal/> */}
-        <ChampionModal />
+        <ChampionModal/>
       </div>
     );
   }
