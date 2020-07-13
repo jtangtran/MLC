@@ -20,7 +20,7 @@ class RegisterModal extends Component {
         RoleId: 0,
         roles: []
     };
-    this.getRole = this.getRoles.bind(this);
+    this.getRoles = this.getRoles.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.register = this.register.bind(this);
   }
@@ -183,6 +183,7 @@ class RegisterModal extends Component {
                     <label htmlFor="selectRole">Choose your desired account type:</label>
                     <select onChange={this.handleChange} name="RoleId" className="form-control text-center" id="selectRole" required>
                     {this.state.roles.map((value, index) => {
+                      if(index < this.state.roles.length-1)
                      return <option key={index} value={value.role.id}>{value.role.role_name}</option>
                     })}
                     </select>
