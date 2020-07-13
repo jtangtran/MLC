@@ -21,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     active: {
       type: DataTypes.BOOLEAN,
       defaultValue: true
-    }
+    },
+    ratio: DataTypes.FLOAT
   }, {});
   Idea.associate = function(models) {
     // Belongs-To associations

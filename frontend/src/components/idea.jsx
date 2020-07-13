@@ -35,6 +35,9 @@ class Idea extends Component {
       averageRating: 0,
       votes: [],
       interactivity: 0,
+      ratio: 0,
+      positiveInteractivity: 0,
+      negativeInteractivity: 0,
       posRating: 0,
       negRating: 0,
       rating: 0
@@ -72,6 +75,7 @@ class Idea extends Component {
         this.setState({ negAvgRating: Math.abs(parseFloat(json.rating.negativeAverage)) || 0})
         this.setState({ votes: json.rating.votes})
         this.setState({ interactivity: json.rating.interactivity})
+        this.setState({ ratio: json.rating.ratio})
       })
       .catch(error => {
         console.log("Error: " + error);
@@ -257,6 +261,12 @@ class Idea extends Component {
                     <p>Manufacturing and Waste:
                       <span className="impactAreas">{this.state.idea.manufacturing_impact}</span></p>
                   </div>
+                </div>
+                <div className="col-6">
+                  <p>The required approval ratio is: {this.state.idea.ratio}</p>
+                </div>
+                <div className="col-6">
+                  <p>The actual approval ratio is: {this.state.ratio}</p>
                 </div>
                 <div className="row">
                   <div className="col-12 mt-5">

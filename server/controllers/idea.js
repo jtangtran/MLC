@@ -506,13 +506,40 @@ const addVotes = async idea => {
   */
 
   var interactivity = await Rating.count({ where: {'IdeaId': idea.id} });
+  if (interactivity === 0) {
+    interactivity = 1
+  }
+
+  var positiveCount = await Rating.count({ 
+    where: {
+      'IdeaId': idea.id,
+      'rating': {
+        [Op.gt]: 0
+      }
+    } 
+  });
+
+  var negativeCount = await Rating.count({ 
+    where: {
+      'IdeaId': idea.id,
+      'rating': {
+        [Op.lt]: 0
+      }
+    } 
+  });
+
+  var ratio = (positiveCount / interactivity);
+  console.log(positiveCount);
+  console.log(interactivity);
+  console.log(ratio);
 
   var rating = {
     totalAverage: averageRating,
     positiveAverage: posAverageRating,
     negativeAverage: negAverageRating,
     votes: votes,
-    interactivity: interactivity
+    interactivity: interactivity,
+    ratio: ratio
   };
 
   return await {
