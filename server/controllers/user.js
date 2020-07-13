@@ -5,6 +5,9 @@ const User = db.User;
 const Role = db.Role;
 const sequelize = db.sequelize;
 
+
+
+
 //POST new user route (optional, everyone has access)
 const register = (req, res, next) => {
   const { body: { user } } = req;
@@ -109,6 +112,23 @@ const getCurrentUser = (req, res, next) => {
     });
 };
 
+const getRoles = async function(req, res) {
+  try{
+  var dbRoles = await Role.findAll()
+  .catch((err) => {throw err;});
+  var roles = await Promise.all(dbRoles.map(role => { return {"role": role} }));
+  res.send(roles);
+  }
+  catch(e){
+    return res.status(400).json({
+      errors: {
+        error: e.stack
+      },
+    });
+  }
+}
+
+
 //GET all users (required, only admin users have access)
 const getUsers = async function(req, res) {
   try {
@@ -136,5 +156,6 @@ module.exports = {
   login,
   logout,
   getCurrentUser,
+  getRoles,
   getUsers
 };

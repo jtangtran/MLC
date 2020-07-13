@@ -88,7 +88,7 @@ class Admin extends Component {
                                         <td>{value.user.lname}</td>
                                         <td>{value.user.Street_Name || "unknown"}</td>
                                         <td>{value.user.Postal_Code || "unknown"}</td>
-                                        <td>{value.user.role}</td>
+                                        <td>{value.user.RoleId}</td>
                                     </tr>
                                 })}
                             </tbody>

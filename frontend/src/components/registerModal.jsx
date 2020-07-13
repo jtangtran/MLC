@@ -17,10 +17,29 @@ class RegisterModal extends Component {
         lname: '',
         Street_Name:'',
         Postal_Code:'',
-        RoleId: ''
+        RoleId: 0,
+        roles: []
     };
+    this.getRole = this.getRoles.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.register = this.register.bind(this);
+  }
+
+  componentDidMount() {
+    this.getRoles()
+      };
+
+  async getRoles() {
+    await fetch(API_URL+ "/roles")
+    .then(response => {
+      return response.json();
+    }).then(json => {
+      console.log(json);
+      this.setState({roles : json});
+    })
+    .catch(error => {
+      console.log("Error: " + error);
+    })
   }
 
   handleChange(event) {
@@ -39,7 +58,7 @@ class RegisterModal extends Component {
               lname: this.state.lname,
               Street_Name: this.state.Street_Name,
               Postal_Code: this.state.Postal_Code,
-              RoleId: parseInt(this.state.RoleId)
+              RoleId: this.state.RoleId
             }
         });
         
@@ -163,10 +182,9 @@ class RegisterModal extends Component {
                   <div className="form-group">
                     <label htmlFor="selectRole">Choose your desired account type:</label>
                     <select onChange={this.handleChange} name="RoleId" className="form-control text-center" id="selectRole" required>
-                      <option value="1">Guest</option>
-                      <option value="2">Resident</option>
-                      <option value="3">Worker</option>
-                      <option value="4">Associate</option>
+                    {this.state.roles.map((value, index) => {
+                     return <option key={index} value={value.role.id}>{value.role.role_name}</option>
+                    })}
                     </select>
                   </div>
                   {/* Privacy Policy Check */}
