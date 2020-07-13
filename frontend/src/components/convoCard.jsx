@@ -5,7 +5,7 @@ import Ratings from 'react-ratings-declarative';
 class ConvoCard extends Component {
 
   render() {
-    const averageRating = this.props.model.averageRating != null ? parseFloat(this.props.model.averageRating.rating) : 0;
+    const averageRating = this.props.model.rating != null ? parseFloat(this.props.model.rating.totalAverage) : 0;
     return (
         <div className="card convoCard">
           <a href={"/idea/" + this.props.model.idea.id}>

@@ -344,13 +344,16 @@ const getIdeas = async function (req, res) {
       }).catch((err) => {throw err;});
       var ideas = await Promise.all(dbIdeas.map(idea => addVotes(idea))) 
       ideas.sort((a,b) => {
-        if (a.upvoteCount - a.downvoteCount > b.upvoteCount - b.downvoteCount) {
+        return a.rating.totalAverage - b.rating.totalAverage;
+        /*
+        if (a.rating.totalAverage > b.rating.totalAverage) {
           return 1;
         }
-        if (a.upvoteCount - a.downvoteCount < b.upvoteCount - b.downvoteCount) {
+        if (a.rating.totalAverage < b.rating.totalAverage) {
           return -1;
         }
         return 0;
+        */
       }).reverse();
       res.send(ideas);
 

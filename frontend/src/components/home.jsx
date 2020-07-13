@@ -88,7 +88,7 @@ class Home extends Component {
                             Average Rating:
                             <br/>
                             <Ratings
-                              rating={Math.abs(value.averageRating != null ? parseFloat(value.averageRating.rating) : 0)}
+                              rating={Math.abs(value.rating != null ? parseFloat(value.rating.totalAverage) : 0)}
                               widgetRatedColors={(value.averageRating != null ? parseFloat(value.averageRating.rating) : 0) > 0 ? "lightgreen" : "red"}
                               widgetEmptyColors="grey"
                               widgetDimensions="30px"
