@@ -462,7 +462,7 @@ class Idea extends Component {
                           </div>
                           <br />
                           <input className="btn btn-primary" type="submit" value="Post Comment"></input>
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
                         </form>
                       </div>
 

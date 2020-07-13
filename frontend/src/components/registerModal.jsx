@@ -184,7 +184,8 @@ class RegisterModal extends Component {
                     <select onChange={this.handleChange} name="RoleId" className="form-control text-center" id="selectRole" required>
                     {this.state.roles.map((value, index) => {
                       if(index < this.state.roles.length-1)
-                     return <option key={index} value={value.role.id}>{value.role.role_name}</option>
+                     return <option key={index} value={this.state.RoleId = value.role.id}>{value.role.
+                      role_name}</option>
                     })}
                     </select>
                   </div>
