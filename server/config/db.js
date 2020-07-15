@@ -1,7 +1,7 @@
 module.exports = {
   development: {
     username: 'postgres',
-    password: 'postgres',
+    password: process.env.DB_PASS || 'postgres',
     database: 'mylivingcity',
     host: 'host.docker.internal' || 'localhost',
     dialect: 'postgres'
