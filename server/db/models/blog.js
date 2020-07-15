@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     slug: DataTypes.STRING,
     short_desc: DataTypes.STRING(500),
   }, {});
+
   Blog.associate = function(models) {
     // Belongs-To associations
     Blog.belongsTo(models.User);
@@ -25,5 +26,6 @@ module.exports = (sequelize, DataTypes) => {
 
     // Has-Many associations
   };
+  
   return Blog;
 };

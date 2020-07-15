@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     rating: DataTypes.INTEGER
   }, {});
+
   Rating.associate = function(models) {
     // Belongs-To associations
     Rating.belongsTo(models.User);
@@ -20,5 +21,6 @@ module.exports = (sequelize, DataTypes) => {
 
     // Has-Many associations
   };
+  
   return Rating;
 };

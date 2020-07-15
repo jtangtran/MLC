@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     ratio: DataTypes.FLOAT
   }, {});
+
   Idea.associate = function(models) {
     // Belongs-To associations
     Idea.belongsTo(models.User);
@@ -42,5 +43,6 @@ module.exports = (sequelize, DataTypes) => {
     Idea.hasMany(models.Rating);
     Idea.hasMany(models.Vote);
   };
+  
   return Idea;
 };

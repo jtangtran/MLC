@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: true
     }
   }, {});
+
   Comment.associate = function(models) {
     // Belongs-To associations
     Comment.belongsTo(models.User);
@@ -25,5 +26,6 @@ module.exports = (sequelize, DataTypes) => {
     // Has-Many associations
     Comment.hasMany(models.Rating);
   };
+  
   return Comment;
 };

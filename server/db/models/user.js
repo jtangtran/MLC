@@ -21,17 +21,11 @@ module.exports = (sequelize, DataTypes) => {
     longitude: DataTypes.DECIMAL,
     RoleId: DataTypes.INTEGER
   });
+
   User.prototype.validatePassword = function (password) {
     return bcrypt.compareSync(password, this.password);
   };
-  /*
-  User.prototype.generateJWT = function() {
-    return jwt.sign({
-        email: this.email,
-        id: this.id,
-    }, 'secret', { expiresIn: '30d'} );
-  };
-  */
+
   User.prototype.toAuthJSON = function() {
     return {
         id: this.id,
@@ -43,7 +37,6 @@ module.exports = (sequelize, DataTypes) => {
         location: this.location,
         latitude: this.latitude,
         longitude: this.longitude,
-        //token: this.generateJWT(),
         RoleId: this.RoleId
     };
   };

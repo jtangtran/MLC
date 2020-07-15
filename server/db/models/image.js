@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     filename: DataTypes.STRING(),
   }, {});
+
   Image.associate = function(models) {
     // Belongs-To associations
     Image.belongsTo(models.User);
@@ -20,5 +21,6 @@ module.exports = (sequelize, DataTypes) => {
 
     // Has-Many associations
   };
+  
   return Image;
 };
