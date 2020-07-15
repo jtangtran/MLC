@@ -410,7 +410,11 @@ const addVotes = async idea => {
     where: {'IdeaId': idea.id},
     raw: true
   }).then((success) => {
-    return success.average;
+    if (success) {
+      return success.average;
+    } else {
+      return 0;
+    }
   });
 
   var votes = await Rating.findAll({
@@ -454,24 +458,12 @@ const addVotes = async idea => {
     },
     raw: true
   }).then((success) => {
-    return success.average;
+    if (success) {
+      return success.average;
+    } else {
+      return 0;
+    }
   });
-
-  /*
-  var posVotes = await Rating.findAll({
-    attributes: ['rating', [Sequelize.fn('COUNT', 
-      Sequelize.col('*')), 'count'
-    ]],
-    group: ['rating'],
-    where: {
-      'IdeaId': idea.id,
-      'rating': {
-        [Op.gt]: 0
-      }
-    },
-    order: [['rating', 'ASC']]
-  });
-  */
 
   var negAverageRating = await Rating.findOne({
     attributes: [[Sequelize.fn('AVG', 
@@ -486,29 +478,14 @@ const addVotes = async idea => {
     },
     raw: true
   }).then((success) => {
-    return success.average;
+    if (success) {
+      return success.average;
+    } else {
+      return 0;
+    }
   });
-
-  /*
-  var negVotes = await Rating.findAll({
-    attributes: ['rating', [Sequelize.fn('COUNT', 
-      Sequelize.col('*')), 'count'
-    ]],
-    group: ['rating'],
-    where: {
-      'IdeaId': idea.id,
-      'rating': {
-        [Op.lt]: 0
-      }
-    },
-    order: [['rating', 'ASC']]
-  });
-  */
 
   var interactivity = await Rating.count({ where: {'IdeaId': idea.id} });
-  if (interactivity === 0) {
-    interactivity = 1
-  }
 
   var positiveCount = await Rating.count({ 
     where: {
@@ -528,10 +505,12 @@ const addVotes = async idea => {
     } 
   });
 
-  var ratio = (positiveCount / interactivity);
-  console.log(positiveCount);
-  console.log(interactivity);
-  console.log(ratio);
+  var ratio;
+  if (positiveCount > 0 || negativeCount > 0) {
+    ratio = (positiveCount / (positiveCount + negativeCount)).toFixed(2);
+  } else {
+    ratio = 0;
+  }
 
   var rating = {
     totalAverage: averageRating,
@@ -550,27 +529,9 @@ const addVotes = async idea => {
   }
 }
 
-/*
-// Average rating of an idea object
-const averageRating = async idea => {
-  var averageRating = await Rating.findAll({
-    attributes: ['id', [models.sequelize.fn('AVG', 
-      models.sequelize.col('rating')), 'averageRating'
-    ]],
-    group: ['id'],
-    where: {'id': idea.id}
-  });
-  
-  return await {
-    idea,
-    averageRating
-  }
-}
-*/
-
-
 // GET /idea/:id
 const getSingleIdea = async function(req, res) {
+  console.log(req.session);
   try {
     var dbIdea = await Idea.findByPk(req.params.id, {
       include: [{
@@ -599,8 +560,6 @@ const getSingleIdea = async function(req, res) {
     });
   }
 };
-
-
 
 // POST /ideas
 const postIdea = (req, res) => {
