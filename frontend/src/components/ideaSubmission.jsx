@@ -71,6 +71,7 @@ class IdeaSubmission extends Component {
         let response = await fetch(API_URL+"/idea", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
+            credentials: 'cross-origin',
             body: data
         });
         if (response.ok){

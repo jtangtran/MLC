@@ -86,8 +86,7 @@ const login = (req, res, next) => {
         maxAge: 30 * 60 * 60 * 24 * 1000  // 30 days in ms
       });
       */
-      res.status(200).send(req.session.user);
-      //return res.json({ user: user.toAuthJSON() });
+      return res.json({ user: user.toAuthJSON() });
     }
 
     return res.status(400).info;
