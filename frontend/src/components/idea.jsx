@@ -431,21 +431,25 @@ class Idea extends Component {
                         {this.state.comments.map((value, index) => {
                           if (index < 5) {
                             return <li className="list-group-item" key={index}> {value.comment.text}
-                              <p className="lead">Likes: {value.upvoteCount}
-                                <button onClick={(e) => this.commentLike(e, value.comment.id)} type="button" className="btn btn-light">
+                              <p className="lead">Likes:
+                               {/* {value.upvoteCount} */}
+                                {/* doesn't work because table doesn't exist will fix later */}
+                                {/* <button onClick={(e) => this.commentLike(e, value.comment.id)} type="button" className="btn btn-light"> */}
                                   Like<span className="pl-2"></span>
                                   <span className="badge badge-success">
                                     <i className="far fa-thumbs-up"></i>
                                   </span>
-                                </button>
+                                {/* </button> */}
                               </p>
-                              <p className="lead">Dislikes: {value.downvoteCount}
-                                <button onClick={(e) => this.commentDislike(e, value.comment.id)} type="button" className="btn btn-light">
+                              <p className="lead">Dislikes: 
+                              {/* {value.downvoteCount} */}
+                                {/* doesn't work because table doesn't exist will fix later */}
+                                {/* <button onClick={(e) => this.commentDislike(e, value.comment.id)} type="button" className="btn btn-light"> */}
                                   Dislike<span className="pl-2"></span>
                                   <span className="badge badge-danger">
                                     <i className="far fa-thumbs-down"></i>
                                   </span>
-                                </button>
+                                {/* </button> */}
                               </p>
                               <Moment fromNow className='time'>{value.comment.createdAt}</Moment>
                             </li>
@@ -482,21 +486,25 @@ class Idea extends Component {
                   return <li className="list-group-item" key={index}>
                     <h5>Posted by: {value.comment.User.fname} {value.comment.User.lname}</h5>
                     <p>{value.comment.text}</p>
-                    <p className="lead">Likes: {value.upvoteCount}
-                      <button onClick={(e) => this.commentLike(e, value.comment.id)} type="button" className="btn btn-light">
+                    <p className="lead">Likes: 
+                    {/* {value.upvoteCount} */}
+                     {/* doesn't work because table doesn't exist will fix later */}
+                      {/* <button onClick={(e) => this.commentLike(e, value.comment.id)} type="button" className="btn btn-light"> */}
                         Like<span className="pl-2"></span>
                         <span className="badge badge-success">
                           <i className="far fa-thumbs-up"></i>
                         </span>
-                      </button>
+                      {/* </button> */}
                     </p>
-                    <p className="lead">Dislikes: {value.downvoteCount}
-                      <button onClick={(e) => this.commentDislike(e, value.comment.id)} type="button" className="btn btn-light">
+                    <p className="lead">Dislikes: 
+                    {/* {value.downvoteCount} */}
+                    {/* doesn't work because table doesn't exist will fix later */}
+                      {/* <button onClick={(e) => this.commentDislike(e, value.comment.id)} type="button" className="btn btn-light"> */}
                         Dislike<span className="pl-2"></span>
                         <span className="badge badge-danger">
                           <i className="far fa-thumbs-down"></i>
                         </span>
-                      </button>
+                      {/* </button> */}
                     </p>
                     <Moment fromNow className='time'>{value.comment.createdAt}</Moment>
                     <BarChart

@@ -46,10 +46,10 @@ const getComments = async function(req, res) {
       });
       var comments = await Promise.all(dbComments.map(comment => addVotes(comment)));
       comments.sort((a,b) => {
-        if (a.upvoteCount - a.downvoteCount > b.upvoteCount - b.downvoteCount) {
+        if (a.posRatingCount - a.negRatingCount > b.posRatingCount - b.negRatingCount) {
           return 1;
         }
-        if (a.upvoteCount - a.downvoteCount < b.upvoteCount - b.downvoteCount) {
+        if (a.posRatingCount - a.negRatingCount < b.posRatingCount - b.negRatingCount) {
           return -1;
         }
         return 0;
@@ -67,10 +67,12 @@ const getComments = async function(req, res) {
 
 // Adds votes to an comment object
 const addVotes = async comment => {
-  var upvoteCount = await Vote.count({ where: {'up': true, 'CommentId': comment.id} });
+  //UPDATE IT SO IT DOESN'T USE THE VOTE TABLE 
+  // var upvoteCount = await Vote.count({ where: {'up': true, 'CommentId': comment.id} });
 
-  var downvoteCount = await Vote.count({ where: {'down': true, 'CommentId': comment.id} });
-
+  // var downvoteCount = await Vote.count({ where: {'down': true, 'CommentId': comment.id} });
+  var negRatingCount;
+  var posRatingCount;
   var votes = await Rating.findAll({
     attributes: ['rating', [Sequelize.fn('COUNT', 
       Sequelize.col('*')), 'count'
@@ -96,13 +98,28 @@ const addVotes = async comment => {
     success.map((value, id) => {
       queryVotes[value.rating] = value.count;
     });
+    var isPositive = 0;
+    var isNegative = 0;
+    for (i = 0; i < queryVotes.count; i++) {
+      if (queryVotes[i] > 0) {
+        isPositive++;
+      } else {
+        isNegative++;
+      }
+    }
+
+    negRatingCount = isNegative;
+    posRatingCount = isPositive;
+
     return queryVotes;
   });
 
   return await {
     comment,
-    upvoteCount,
-    downvoteCount,
+    // upvoteCount,
+    // downvoteCount,
+    negRatingCount,
+    posRatingCount,
     votes
   }
 }
@@ -178,6 +195,7 @@ const deleteComment = (req, res) => {
   }
 };
 
+// BEEN REPLACED WITH RATING METHOD TO CHANGE THE RATING SYSTEM
 // POST /comment/:id/upvote
 const upvote = async function(req, res) {
   try {
@@ -205,6 +223,7 @@ const upvote = async function(req, res) {
   }
 };
 
+// BEEN REPLACED WITH RATING METHOD TO CHANGE THE RATING SYSTEM
 // POST /comment/:id/downvote
 const downvote = async function(req, res) {
   try {
