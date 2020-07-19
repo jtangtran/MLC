@@ -209,15 +209,7 @@ class Idea extends Component {
   render() {
     var avgRating = this.state.averageRating;
     const shareURL = window.location.href;
-    console.log(shareURL)
-    //WILL CHANGE SOON TO THE STAR RATING DATA
-    //data from the positive likes and dislikes in the comments
-    /*
-    const data = [
-      { text: 'Likes', value: this.state.json.upvoteCount },
-      { text: 'Dislikes', value: this.state.json.downvoteCount }
-    ];
-    */
+    // console.log(shareURL)
     // will only display the sponsor button if the average rating is over 3
     if (avgRating > 3.0) {
       //warning just to change the colour of the button to yellow - will change to a different colour soon
@@ -522,7 +514,6 @@ class Idea extends Component {
             </div>
           </div>
         </div>
-        {/* <SponsorModal/> */}
         <ChampionModal />
       </div>
     );
