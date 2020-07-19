@@ -1,5 +1,6 @@
 const db = require('../db/models/index');
 const Idea = db.Idea; 
+//going to delete this soon but the server is temporarily unavailable
 const Vote = db.Vote; 
 const User = db.User;
 const Rating = db.Rating;
@@ -529,9 +530,6 @@ const addVotes = async idea => {
   });
 
   var ratio = (positiveCount / interactivity);
-  // console.log(positiveCount);
-  // console.log(interactivity);
-  // console.log(ratio);
 
   var rating = {
     totalAverage: averageRating,
@@ -711,6 +709,7 @@ const upvote = async function (req, res) {
       }).catch((err) => {throw err;});
 
       // Did we transition to a proposal state?
+      // COMMENTED IT OUT AS IT USES THE VOTE TABLE WHICH IS CURRENTLY DELETED
       // var upvoteCount = await Vote.count({ where: {'up': true, 'IdeaId': req.params.id} }).catch((err) => {throw err;});
       // var downvoteCount = await Vote.count({ where: {'down': true, 'IdeaId': req.params.id} }).catch((err) => {throw err;});
 
