@@ -1,5 +1,6 @@
 const db = require('../db/models/index');
 const Idea = db.Idea; 
+//going to delete this soon but the server is temporarily unavailable
 const Vote = db.Vote; 
 const User = db.User;
 const Rating = db.Rating;
@@ -151,10 +152,10 @@ const getIdeasByCategory = async function(req, res) {
       }).catch((err) => {throw err;});
       var ideas = await Promise.all(dbIdeas.map(idea => addVotes(idea))) 
       ideas.sort((a,b) => {
-        if (a.upvoteCount - a.downvoteCount > b.upvoteCount - b.downvoteCount) {
+        if (a.positiveCount - a.negativeCount > b.positiveCount - b.negativeCount) {
           return 1;
         }
-        if (a.upvoteCount - a.downvoteCount < b.upvoteCount - b.downvoteCount) {
+        if (a.positiveCount - a.negativeCount < b.positiveCount - b.negativeCount) {
           return -1;
         }
         return 0;
@@ -182,10 +183,10 @@ const getIdeasByCategory = async function(req, res) {
       }).catch((err) => {throw err;});
       var ideas = await Promise.all(dbIdeas.map(idea => addVotes(idea))) 
       ideas.sort((a,b) => {
-        if (a.upvoteCount - a.downvoteCount > b.upvoteCount - b.downvoteCount) {
+        if (a.positiveCount - a.negativeCount > b.positiveCount - b.negativeCount) {
           return 1;
         }
-        if (a.upvoteCount - a.downvoteCount < b.upvoteCount - b.downvoteCount) {
+        if (a.positiveCount - a.negativeCount < b.positiveCount - b.negativeCount) {
           return -1;
         }
         return 0;
@@ -213,10 +214,10 @@ const getIdeasByCategory = async function(req, res) {
       }).catch((err) => {throw err;});
       var ideas = await Promise.all(dbIdeas.map(idea => addVotes(idea))) 
       ideas.sort((a,b) => {
-        if (a.upvoteCount - a.downvoteCount > b.upvoteCount - b.downvoteCount) {
+        if (a.positiveCount - a.negativeCount > b.positiveCount - b.negativeCount) {
           return 1;
         }
-        if (a.upvoteCount - a.downvoteCount < b.upvoteCount - b.downvoteCount) {
+        if (a.positiveCount - a.negativeCount < b.positiveCount - b.negativeCount) {
           return -1;
         }
         return 0;
@@ -244,10 +245,10 @@ const getIdeasByCategory = async function(req, res) {
       }).catch((err) => {throw err;});
       var ideas = await Promise.all(dbIdeas.map(idea => addVotes(idea))) 
       ideas.sort((a,b) => {
-        if (a.upvoteCount - a.downvoteCount > b.upvoteCount - b.downvoteCount) {
+        if (a.positiveCount - a.negativeCount > b.positiveCount - b.negativeCount) {
           return 1;
         }
-        if (a.upvoteCount - a.downvoteCount < b.upvoteCount - b.downvoteCount) {
+        if (a.positiveCount - a.negativeCount < b.positiveCount - b.negativeCount) {
           return -1;
         }
         return 0;
@@ -275,10 +276,10 @@ const getIdeasByCategory = async function(req, res) {
       }).catch((err) => {throw err;});
       var ideas = await Promise.all(dbIdeas.map(idea => addVotes(idea))) 
       ideas.sort((a,b) => {
-        if (a.upvoteCount - a.downvoteCount > b.upvoteCount - b.downvoteCount) {
+        if (a.positiveCount - a.negativeCount > b.positiveCount - b.negativeCount) {
           return 1;
         }
-        if (a.upvoteCount - a.downvoteCount < b.upvoteCount - b.downvoteCount) {
+        if (a.positiveCount - a.negativeCount < b.positiveCount - b.negativeCount) {
           return -1;
         }
         return 0;
@@ -398,9 +399,9 @@ const getIdeas = async function (req, res) {
 
 // Adds votes to an idea object
 const addVotes = async idea => {
-  var upvoteCount = await Vote.count({ where: {'up': true, 'IdeaId': idea.id} });
+  // var upvoteCount = await Vote.count({ where: {'up': true, 'IdeaId': idea.id} });
 
-  var downvoteCount = await Vote.count({ where: {'down': true, 'IdeaId': idea.id} });
+  // var downvoteCount = await Vote.count({ where: {'down': true, 'IdeaId': idea.id} });
 
   var averageRating = await Rating.findOne({
     attributes: [[Sequelize.fn('AVG', 
@@ -410,11 +411,7 @@ const addVotes = async idea => {
     where: {'IdeaId': idea.id},
     raw: true
   }).then((success) => {
-    if (success) {
-      return success.average;
-    } else {
-      return 0;
-    }
+    return success.average;
   });
 
   var votes = await Rating.findAll({
@@ -458,12 +455,24 @@ const addVotes = async idea => {
     },
     raw: true
   }).then((success) => {
-    if (success) {
-      return success.average;
-    } else {
-      return 0;
-    }
+    return success.average;
   });
+
+  /*
+  var posVotes = await Rating.findAll({
+    attributes: ['rating', [Sequelize.fn('COUNT', 
+      Sequelize.col('*')), 'count'
+    ]],
+    group: ['rating'],
+    where: {
+      'IdeaId': idea.id,
+      'rating': {
+        [Op.gt]: 0
+      }
+    },
+    order: [['rating', 'ASC']]
+  });
+  */
 
   var negAverageRating = await Rating.findOne({
     attributes: [[Sequelize.fn('AVG', 
@@ -478,14 +487,29 @@ const addVotes = async idea => {
     },
     raw: true
   }).then((success) => {
-    if (success) {
-      return success.average;
-    } else {
-      return 0;
-    }
+    return success.average;
   });
 
+  /*
+  var negVotes = await Rating.findAll({
+    attributes: ['rating', [Sequelize.fn('COUNT', 
+      Sequelize.col('*')), 'count'
+    ]],
+    group: ['rating'],
+    where: {
+      'IdeaId': idea.id,
+      'rating': {
+        [Op.lt]: 0
+      }
+    },
+    order: [['rating', 'ASC']]
+  });
+  */
+
   var interactivity = await Rating.count({ where: {'IdeaId': idea.id} });
+  if (interactivity === 0) {
+    interactivity = 1
+  }
 
   var positiveCount = await Rating.count({ 
     where: {
@@ -505,12 +529,7 @@ const addVotes = async idea => {
     } 
   });
 
-  var ratio;
-  if (positiveCount > 0 || negativeCount > 0) {
-    ratio = (positiveCount / (positiveCount + negativeCount)).toFixed(2);
-  } else {
-    ratio = 0;
-  }
+  var ratio = (positiveCount / interactivity);
 
   var rating = {
     totalAverage: averageRating,
@@ -523,15 +542,35 @@ const addVotes = async idea => {
 
   return await {
     idea,
-    upvoteCount,
-    downvoteCount,
+    // upvoteCount,
+    // downvoteCount,
+    positiveCount,
+    negativeCount,
     rating
   }
+} //end of addVote function
+
+/*
+// Average rating of an idea object
+const averageRating = async idea => {
+  var averageRating = await Rating.findAll({
+    attributes: ['id', [models.sequelize.fn('AVG', 
+      models.sequelize.col('rating')), 'averageRating'
+    ]],
+    group: ['id'],
+    where: {'id': idea.id}
+  });
+  
+  return await {
+    idea,
+    averageRating
+  }
 }
+*/
+
 
 // GET /idea/:id
 const getSingleIdea = async function(req, res) {
-  console.log(req.session);
   try {
     var dbIdea = await Idea.findByPk(req.params.id, {
       include: [{
@@ -548,8 +587,8 @@ const getSingleIdea = async function(req, res) {
         ]}
       ],
     }).catch(err => {throw err;});
-    var upvoteCount = await Vote.count({ where: {'up': true, 'IdeaId': req.params.id} });
-    var downvoteCount = await Vote.count({ where: {'down': true, 'IdeaId': req.params.id} });
+    // var upvoteCount = await Vote.count({ where: {'up': true, 'IdeaId': req.params.id} });
+    // var downvoteCount = await Vote.count({ where: {'down': true, 'IdeaId': req.params.id} });
     var idea = await addVotes(dbIdea) 
     res.send(idea);
   } catch (e) {
@@ -560,6 +599,8 @@ const getSingleIdea = async function(req, res) {
     });
   }
 };
+
+
 
 // POST /ideas
 const postIdea = (req, res) => {
@@ -612,6 +653,23 @@ const editIdea = (req, res) => {
   }
 };
 
+// PUT /idea/:id (only state)
+const updateIdea = async function(req, res) {
+  try {
+    await Idea.update({state: 'proposal'}, { where: {id: req.params.id}}).catch((err) => {throw err;});
+    console.log(req.body.session);
+    res.status(200).end();
+  } catch(e){
+    return res.status(500).json({
+      errors: {
+        error: e.stack
+      },
+    });
+  }
+};
+
+
+
 // DELETE /idea/:id
 const deleteIdea = (req, res) => {
   Idea.findByPk(req.params.id).then(idea => {
@@ -634,6 +692,7 @@ const deleteIdea = (req, res) => {
 };
 
 const upvote = async function (req, res) {
+  console.log("upvote was called");
   try {
     var existingVote = await Vote.findOne({ where: {UserId: req.session.user.id, IdeaId: req.params.id}});
     if (existingVote != null) {
@@ -650,11 +709,13 @@ const upvote = async function (req, res) {
       }).catch((err) => {throw err;});
 
       // Did we transition to a proposal state?
-      var upvoteCount = await Vote.count({ where: {'up': true, 'IdeaId': req.params.id} }).catch((err) => {throw err;});
-      var downvoteCount = await Vote.count({ where: {'down': true, 'IdeaId': req.params.id} }).catch((err) => {throw err;});
-      if (upvoteCount + downvoteCount >= 50) {
-        if (downvoteCount == 0) { downvoteCount = 1; } // avoid divide by zero
-        if ((upvoteCount/downvoteCount * 100) >= 70) {
+      // COMMENTED IT OUT AS IT USES THE VOTE TABLE WHICH IS CURRENTLY DELETED
+      // var upvoteCount = await Vote.count({ where: {'up': true, 'IdeaId': req.params.id} }).catch((err) => {throw err;});
+      // var downvoteCount = await Vote.count({ where: {'down': true, 'IdeaId': req.params.id} }).catch((err) => {throw err;});
+
+      if (positiveCount + negativeCount >= 50) {
+        if (negativeCount == 0) { negativeCount = 1; } // avoid divide by zero
+        if ((positiveCount/negativeCount * 100) >= 70) {
           Idea.update({state: 'proposal'}, { where: {id: req.params.id}}).catch((err) => {throw err;});
         }
       }//else if upvote over 100 => update state: collaborations
@@ -728,22 +789,14 @@ const rate = async function (req, res) {
           UserId: req.session.user.id,
           IdeaId: req.params.id,
           negRating: req.body.rating,
-          //causes a fk constraint issue
-          // rating: req.body.rating
         }).catch((err) => {throw err;});
       } else if (req.body.rating >= 5 && req.body.rating < 10) {
         Rating.create({
           UserId: req.session.user.id,
           IdeaId: req.params.id,
           posRating: req.body.rating,
-          // rating: req.body.rating
         }).catch((err) => {throw err;});
       }
-      // Rating.create({
-      //   UserId: req.session.user.id,
-      //   IdeaId: req.params.id,
-      //   rating: req.body.rating
-      // }).catch((err) => {throw err;});
       res.status(200).end();
     }
   } catch(e) {
@@ -754,6 +807,8 @@ const rate = async function (req, res) {
     });
   }
 };
+
+
 
 // PUT /idea/:id/developer
 const assignDeveloper = async function (req, res, next) {
@@ -785,6 +840,7 @@ module.exports = {
   postIdea,
   getIdeasByCategory,
   editIdea,
+  updateIdea,
   deleteIdea,
   upvote,
   downvote,

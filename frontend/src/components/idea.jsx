@@ -91,7 +91,20 @@ class Idea extends Component {
       .catch(error => {
         console.log("Error: " + error);
       });
+      var requiredRatio = this.state.idea.ratio;
+      var ratio = this.state.ratio;
+      var interactivity = this.state.interactivity;
+      var champ = document.getElementById('champ');
+      console.log(requiredRatio)
+      console.log(ratio)
+      console.log(interactivity)
+      if(ratio >= requiredRatio && interactivity >= 5){
+        champ.hidden = false;
+      } else{
+        champ.hidden = true;
+      }
   }
+
 
   addComment(e) {
     e.preventDefault();
@@ -208,15 +221,7 @@ class Idea extends Component {
   render() {
     var avgRating = this.state.averageRating;
     const shareURL = window.location.href;
-    console.log(shareURL)
-    //WILL CHANGE SOON TO THE STAR RATING DATA
-    //data from the positive likes and dislikes in the comments
-    /*
-    const data = [
-      { text: 'Likes', value: this.state.json.upvoteCount },
-      { text: 'Dislikes', value: this.state.json.downvoteCount }
-    ];
-    */
+    // console.log(shareURL)
     // will only display the sponsor button if the average rating is over 3
     if (avgRating > 3.0) {
       //warning just to change the colour of the button to yellow - will change to a different colour soon
@@ -270,7 +275,9 @@ class Idea extends Component {
                 </div>
                 <div className="row">
                   <div className="col-12 mt-5">
-                    <div id="button"></div>
+                    <div id="champ">
+                      <button type="button" className="btn btn-warning" data-toggle="modal" data-target="#championModal">Promote Idea</button>
+                    </div>
                     <br />
                     <h5>Share</h5>
                     <a className="resp-sharing-button__link" href={"https://facebook.com/sharer/sharer.php?u=http%3A%2F%2F" + shareURL} target="_blank" rel="noopener noreferrer" aria-label="">
@@ -423,29 +430,33 @@ class Idea extends Component {
                 <div className="modal-dialog" role="document">
                   <div className="modal-content">
                     <div className="modal-header">
-                      <h4 className="modal-title">Top Five Comments!</h4>
+                      <h4 className="modal-title">Top Ten Comments!</h4>
                       <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
                     <div className="modal-body">
                       <ul className="list-group">
                         {this.state.comments.map((value, index) => {
-                          if (index < 5) {
+                          if (index < 10) {
                             return <li className="list-group-item" key={index}> {value.comment.text}
-                              <p className="lead">Likes: {value.upvoteCount}
-                                <button onClick={(e) => this.commentLike(e, value.comment.id)} type="button" className="btn btn-light">
+                              <p className="lead">Likes:
+                               {/* {value.upvoteCount} */}
+                                {/* doesn't work because table doesn't exist will fix later */}
+                                {/* <button onClick={(e) => this.commentLike(e, value.comment.id)} type="button" className="btn btn-light"> */}
                                   Like<span className="pl-2"></span>
                                   <span className="badge badge-success">
                                     <i className="far fa-thumbs-up"></i>
                                   </span>
-                                </button>
+                                {/* </button> */}
                               </p>
-                              <p className="lead">Dislikes: {value.downvoteCount}
-                                <button onClick={(e) => this.commentDislike(e, value.comment.id)} type="button" className="btn btn-light">
+                              <p className="lead">Dislikes: 
+                              {/* {value.downvoteCount} */}
+                                {/* doesn't work because table doesn't exist will fix later */}
+                                {/* <button onClick={(e) => this.commentDislike(e, value.comment.id)} type="button" className="btn btn-light"> */}
                                   Dislike<span className="pl-2"></span>
                                   <span className="badge badge-danger">
                                     <i className="far fa-thumbs-down"></i>
                                   </span>
-                                </button>
+                                {/* </button> */}
                               </p>
                               <Moment fromNow className='time'>{value.comment.createdAt}</Moment>
                             </li>
@@ -482,21 +493,25 @@ class Idea extends Component {
                   return <li className="list-group-item" key={index}>
                     <h5>Posted by: {value.comment.User.fname} {value.comment.User.lname}</h5>
                     <p>{value.comment.text}</p>
-                    <p className="lead">Likes: {value.upvoteCount}
-                      <button onClick={(e) => this.commentLike(e, value.comment.id)} type="button" className="btn btn-light">
+                    <p className="lead">Likes: 
+                    {/* {value.upvoteCount} */}
+                     {/* doesn't work because table doesn't exist will fix later */}
+                      {/* <button onClick={(e) => this.commentLike(e, value.comment.id)} type="button" className="btn btn-light"> */}
                         Like<span className="pl-2"></span>
                         <span className="badge badge-success">
                           <i className="far fa-thumbs-up"></i>
                         </span>
-                      </button>
+                      {/* </button> */}
                     </p>
-                    <p className="lead">Dislikes: {value.downvoteCount}
-                      <button onClick={(e) => this.commentDislike(e, value.comment.id)} type="button" className="btn btn-light">
+                    <p className="lead">Dislikes: 
+                    {/* {value.downvoteCount} */}
+                    {/* doesn't work because table doesn't exist will fix later */}
+                      {/* <button onClick={(e) => this.commentDislike(e, value.comment.id)} type="button" className="btn btn-light"> */}
                         Dislike<span className="pl-2"></span>
                         <span className="badge badge-danger">
                           <i className="far fa-thumbs-down"></i>
                         </span>
-                      </button>
+                      {/* </button> */}
                     </p>
                     <Moment fromNow className='time'>{value.comment.createdAt}</Moment>
                     <BarChart
@@ -513,7 +528,6 @@ class Idea extends Component {
             </div>
           </div>
         </div>
-        {/* <SponsorModal/> */}
         <ChampionModal />
       </div>
     );

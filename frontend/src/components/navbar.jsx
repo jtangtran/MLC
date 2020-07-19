@@ -27,7 +27,7 @@ class Navbar extends Component {
     if(userLoggedIn){
       loginButtons.hidden = true;
       loggedIn.hidden = false;
-      if(userRole === 5 || userRole === '5') {
+      if(userRole == 5) {
         adminLink.hidden = false;
       } 
       else {
