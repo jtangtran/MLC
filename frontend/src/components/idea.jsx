@@ -91,6 +91,18 @@ class Idea extends Component {
       .catch(error => {
         console.log("Error: " + error);
       });
+      var requiredRatio = this.state.idea.ratio;
+      var ratio = this.state.ratio;
+      var interactivity = this.state.interactivity;
+      var champ = document.getElementById('champ');
+      console.log(requiredRatio)
+      console.log(ratio)
+      console.log(interactivity)
+      if(ratio >= requiredRatio && interactivity >= 5){
+        champ.hidden = false;
+      } else{
+        champ.hidden = true;
+      }
   }
 
 
@@ -263,7 +275,9 @@ class Idea extends Component {
                 </div>
                 <div className="row">
                   <div className="col-12 mt-5">
-                    <div id="button"></div>
+                    <div id="champ">
+                      <button type="button" className="btn btn-warning" data-toggle="modal" data-target="#championModal">Promote Idea</button>
+                    </div>
                     <br />
                     <h5>Share</h5>
                     <a className="resp-sharing-button__link" href={"https://facebook.com/sharer/sharer.php?u=http%3A%2F%2F" + shareURL} target="_blank" rel="noopener noreferrer" aria-label="">
