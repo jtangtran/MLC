@@ -1,20 +1,19 @@
 version: '3'
 services:
   server:
-    container_name: mylivingcity_server
+    container_name: server
     build: ./server
-    expose:
-      - 3001
     ports:
-      - 3001:3001
+      - 3001:3000
+    depends_on: 
+      - postgres
     volumes:
       - ./server/config:/usr/src/app/server/config
       - ./server/controllers:/usr/src/app/server/controllers
       - ./server/db:/usr/src/app/server/db
-    command: npm run start
   postgres:
     image: postgres:12
-    container_name: mylivingcity_postgres
+    container_name: postgres
     ports:
       - 5432:5432
     volumes:
@@ -24,14 +23,11 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
   frontend:
-    container_name: mylivingcity_frontend
+    container_name: frontend
     build: ./frontend
-    expose:
-      - 3000
     ports:
       - 3000:3000
     volumes:
       - ./frontend/src:/usr/src/app/frontend/src
       - ./frontend/public:/usr/src/app/frontend/public
-    command: npm start
     stdin_open: true

@@ -1,12 +1,15 @@
-FROM node:12
+# Server Dockerfile
 
-# Create frontend directory
-RUN mkdir -p /usr/src/app/server/
-WORKDIR /usr/src/app/server/
+# Stage 1
+FROM node:12-alpine as build-stage
+WORKDIR /app
 
 # Install dependencies
-COPY package*.json /usr/src/app/server/
+COPY package*.json /app/
+RUN apk --no-cache add --virtual builds-deps build-base python
 RUN npm install
-COPY . /usr/src/app/server/
+COPY . /app/
 
-CMD [ "npm" , "run" , "start" ]
+# Open port 3001 for connections
+EXPOSE 3001
+CMD ["npm", "run", "start"]

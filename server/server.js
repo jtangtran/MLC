@@ -58,7 +58,7 @@ app.get('/ideas/:sort/:offset', ideaController.getIdeas);
 app.get('/idea/:id', ideaController.getSingleIdea);
 app.delete('/idea/:id', validateLogin, ideaController.deleteIdea);
 app.put('/idea/:id', validateLogin, bodyParser.json(), ideaController.editIdea);
-app.post('/idea', validateLogin, bodyParser.json(), ideaController.postIdea);
+app.post('/idea', bodyParser.json(), ideaController.postIdea);
 
 app.get('/:category/ideas/:sort/:offset', auth.optional, ideaController.getIdeasByCategory);
 
