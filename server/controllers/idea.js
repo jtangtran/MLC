@@ -655,6 +655,23 @@ const editIdea = (req, res) => {
   }
 };
 
+// PUT /idea/:id (only state)
+const updateIdea = async function(req, res) {
+  try {
+    await Idea.update({state: 'proposal'}, { where: {id: req.params.id}}).catch((err) => {throw err;});
+    console.log(req.body.session);
+    res.status(200).end();
+  } catch(e){
+    return res.status(500).json({
+      errors: {
+        error: e.stack
+      },
+    });
+  }
+};
+
+
+
 // DELETE /idea/:id
 const deleteIdea = (req, res) => {
   Idea.findByPk(req.params.id).then(idea => {
@@ -792,6 +809,8 @@ const rate = async function (req, res) {
   }
 };
 
+
+
 // PUT /idea/:id/developer
 const assignDeveloper = async function (req, res, next) {
   await Idea.findByPk(req.params.id).then(idea => {
@@ -822,6 +841,7 @@ module.exports = {
   postIdea,
   getIdeasByCategory,
   editIdea,
+  updateIdea,
   deleteIdea,
   upvote,
   downvote,

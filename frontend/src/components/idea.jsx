@@ -93,6 +93,7 @@ class Idea extends Component {
       });
   }
 
+
   addComment(e) {
     e.preventDefault();
     const data = JSON.stringify({
@@ -423,13 +424,13 @@ class Idea extends Component {
                 <div className="modal-dialog" role="document">
                   <div className="modal-content">
                     <div className="modal-header">
-                      <h4 className="modal-title">Top Five Comments!</h4>
+                      <h4 className="modal-title">Top Ten Comments!</h4>
                       <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
                     <div className="modal-body">
                       <ul className="list-group">
                         {this.state.comments.map((value, index) => {
-                          if (index < 5) {
+                          if (index < 10) {
                             return <li className="list-group-item" key={index}> {value.comment.text}
                               <p className="lead">Likes:
                                {/* {value.upvoteCount} */}

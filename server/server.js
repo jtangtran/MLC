@@ -60,6 +60,8 @@ app.delete('/idea/:id', validateLogin, ideaController.deleteIdea);
 app.put('/idea/:id', validateLogin, bodyParser.json(), ideaController.editIdea);
 app.post('/idea', validateLogin, bodyParser.json(), ideaController.postIdea);
 
+app.put('/proposal/:id', bodyParser.json(), ideaController.updateIdea);
+
 app.get('/:category/ideas/:sort/:offset', auth.optional, ideaController.getIdeasByCategory);
 
 app.post('/idea/:id/upvote', validateLogin, ideaController.upvote);
