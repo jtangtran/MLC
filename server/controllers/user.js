@@ -44,10 +44,6 @@ const register = (req, res, next) => {
 const login = (req, res, next) => {
   const { body: { user } } = req;
 
-  /*******DEBUG*********/
-  console.log(user);
-  /********************/
-
   if(!user.email) {
     return res.status(422).json({
       errors: {
@@ -79,14 +75,17 @@ const login = (req, res, next) => {
       /********************/
 
       const user = passportUser;
+      req.session.user = passportUser;
+      console.log(req.session);
       //user.token = passportUser.generateJWT();
       req.session.user = user;
+      return res.send( {user: user.toAuthJSON() });
       /*
       res.cookie('authToken', user.token, { 
         maxAge: 30 * 60 * 60 * 24 * 1000  // 30 days in ms
       });
       */
-      return res.json({ user: user.toAuthJSON() });
+      //return res.json({ user: user.toAuthJSON() });
     }
 
     return res.status(400).info;

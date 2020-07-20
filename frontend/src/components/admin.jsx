@@ -23,7 +23,8 @@ class Admin extends Component {
         try {
             await fetch(API_URL + "/users", {
                 method: "GET",
-                headers: {"Content-Type": "application/json"}
+                headers: {"Content-Type": "application/json"},
+                credentials: 'include'
             }).then((response) => {
                 response.json()
                 .then((json) => {
@@ -43,7 +44,8 @@ class Admin extends Component {
         try {
             await fetch(API_URL + "/ideas/new/0", {
                 method: "GET",
-                headers: {"Content-Type": "application/json"}
+                headers: {"Content-Type": "application/json"},
+                credentials: 'include'
             }).then((response) => {
                 response.json()
                 .then((json) => {

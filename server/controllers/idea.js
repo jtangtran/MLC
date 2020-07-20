@@ -411,7 +411,11 @@ const addVotes = async idea => {
     where: {'IdeaId': idea.id},
     raw: true
   }).then((success) => {
-    return success.average;
+    if (success) {
+      return success.average;
+    } else {
+      return 0;
+    }
   });
 
   var votes = await Rating.findAll({
@@ -455,7 +459,11 @@ const addVotes = async idea => {
     },
     raw: true
   }).then((success) => {
-    return success.average;
+    if (success) {
+      return success.average;
+    } else {
+      return 0;
+    }
   });
 
   /*
@@ -487,7 +495,11 @@ const addVotes = async idea => {
     },
     raw: true
   }).then((success) => {
-    return success.average;
+    if (success) {
+      return success.average;
+    } else {
+      return 0;
+    }
   });
 
   /*

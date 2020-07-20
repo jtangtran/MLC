@@ -25,7 +25,8 @@ class Category extends Component {
         try{
           await fetch(API_URL + "/" + this.props.match.params.category + "/ideas/new/0", {
               method: "GET",
-              headers: {"Content-Type": "application/json"}
+              headers: {"Content-Type": "application/json"},
+              credentials: 'include'
           }).then((response) => {
               response.json().then((data) => {
                 console.log('Fetched Ideas: ', data);
@@ -48,7 +49,8 @@ class Category extends Component {
         try{
           await fetch(API_URL + "/" + this.props.match.params.category + "/ideas/" + type + "/0", {
               method: "GET",
-              headers: {"Content-Type": "application/json"}
+              headers: {"Content-Type": "application/json"},
+              credentials: 'include'
           }).then((response) => {
               response.json().then((data) => {
                 console.log('Fetched Ideas: ', data);

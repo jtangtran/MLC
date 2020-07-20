@@ -32,7 +32,8 @@ async login(e){
       await fetch(API_URL+"/user/login", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: data
+        body: data,
+        credentials: 'include'
     }).then((response) => {
       if(response.ok){
         response.json().then((data) => {

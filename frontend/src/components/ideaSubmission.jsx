@@ -71,7 +71,7 @@ class IdeaSubmission extends Component {
         let response = await fetch(API_URL+"/idea", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            credentials: 'cross-origin',
+            credentials: 'include',
             body: data
         });
         if (response.ok){
@@ -86,7 +86,8 @@ class IdeaSubmission extends Component {
                 document.getElementById('submitIdeaBtn').hidden = true;
                 let imageResponse = await fetch(API_URL+"/idea/" + data.id + "/images", {
                     method: "POST",
-                    body: formData
+                    body: formData,
+                    credentials: 'include'
                 });
                 if(imageResponse.ok){
                     console.log('Image Uploaded')

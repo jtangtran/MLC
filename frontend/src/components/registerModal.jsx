@@ -30,7 +30,9 @@ class RegisterModal extends Component {
       };
 
   async getRoles() {
-    await fetch(API_URL+ "/roles")
+    await fetch(API_URL+ "/roles", {
+      credentials: 'include'
+    })
     .then(response => {
       return response.json();
     }).then(json => {
@@ -88,7 +90,8 @@ class RegisterModal extends Component {
         let response = await fetch(API_URL+"/user/register", {
           method: "POST",
           headers: {"Content-Type": "application/json"},
-          body: data
+          body: data,
+          credentials: 'include'
       });
       if (response.ok){
         console.log(response);
@@ -105,7 +108,8 @@ class RegisterModal extends Component {
             await fetch(API_URL+"/user/login", {
               method: "POST",
               headers: {"Content-Type": "application/json"},
-              body: data
+              body: data,
+              credentials: 'include'
           }).then((response) => {
             if(response.ok){
               response.json().then((data) => {

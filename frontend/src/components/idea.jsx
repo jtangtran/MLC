@@ -60,7 +60,9 @@ class Idea extends Component {
   }
 
   async componentDidMount() {
-    await fetch(API_URL + "/idea/" + this.props.match.params.id)
+    await fetch(API_URL + "/idea/" + this.props.match.params.id, {
+      credentials: 'include'
+    })
       .then(response => {
         return response.json();
       })
@@ -81,7 +83,9 @@ class Idea extends Component {
         console.log("Error: " + error);
       });
 
-    await fetch(API_URL + "/idea/" + this.props.match.params.id + '/comments')
+    await fetch(API_URL + "/idea/" + this.props.match.params.id + '/comments', {
+      credentials: 'include'
+    })
       .then(res => {
         return res.json();
       })
@@ -114,7 +118,8 @@ class Idea extends Component {
     fetch(API_URL + "/idea/" + this.props.match.params.id + '/comment', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: data
+      body: data,
+      credentials: 'include'
     })
       .then(res => {
         window.location.reload();
@@ -128,6 +133,7 @@ class Idea extends Component {
     e.preventDefault();
     fetch(API_URL + "/idea/" + this.props.match.params.id + '/upvote', {
       method: "POST",
+      credentials: 'include'
     })
       .then(res => {
         window.location.reload();
@@ -140,7 +146,8 @@ class Idea extends Component {
   addDislike(e) {
     e.preventDefault();
     fetch(API_URL + "/idea/" + this.props.match.params.id + '/downvote', {
-      method: "POST"
+      method: "POST",
+      credentials: 'include'
     })
       .then(res => {
         window.location.reload();
@@ -154,6 +161,7 @@ class Idea extends Component {
     e.preventDefault();
     fetch(API_URL + "/comment/" + this.props.match.params.id + '/upvote', {
       method: "POST",
+      credentials: 'include'
     })
       .then(res => {
         window.location.reload();
@@ -166,7 +174,8 @@ class Idea extends Component {
   commentDislike(e, id) {
     e.preventDefault();
     fetch(API_URL + "/comment/" + this.props.match.params.id + '/downvote', {
-      method: "POST"
+      method: "POST",
+      credentials: 'include'
     })
       .then(res => {
         window.location.reload();
@@ -196,7 +205,8 @@ class Idea extends Component {
       fetch(API_URL + "/idea/" + this.props.match.params.id + '/rate', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: data
+        body: data,
+        credentials: 'include'
       })
         .then(res => {
           window.location.reload();

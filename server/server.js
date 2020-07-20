@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 var cors = require('cors');
 const bodyParser = require('body-parser');
@@ -6,7 +7,9 @@ const cookieParser = require('cookie-parser');
 var multer = require('multer');
 multer = multer({storage: multer.memoryStorage()});
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({
+  credentials: true
+}));
 const port = 3001;
 
 const db = require('./db/models/index');
@@ -18,7 +21,8 @@ const passport = require('passport');
 const auth = require ('./controllers/auth');
 var session = require("express-session");
 app.use(session({
-  secret: "?Jmapv57ueVK!#6@WZJ-VMs7W#@?&!RX",
+  secret: process.env.SESSION_SECRET,
+  resave: false,
   cookie: {
     maxAge: 30 * 60 * 60 * 24 * 1000, // 30 days in milliseconds
     secure: process.env.NODE_ENV === "production"
@@ -39,7 +43,9 @@ passport.deserializeUser(function(id, done) {
 });
 
 const validateLogin = function(req, res, next) {
-  if (req.session.user) {
+  var session = req.session;
+  console.log(session);
+  if (session.user) {
     next();
   } else {
     res.status(401).send("Not logged in");
@@ -58,7 +64,7 @@ app.get('/ideas/:sort/:offset', ideaController.getIdeas);
 app.get('/idea/:id', ideaController.getSingleIdea);
 app.delete('/idea/:id', validateLogin, ideaController.deleteIdea);
 app.put('/idea/:id', validateLogin, bodyParser.json(), ideaController.editIdea);
-app.post('/idea', bodyParser.json(), ideaController.postIdea);
+app.post('/idea', validateLogin, bodyParser.json(), ideaController.postIdea);
 
 app.put('/proposal/:id', bodyParser.json(), ideaController.updateIdea);
 

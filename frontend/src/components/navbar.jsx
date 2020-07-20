@@ -45,6 +45,7 @@ class Navbar extends Component {
     try{
         fetch(API_URL+"/user/logout", {
           method: "POST",
+          credentials: 'include'
       }).then((response) => {
         if(response.ok){
             console.log('Logged Out User');

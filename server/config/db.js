@@ -3,7 +3,7 @@ module.exports = {
     username: 'postgres',
     password: process.env.DB_PASS || 'postgres',
     database: 'mylivingcity',
-    host: 'host.docker.internal' || 'localhost' || '*',
+    host: 'postgres' || 'host.docker.internal' || 'localhost' || '*',
     dialect: 'postgres'
   },
   production: {
