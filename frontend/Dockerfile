@@ -1,22 +1,17 @@
 # Frontend Dockerfile
 
 # Stage 1
-FROM node:12-alpine as build-stage
-WORKDIR /app
+FROM node:12
+
+# Create frontend directory
+RUN mkdir -p /usr/src/app/frontend/
+WORKDIR /usr/src/app/frontend/
 
 # Install dependencies
-COPY package*.json /app/
+COPY package*.json /usr/src/app/frontend/
 RUN npm install
-COPY . /app/
+COPY . /usr/src/app/frontend/
 
-# Build static files
+# Open port 3000 for connections
 EXPOSE 3000
-CMD [ "npm", "start" ]
-
-# Stage 2
-# FROM nginx:1.16.0-alpine
-# COPY --from=build-stage /app/build /usr/share/nginx/html
-
-# Open port 80 for connections
-# EXPOSE 80
-# CMD ["nginx", "-g", "daemon off;"]
+CMD ["npm", "start"]
