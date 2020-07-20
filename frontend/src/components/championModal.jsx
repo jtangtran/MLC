@@ -8,7 +8,8 @@ class ChampionModal extends Component {
         super(props);
         this.state = {
             name: '',
-            reason: ''
+            reason: '',
+            state: ''
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -20,17 +21,28 @@ class ChampionModal extends Component {
         this.setState({[event.target.name]: event.target.value});
     }
 
-    updateIdea(e){
+    async updateIdea(e){
         e.preventDefault();
-        fetch(API_URL + "/proposal/" + this.props.match.params.id, { 
+        let data = JSON.stringify({
+            idea: {
+                name:this.state.name,
+                reasons:this.state.description,
+                state:this.state.state
+            }
+        });
+        let response = await fetch(API_URL + "/proposal/" + this.props.match.params.id, { 
             method: 'PUT',
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json',
             },
+            body: data,
             credentials: 'include'
           })
           .then(res => {
+            if (response.ok){
+                console.log(response);
+            }
             return res.json();
           })
           .catch(error => {

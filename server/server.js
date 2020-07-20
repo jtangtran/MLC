@@ -7,10 +7,13 @@ const cookieParser = require('cookie-parser');
 var multer = require('multer');
 multer = multer({storage: multer.memoryStorage()});
 app.use(cookieParser());
-app.use(cors({
-  credentials: true
-}));
 const port = 3001;
+const frontendPort = 3000;
+app.use(cors({
+  credentials: true,
+  origin: `http://localhost:${frontendPort}`
+}));
+
 
 const db = require('./db/models/index');
 const sequelize = db.sequelize;

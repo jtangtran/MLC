@@ -49,6 +49,7 @@ class Idea extends Component {
     this.addDislike = this.addDislike.bind(this);
     this.changeRating = this.changeRating.bind(this);
     this.addRating = this.addRating.bind(this);
+    this.proposal = this.proposal.bind(this);
   }
 
   handleCommentChange(event) {
@@ -78,6 +79,7 @@ class Idea extends Component {
         this.setState({ votes: json.rating.votes})
         this.setState({ interactivity: json.rating.interactivity})
         this.setState({ ratio: json.rating.ratio})
+        this.proposal();
       })
       .catch(error => {
         console.log("Error: " + error);
@@ -95,18 +97,20 @@ class Idea extends Component {
       .catch(error => {
         console.log("Error: " + error);
       });
-      var requiredRatio = this.state.idea.ratio;
-      var ratio = this.state.ratio;
-      var interactivity = this.state.interactivity;
-      var champ = document.getElementById('champ');
-      console.log(requiredRatio)
-      console.log(ratio)
-      console.log(interactivity)
-      if(ratio >= requiredRatio && interactivity >= 5){
-        champ.hidden = false;
-      } else{
-        champ.hidden = true;
-      }
+  }
+
+  proposal(){
+    var requiredRatio = this.state.idea.ratio;
+    var ratio = this.state.ratio;
+    var interactivity = this.state.interactivity;
+    var champ = document.getElementById('champ');
+    var state = this.state.idea.state;
+  
+    if(ratio >= requiredRatio && interactivity >= 5 && state === 'idea'){
+      champ.hidden = false;
+    } else{
+      champ.hidden = true;
+  }
   }
 
 

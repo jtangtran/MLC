@@ -75,6 +75,7 @@ class Admin extends Component {
                             <thead>
                                 <tr>
                                     <th>Id</th>
+                                    <th>Email</th>
                                     <th>First Name</th>
                                     <th>Last Name</th>
                                     <th>Street Name</th>
@@ -86,6 +87,7 @@ class Admin extends Component {
                                 {this.state.users.map((value, index) => {
                                     return <tr key={index}>
                                         <td>{value.user.id}</td>
+                                        <td>{value.user.email}</td>
                                         <td>{value.user.fname}</td>
                                         <td>{value.user.lname}</td>
                                         <td>{value.user.Street_Name || "unknown"}</td>
