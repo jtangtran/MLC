@@ -133,7 +133,14 @@ const getRoles = async function(req, res) {
 //GET all users (required, only admin users have access)
 const getUsers = async function(req, res) {
   try {
-    var dbUsers = await User.findAll()
+    var dbUsers = await User.findAll({
+      include: [{
+        model: Role,
+        attributes: [
+          ['role_name', 'role_name']
+        ]
+      }]
+    })
     /*
     .then((users) => {
       res.send(users)

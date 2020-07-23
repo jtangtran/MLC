@@ -67,6 +67,7 @@ app.get('/ideas/:sort/:offset', ideaController.getIdeas);
 app.get('/idea/:id', ideaController.getSingleIdea);
 app.delete('/idea/:id', validateLogin, ideaController.deleteIdea);
 app.put('/idea/:id', validateLogin, bodyParser.json(), ideaController.editIdea);
+app.put('/idea/ratio/:id', validateLogin, bodyParser.json(), ideaController.updateRatio);
 app.post('/idea', validateLogin, bodyParser.json(), ideaController.postIdea);
 
 app.put('/proposal/:id', bodyParser.json(), ideaController.updateIdea);

@@ -541,7 +541,12 @@ const addVotes = async idea => {
     } 
   });
 
-  var ratio = (positiveCount / interactivity);
+  var ratio;
+  if (positiveCount > 0 || negativeCount > 0) {
+    ratio = positiveCount / (positiveCount + negativeCount);
+  } else {
+    ratio = 0;
+  }
 
   var rating = {
     totalAverage: averageRating,
@@ -670,6 +675,20 @@ const updateIdea = async function(req, res) {
   try {
     await Idea.update({state: 'proposal'}, { where: {id: req.params.id}}).catch((err) => {throw err;});
     console.log(req.body.session);
+    res.status(200).end();
+  } catch(e){
+    return res.status(500).json({
+      errors: {
+        error: e.stack
+      },
+    });
+  }
+};
+
+// PUT /idea/ratio/:id (only ratio)
+const updateRatio = async function(req, res) {
+  try {
+    await Idea.update({ratio: req.body.ratio}, { where: {id: req.params.id}}).catch((err) => {throw err;});
     res.status(200).end();
   } catch(e){
     return res.status(500).json({
@@ -853,6 +872,7 @@ module.exports = {
   getIdeasByCategory,
   editIdea,
   updateIdea,
+  updateRatio,
   deleteIdea,
   upvote,
   downvote,

@@ -8,10 +8,12 @@ class Admin extends Component {
         super(props);
         this.state = {
             users: [],
-            ideas: []
+            ideas: [],
+            ratios: {}
         };
         this.getUsers = this.getUsers.bind(this);
-        this.getIdeas = this.getIdeas.bind(this)
+        this.getIdeas = this.getIdeas.bind(this);
+        this.changeHandler = this.changeHandler.bind(this);
     }
 
     componentDidMount() {
@@ -65,6 +67,36 @@ class Admin extends Component {
         }
     }
 
+    changeHandler(event, key) {
+        this.state.ratios[key] = event.target.value;
+        console.log(this.state.ratios);
+    }
+
+    async handleSubmit(e, id, key) {
+        e.preventDefault();
+        try{
+            let data = JSON.stringify({
+                ratio: this.state.ratios[key],
+            });
+            console.log(this.state.ratios[key]);
+            console.log("stringified");
+            await fetch(API_URL+"/idea/ratio/" + id, {
+                method: "PUT",
+                headers: {"Content-Type": "application/json"},
+                body: data,
+                credentials: 'include'
+            }).then(response => {
+                if (response.ok) {
+                    window.location.reload();
+                }
+            }).catch(error => {
+                throw error
+            });
+        } catch(e) {
+            console.log(e.stack)
+        }
+    }
+
     render() {
         return (
             <div className="Admin">
@@ -92,7 +124,7 @@ class Admin extends Component {
                                         <td>{value.user.lname}</td>
                                         <td>{value.user.Street_Name || "unknown"}</td>
                                         <td>{value.user.Postal_Code || "unknown"}</td>
-                                        <td>{value.user.RoleId}</td>
+                                        <td>{value.user.Role.role_name}</td>
                                     </tr>
                                 })}
                             </tbody>
@@ -106,20 +138,29 @@ class Admin extends Component {
                                     <th>Category</th>
                                     <th>Title</th>
                                     <th>Description</th>
-                                    <th>Upvotes</th>
-                                    <th>Downvotes</th>
+                                    <th>Average Rating</th>
+                                    <th>Approval Ratio</th>
+                                    <th>Required Approval Ratio</th>
                                     <th>User</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {this.state.ideas.map((value, index) => {
+                                    var key = "ratio" + index.toString();
+                                    this.state.ratios[key] = parseFloat(value.idea.ratio).toFixed(2);
                                     return <tr key={index}>
                                         <td>{value.idea.id}</td>
-                                        <td>{value.idea.category}</td>
+                                        <td>{value.idea.category || 'No Category'}</td>
                                         <td>{value.idea.title}</td>
                                         <td>{value.idea.description}</td>
-                                        <td>{value.idea.upvotes}</td>
-                                        <td>{value.idea.downvotes}</td>
+                                        <td>{parseFloat(value.rating.totalAverage).toFixed(2)}</td>
+                                        <td>{parseFloat(value.rating.ratio).toFixed(2)}</td>
+                                        <td>
+                                            <form onSubmit={(e) => this.handleSubmit(e, value.idea.id, key)}>
+                                                <input type="numberic" name={key} defaultValue={parseFloat(value.idea.ratio).toFixed(2)} onChange={(e) => this.changeHandler(e, key)} /> &nbsp;
+                                                <input type="submit" value="Edit" />
+                                            </form>
+                                        </td>
                                         <td>{value.idea.User.fname} {value.idea.User.lname}</td>
                                     </tr>
                                 })}
