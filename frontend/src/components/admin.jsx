@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from './navbar';
+import Footer from './footer.jsx';
 
 const API_URL = require('../config.js')
 
@@ -168,6 +169,7 @@ class Admin extends Component {
                         </table>
                     </div>
                 </div>
+                <Footer />
             </div>
         );
     }

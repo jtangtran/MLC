@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from './navbar.jsx';
+import Footer from './footer.jsx';
 
 const API_URL = require('../config.js');
 
@@ -172,12 +173,14 @@ render() {
                     <p id="seeIdea" hidden className="lead">Thanks for Posting!<br/><a href={this.state.ideaLink}>See your Idea</a></p>
                     <button id="submitIdeaBtn" type="submit" className="btn btn-primary">Submit your Idea!</button>
                     <button id="signInWarning" className="btn btn-primary" data-toggle="modal" data-target="#loginModal">Sign In To Post</button>
+                    <br /><br />
                 </div>
                 </form>
             </div>
             <div className="col-2">
             </div>
         </div>
+        <Footer />
     </div>
     );
 }

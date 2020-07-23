@@ -3,6 +3,7 @@ import '../stylesheets/conversations.css';
 
 import Navbar from './navbar';
 import ConvoCard from './convoCard.jsx';
+import Footer from './footer.jsx';
 
 const API_URL = require('../config.js');
 
@@ -180,6 +181,7 @@ class Conversations extends Component {
               </div>
             </div>
           </div>
+          <Footer />
         </div>
       );
     }
@@ -187,6 +189,7 @@ class Conversations extends Component {
       return(
         <div>
           <Navbar/>
+          <Footer />
         </div>
       );
     }
