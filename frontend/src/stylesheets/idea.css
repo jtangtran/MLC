@@ -208,3 +208,17 @@ background-color: #FF6600
   padding-left: 8px;
   color: black;
 }
+
+#rateVotes {
+  padding-right: 55px;
+}
+
+#rateVote {
+  padding-left: 30px;
+  padding-right: 63px;
+
+}
+
+#rateMoreVotes {
+  padding-right: 118px;
+}

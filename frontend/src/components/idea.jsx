@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Navbar from './navbar';
 import Moment from 'react-moment';
 import Ratings from 'react-ratings-declarative';
-import BarChart from 'react-bar-chart';
-import ReactDOM from 'react-dom';
+//for the bar/pie charts
+import CanvasJSReact from '../canvasjs.react';
 import '../stylesheets/idea.css';
 
 //sponsor button not needed only the champion button sponsor button is needed for the proposals 
@@ -12,14 +12,10 @@ import ChampionModal from './championModal.jsx';
 
 const API_URL = require('../config.js')
 
-//specifying the width for the bar chart
-const width = 400;
+//for the charts
+var CanvasJS = CanvasJSReact.CanvasJS;
+var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-//specifying the margin of the bar graphs
-const margin = { top: 10, right: 5, bottom: 30, left: 5 };
-
-//specifying the height for the bar chart
-const height = 200;
 
 class Idea extends Component {
   constructor(props) {
@@ -74,11 +70,11 @@ class Idea extends Component {
         this.setState({ idea: json.idea });
         this.setState({ user: json.idea.User })
         this.setState({ averageRating: parseFloat(json.rating.totalAverage) || 0 })
-        this.setState({ posAvgRating: parseFloat(json.rating.positiveAverage) || 0})
-        this.setState({ negAvgRating: Math.abs(parseFloat(json.rating.negativeAverage)) || 0})
-        this.setState({ votes: json.rating.votes})
-        this.setState({ interactivity: json.rating.interactivity})
-        this.setState({ ratio: json.rating.ratio})
+        this.setState({ posAvgRating: parseFloat(json.rating.positiveAverage) || 0 })
+        this.setState({ negAvgRating: Math.abs(parseFloat(json.rating.negativeAverage)) || 0 })
+        this.setState({ votes: json.rating.votes })
+        this.setState({ interactivity: json.rating.interactivity })
+        this.setState({ ratio: json.rating.ratio })
         this.proposal();
       })
       .catch(error => {
@@ -99,18 +95,18 @@ class Idea extends Component {
       });
   }
 
-  proposal(){
+  proposal() {
     var requiredRatio = this.state.idea.ratio;
     var ratio = this.state.ratio;
     var interactivity = this.state.interactivity;
     var champ = document.getElementById('champ');
     var state = this.state.idea.state;
-  
-    if(ratio >= requiredRatio && interactivity >= 5 && state === 'idea'){
+
+    if (ratio >= requiredRatio && interactivity >= 5 && state === 'idea') {
       champ.hidden = false;
-    } else{
+    } else {
       champ.hidden = true;
-  }
+    }
   }
 
 
@@ -195,13 +191,13 @@ class Idea extends Component {
     if (this.state.rating > 0 && this.state.rating <= 10) {
       //checks if the rating is the negative rating
       if (this.state.rating > 0 && this.state.rating < 5) {
-         data = JSON.stringify({
+        data = JSON.stringify({
           rating: this.state.rating
         })
       }
-            //checks if the rating is the positive rating
+      //checks if the rating is the positive rating
       else if (this.state.rating < 10 && this.state.rating >= 5) {
-          data = JSON.stringify({
+        data = JSON.stringify({
           rating: this.state.rating
         })
       }
@@ -235,15 +231,16 @@ class Idea extends Component {
   render() {
     var avgRating = this.state.averageRating;
     const shareURL = window.location.href;
-    // console.log(shareURL)
-    // will only display the sponsor button if the average rating is over 3
-    if (avgRating > 3.0) {
-      //warning just to change the colour of the button to yellow - will change to a different colour soon
-      //when the user presses the button it displays a new window similar to sponsorship modal - WILL UPDATE SOON
-      const buttonEnabled = <button type="button" className="btn btn-warning" data-toggle="modal" data-target="#championModal">Champion</button>
-      document.getElementById('button').disabled = false;
-      ReactDOM.render(buttonEnabled, document.getElementById('button'));
-    }
+    // // console.log(shareURL)
+    // // will only display the sponsor button if the average rating is over 3
+    // if (avgRating > 3.0) {
+    //   //warning just to change the colour of the button to yellow - will change to a different colour soon
+    //   //when the user presses the button it displays a new window similar to sponsorship modal - WILL UPDATE SOON
+    //   const buttonEnabled = <button type="button" className="btn btn-warning" data-toggle="modal" data-target="#championModal">Champion</button>
+    //   document.getElementById('button').disabled = false;
+    //   ReactDOM.render(buttonEnabled, document.getElementById('button'));
+    // }
+
     return (
       <div className="Idea">
         <Navbar />
@@ -258,6 +255,7 @@ class Idea extends Component {
                 <br />
                 <br />
                 <p className="lead">{this.state.idea.description}</p>
+                <div className="row">
                 <div id="impactAreaGroup">
                   <div className="col-12">
                     <p>Community and Place:
@@ -281,12 +279,29 @@ class Idea extends Component {
                       <span className="impactAreas">{this.state.idea.manufacturing_impact}</span></p>
                   </div>
                 </div>
-                <div className="col-6">
-                  <p>The required approval ratio is: {this.state.idea.ratio}</p>
-                </div>
-                <div className="col-6">
-                  <p>The actual approval ratio is: {this.state.ratio}</p>
-                </div>
+                {/* pie chart for the interaction */}
+                <CanvasJSChart options={{
+                  exportEnabled: true,
+                  animationEnabled: true,
+                  title: {
+                    text: "Approval Ratio Chart"
+                  },
+                  data: [{
+                    type: "pie",
+                    startAngle: 75,
+                    toolTipContent: "<b>{label}</b>: {y}",
+                    showInLegend: "true",
+                    legendText: "{label}",
+                    indexLabelFontSize: 16,
+                    indexLabel: "{label} - {y}",
+                    dataPoints: [
+                      { y: this.state.averageRating.toFixed(2), label: "Required Approval Ratio" },
+                      { y: this.state.ratio, label: "Actual Approval Ratio" }
+                    ]
+                  }]
+                }}
+                />
+                </div>               
                 <div className="row">
                   <div className="col-12 mt-5">
                     <div id="champ">
@@ -332,11 +347,11 @@ class Idea extends Component {
         {/*Community Rating Row */}
         <div className="container">
           <br />
-        <div className="d-flex justify-content-center">
-              <h3>Community Rating:</h3>
-            </div>
+          <div className="d-flex justify-content-center">
+            <h3>Community Rating:</h3>
+          </div>
           <div className="row">
-            
+
             <div className="col-md">
               <div id="ratingText">
                 Positive Rating:
@@ -353,7 +368,7 @@ class Idea extends Component {
                 <Ratings.Widget />
               </Ratings>
             </div>
-            
+
             <div className="col-md">
               <div id="ratingText">
                 Negative Rating:
@@ -372,26 +387,27 @@ class Idea extends Component {
             </div>
 
             <div className="col-md">
-              Average Rating: {this.state.averageRating}
+              Average Rating: {this.state.averageRating.toFixed(2)}
               <br />
-              {this.state.interactivity} Users have Voted 
+              {this.state.interactivity} Users have Voted
             </div>
             <br />
           </div>
           <div className="row">
             <div className="col-md">
-              <p>Rating: 1 &nbsp; Count: {this.state.votes["1"]}</p>
-              <p>Rating: 2 &nbsp; Count: {this.state.votes["2"]}</p>
-              <p>Rating: 3 &nbsp; Count: {this.state.votes["3"]}</p>
-              <p>Rating: 4 &nbsp; Count: {this.state.votes["4"]}</p>
-              <p>Rating: 5 &nbsp; Count: {this.state.votes["5"]}</p>
-            </div>
-            <div className="col-md">
-              <p>Rating: -1 &nbsp; Count: {this.state.votes["-1"]}</p>
-              <p>Rating: -2 &nbsp; Count: {this.state.votes["-2"]}</p>
-              <p>Rating: -3 &nbsp; Count: {this.state.votes["-3"]}</p>
-              <p>Rating: -4 &nbsp; Count: {this.state.votes["-4"]}</p>
-              <p>Rating: -5 &nbsp; Count: {this.state.votes["-5"]}</p>
+              <div className="row">
+                {/* displaying the count of each vote underneath the star */}
+                <p id="rateVote">{this.state.votes["1"]}</p>
+                <p id="rateVotes">{this.state.votes["2"]}</p>
+                <p id="rateVotes">{this.state.votes["3"]}</p>
+                <p id="rateVotes">{this.state.votes["4"]}</p>
+                <p id="rateMoreVotes">{this.state.votes["5"]}</p>
+                <p id="rateVotes">{this.state.votes["-1"]}</p>
+                <p id="rateVotes">{this.state.votes["-2"]}</p>
+                <p id="rateVotes">{this.state.votes["-3"]}</p>
+                <p id="rateVotes">{this.state.votes["-4"]}</p>
+                <p id="rateVotes">{this.state.votes["-5"]}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -411,7 +427,7 @@ class Idea extends Component {
                     changeRating={this.changeRating}
                     widgetRatedColors={this.state.rating > 6 ? "lightgreen" : "red"}
                     widgetEmptyColors="grey"
-                    widgetHoverColors="yellow"
+                    widgetHoverColors="gold"
                   >
                     <Ratings.Widget />
                     <Ratings.Widget />
@@ -457,19 +473,19 @@ class Idea extends Component {
                                 {/* doesn't work because table doesn't exist will fix later */}
                                 {/* <button onClick={(e) => this.commentLike(e, value.comment.id)} type="button" className="btn btn-light"> */}
                                   Like<span className="pl-2"></span>
-                                  <span className="badge badge-success">
-                                    <i className="far fa-thumbs-up"></i>
-                                  </span>
+                                <span className="badge badge-success">
+                                  <i className="far fa-thumbs-up"></i>
+                                </span>
                                 {/* </button> */}
                               </p>
-                              <p className="lead">Dislikes: 
+                              <p className="lead">Dislikes:
                               {/* {value.downvoteCount} */}
                                 {/* doesn't work because table doesn't exist will fix later */}
                                 {/* <button onClick={(e) => this.commentDislike(e, value.comment.id)} type="button" className="btn btn-light"> */}
                                   Dislike<span className="pl-2"></span>
-                                  <span className="badge badge-danger">
-                                    <i className="far fa-thumbs-down"></i>
-                                  </span>
+                                <span className="badge badge-danger">
+                                  <i className="far fa-thumbs-down"></i>
+                                </span>
                                 {/* </button> */}
                               </p>
                               <Moment fromNow className='time'>{value.comment.createdAt}</Moment>
@@ -497,47 +513,93 @@ class Idea extends Component {
               </div>
             </div>
 
-            <div className='col-6'>
+
+            <div className='col-8'>
               <ul className="list-group">
+
                 {this.state.comments.map((value, index) => {
                   var data = [];
                   for (let rating in value.votes) {
-                    data.push({ text: rating, value: value.votes[rating]});
+                    data.push({ text: rating, value: value.votes[rating] });
                   }
                   return <li className="list-group-item" key={index}>
                     <h5>Posted by: {value.comment.User.fname} {value.comment.User.lname}</h5>
                     <p>{value.comment.text}</p>
-                    <p className="lead">Likes: 
+                    {/* <p className="lead">Likes: 
                     {/* {value.upvoteCount} */}
-                     {/* doesn't work because table doesn't exist will fix later */}
-                      {/* <button onClick={(e) => this.commentLike(e, value.comment.id)} type="button" className="btn btn-light"> */}
+                    {/* doesn't work because table doesn't exist will fix later */}
+                    {/* <button onClick={(e) => this.commentLike(e, value.comment.id)} type="button" className="btn btn-light"> 
                         Like<span className="pl-2"></span>
                         <span className="badge badge-success">
                           <i className="far fa-thumbs-up"></i>
                         </span>
-                      {/* </button> */}
+                      {/* </button> 
                     </p>
                     <p className="lead">Dislikes: 
                     {/* {value.downvoteCount} */}
                     {/* doesn't work because table doesn't exist will fix later */}
-                      {/* <button onClick={(e) => this.commentDislike(e, value.comment.id)} type="button" className="btn btn-light"> */}
+                    {/* <button onClick={(e) => this.commentDislike(e, value.comment.id)} type="button" className="btn btn-light"> 
                         Dislike<span className="pl-2"></span>
                         <span className="badge badge-danger">
                           <i className="far fa-thumbs-down"></i>
                         </span>
-                      {/* </button> */}
-                    </p>
+                      {/* </button> 
+                    </p> */}
+                    {/* NEEDS TO BE CHANGED FOR COMMENT */}
+                    {/* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; */}
+                    <div className="d-flex justify-content-center">
+
+                      <Ratings
+                        rating={this.state.rating > 6 ? this.state.posRating : this.state.negRating}
+                        changeRating={this.changeRating}
+                        widgetRatedColors={this.state.rating > 6 ? "lightgreen" : "red"}
+                        widgetEmptyColors="grey"
+                        widgetHoverColors="gold"
+                      >
+                        <Ratings.Widget />
+                        <Ratings.Widget />
+                        <Ratings.Widget />
+                        <Ratings.Widget />
+                        <Ratings.Widget />
+                        <Ratings.Widget />
+                        <Ratings.Widget />
+                        <Ratings.Widget />
+                        <Ratings.Widget />
+                        <Ratings.Widget />
+                      </Ratings>
+                    </div>
+                    <div className="d-flex justify-content-center">
+                      <button onClick={(e) => this.addRating(e)} type="button" className="btn btn-light">Submit Comment Rating</button>
+                    </div>
                     <Moment fromNow className='time'>{value.comment.createdAt}</Moment>
-                    <BarChart
-                      width={width}
-                      height={height}
-                      margin={margin}
-                      data={data} />
+                    <CanvasJSChart options={{
+                      title: {
+                        text: "Comment Rating Statistics"
+                      },
+                      data: [{
+                        type: "column",
+                        dataPoints: [
+                          // it is in random order because of the way it was inserted into the data array
+                          { label: "-5", y: parseInt(data[10].value) },
+                          { label: "-4", y: parseInt(data[9].value) },
+                          { label: "-3", y: parseInt(data[8].value) },
+                          { label: "-2", y: parseInt(data[7].value) },
+                          { label: "-1", y: parseInt(data[6].value) },
+                          { label: "0", y: parseInt(data[0].value) },
+                          { label: "1", y: parseInt(data[1].value) },
+                          { label: "2", y: parseInt(data[2].value) },
+                          { label: "3", y: parseInt(data[3].value) },
+                          { label: "4", y: parseInt(data[4].value) },
+                          { label: "5", y: parseInt(data[5].value) },
+                        ]
+                      }]
+                    }}
+                    />
                   </li>
                 })}
               </ul>
             </div>
-            <div className="col-6">
+            <div className="justify-content-center">
               <button id='commentModal' type="button" className="btn btn-secondary" data-toggle="modal" data-target="#commentModal">Add Comment</button>
             </div>
           </div>

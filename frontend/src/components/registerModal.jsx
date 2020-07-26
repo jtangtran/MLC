@@ -25,6 +25,8 @@ class RegisterModal extends Component {
     this.register = this.register.bind(this);
   }
 
+
+
   componentDidMount() {
     this.getRoles()
       };
