@@ -232,14 +232,6 @@ class Idea extends Component {
     var avgRating = this.state.averageRating;
     const shareURL = window.location.href;
     // // console.log(shareURL)
-    // // will only display the sponsor button if the average rating is over 3
-    // if (avgRating > 3.0) {
-    //   //warning just to change the colour of the button to yellow - will change to a different colour soon
-    //   //when the user presses the button it displays a new window similar to sponsorship modal - WILL UPDATE SOON
-    //   const buttonEnabled = <button type="button" className="btn btn-warning" data-toggle="modal" data-target="#championModal">Champion</button>
-    //   document.getElementById('button').disabled = false;
-    //   ReactDOM.render(buttonEnabled, document.getElementById('button'));
-    // }
 
     return (
       <div className="Idea">
