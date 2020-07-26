@@ -550,7 +550,7 @@ class Idea extends Component {
                       <Ratings
                         rating={this.state.rating > 6 ? this.state.posRating : this.state.negRating}
                         changeRating={this.changeRating}
-                        widgetRatedColors={this.state.rating > 6 ? "lightgreen" : "red"}
+                        widgetRatedColors={this.state.rating}
                         widgetEmptyColors="grey"
                         widgetHoverColors="gold"
                       >
