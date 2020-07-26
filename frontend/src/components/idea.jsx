@@ -545,10 +545,8 @@ class Idea extends Component {
                         </span>
                       {/* </button> 
                     </p> */}
-                    {/* NEEDS TO BE CHANGED FOR COMMENT */}
-                    {/* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; */}
-                    <div className="d-flex justify-content-center">
 
+                    <div className="d-flex justify-content-center">
                       <Ratings
                         rating={this.state.rating > 6 ? this.state.posRating : this.state.negRating}
                         changeRating={this.changeRating}
