@@ -83,7 +83,7 @@ class ChampionModal extends Component {
                                         <textarea onChange={this.handleChange} type="text" name="reason" className="form-control text-left" id="reasonsInput" placeholder="e.g. I love my community" required/>
                                     </div>
                                     <div id="statusContainer">
-                                        <button onclick={(e) => this.updateIdea(e)} id="submitBtn" type="submit" className="btn btn-primary">Submit Champion Form</button>
+                                        <button onClick={(e) => this.updateIdea(e)} id="submitBtn" type="submit" className="btn btn-primary">Submit Champion Form</button>
                                         <div>
                                             <i id="confirmIcon" hidden className="fas fa-check fa-2x"></i>
                                             <i id="denyIcon" hidden className="far fa-times-circle fa-2x"></i>

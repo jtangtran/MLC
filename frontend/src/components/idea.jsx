@@ -31,9 +31,9 @@ class Idea extends Component {
       averageRating: 0,
       votes: [],
       interactivity: 0,
+      posCount: 0,
+      negCount: 0,
       ratio: 0,
-      positiveInteractivity: 0,
-      negativeInteractivity: 0,
       posRating: 0,
       negRating: 0,
       rating: 0
@@ -74,6 +74,8 @@ class Idea extends Component {
         this.setState({ negAvgRating: Math.abs(parseFloat(json.rating.negativeAverage)) || 0 })
         this.setState({ votes: json.rating.votes })
         this.setState({ interactivity: json.rating.interactivity })
+        this.setState({ posCount: json.positiveCount })
+        this.setState({ negCount: json.negativeCount })
         this.setState({ ratio: json.rating.ratio })
         this.proposal();
       })
@@ -287,8 +289,8 @@ class Idea extends Component {
                     indexLabelFontSize: 16,
                     indexLabel: "{label} - {y}",
                     dataPoints: [
-                      { y: this.state.averageRating.toFixed(2), label: "Required Approval Ratio" },
-                      { y: this.state.ratio, label: "Actual Approval Ratio" }
+                      { y: this.state.posCount, label: "Approval Ratio" },
+                      { y: this.state.negCount, label: "Disapproval Ratio" }
                     ]
                   }]
                 }}
@@ -415,9 +417,9 @@ class Idea extends Component {
                 </div>
                 <div className="d-flex justify-content-center">
                   <Ratings
-                    rating={this.state.rating > 6 ? this.state.posRating : this.state.negRating}
+                    rating={this.state.rating}
                     changeRating={this.changeRating}
-                    widgetRatedColors={this.state.rating > 6 ? "lightgreen" : "red"}
+                    widgetRatedColors={this.state.rating >= 6 ? "green" : "red"}
                     widgetEmptyColors="grey"
                     widgetHoverColors="gold"
                   >
@@ -542,7 +544,7 @@ class Idea extends Component {
                       <Ratings
                         rating={this.state.rating > 6 ? this.state.posRating : this.state.negRating}
                         changeRating={this.changeRating}
-                        widgetRatedColors={this.state.rating}
+                        widgetRatedColors={this.state.rating > 6 ? "green" : "red"}
                         widgetEmptyColors="grey"
                         widgetHoverColors="gold"
                       >
