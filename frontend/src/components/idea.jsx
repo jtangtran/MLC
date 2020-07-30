@@ -9,6 +9,7 @@ import '../stylesheets/idea.css';
 //sponsor button not needed only the champion button sponsor button is needed for the proposals 
 // import SponsorModal from './sponsorModal.jsx';
 import ChampionModal from './championModal.jsx';
+import ReportModal from './report.jsx';
 
 const API_URL = require('../config.js')
 
@@ -563,6 +564,9 @@ class Idea extends Component {
                     <div className="d-flex justify-content-center">
                       <button onClick={(e) => this.addRating(e)} type="button" className="btn btn-light">Submit Comment Rating</button>
                     </div>
+                    <div id="report">
+                      <button type="button" className="btn btn-warning" data-toggle="modal" data-target="#reportModal">Report</button>
+                    </div>
                     <Moment fromNow className='time'>{value.comment.createdAt}</Moment>
                     <CanvasJSChart options={{
                       title: {
@@ -597,6 +601,7 @@ class Idea extends Component {
           </div>
         </div>
         <ChampionModal />
+        <ReportModal/>
       </div>
     );
   }
