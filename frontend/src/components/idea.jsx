@@ -540,30 +540,6 @@ class Idea extends Component {
                         </span>
                       {/* </button> 
                     </p> */}
-
-                    <div className="d-flex justify-content-center">
-                      <Ratings
-                        rating={this.state.rating > 6 ? this.state.posRating : this.state.negRating}
-                        changeRating={this.changeRating}
-                        widgetRatedColors={this.state.rating > 6 ? "green" : "red"}
-                        widgetEmptyColors="grey"
-                        widgetHoverColors="gold"
-                      >
-                        <Ratings.Widget />
-                        <Ratings.Widget />
-                        <Ratings.Widget />
-                        <Ratings.Widget />
-                        <Ratings.Widget />
-                        <Ratings.Widget />
-                        <Ratings.Widget />
-                        <Ratings.Widget />
-                        <Ratings.Widget />
-                        <Ratings.Widget />
-                      </Ratings>
-                    </div>
-                    <div className="d-flex justify-content-center">
-                      <button onClick={(e) => this.addRating(e)} type="button" className="btn btn-light">Submit Comment Rating</button>
-                    </div>
                     <div id="report">
                       <button type="button" className="btn btn-warning" data-toggle="modal" data-target="#reportModal">Report</button>
                     </div>
