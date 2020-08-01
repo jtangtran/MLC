@@ -1,9 +1,9 @@
 module.exports = {
   development: {
-    username: 'testuser',
-    password: process.env.DB_PASS || 'testuser',
+    username: 'postgres',
+    password: process.env.DB_PASS || 'postgres',
     database: 'mylivingcity',
-    host: '127.0.0.1',
+    host: 'host.docker.internal' || 'localhost' || '*',
     dialect: 'postgres'
   },
   production: {

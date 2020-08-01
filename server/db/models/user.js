@@ -1,6 +1,6 @@
 'use strict';
 
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 module.exports = (sequelize, DataTypes) => {
@@ -14,38 +14,48 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     fname: DataTypes.STRING,
     lname: DataTypes.STRING,
+    Street_Name: DataTypes.STRING,
+    Postal_Code: DataTypes.STRING,
     location: DataTypes.STRING,
     latitude: DataTypes.DECIMAL,
     longitude: DataTypes.DECIMAL,
-    role: {
-        type: DataTypes.STRING,
-        defaultValue: 'user'
-    }
+    RoleId: DataTypes.INTEGER
   });
+
   User.prototype.validatePassword = function (password) {
     return bcrypt.compareSync(password, this.password);
   };
-  User.prototype.generateJWT = function() {
-    return jwt.sign({
-        email: this.email,
-        id: this.id,
-    }, 'secret', { expiresIn: '30d'} );
-  };
+
   User.prototype.toAuthJSON = function() {
     return {
         id: this.id,
         email: this.email,
         fname: this.fname,
         lname: this.lname,
+        Street_Name: this.Street_Name,
+        Postal_Code: this.Postal_Code,
         location: this.location,
         latitude: this.latitude,
         longitude: this.longitude,
-        token: this.generateJWT(),
+        RoleId: this.RoleId
     };
   };
 
   User.associate = function(models) {
-    // associations can be defined here
+    // Belongs-To associations
+    User.belongsTo(models.Role);
+
+    // Belongs-To-Many associations
+
+    // Has-One associations
+
+    // Has-Many associations
+    User.hasMany(models.Idea);
+    User.hasMany(models.Comment);
+    User.hasMany(models.Rating);
+    User.hasMany(models.Image);
+    User.hasMany(models.Blog);
+    User.hasMany(models.Vote);
   };
 
   User.beforeCreate((user, options) => {

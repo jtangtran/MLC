@@ -2,7 +2,11 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const db = require('../db/models/index');
 const User = db.User;
+const Role = db.Role;
 const sequelize = db.sequelize;
+
+
+
 
 //POST new user route (optional, everyone has access)
 const register = (req, res, next) => {
@@ -57,18 +61,31 @@ const login = (req, res, next) => {
   }
 
   return passport.authenticate('local', { session: true }, (err, passportUser, info) => {
+    /*******DEBUG*********/
+    console.log("Authenticating...");
+    /********************/
+
     if(err) {
       return next(err);
     }
 
     if(passportUser) {
+      /*******DEBUG*********/
+      console.log("Valid user found");
+      /********************/
+
       const user = passportUser;
-      user.token = passportUser.generateJWT();
+      req.session.user = passportUser;
+      console.log(req.session);
+      //user.token = passportUser.generateJWT();
       req.session.user = user;
+      return res.send( {user: user.toAuthJSON() });
+      /*
       res.cookie('authToken', user.token, { 
         maxAge: 30 * 60 * 60 * 24 * 1000  // 30 days in ms
       });
-      return res.json({ user: user.toAuthJSON() });
+      */
+      //return res.json({ user: user.toAuthJSON() });
     }
 
     return res.status(400).info;
@@ -96,9 +113,57 @@ const getCurrentUser = (req, res, next) => {
     });
 };
 
+const getRoles = async function(req, res) {
+  try{
+  var dbRoles = await Role.findAll()
+  .catch((err) => {throw err;});
+  var roles = await Promise.all(dbRoles.map(role => { return {"role": role} }));
+  res.send(roles);
+  }
+  catch(e){
+    return res.status(400).json({
+      errors: {
+        error: e.stack
+      },
+    });
+  }
+}
+
+
+//GET all users (required, only admin users have access)
+const getUsers = async function(req, res) {
+  try {
+    var dbUsers = await User.findAll({
+      include: [{
+        model: Role,
+        attributes: [
+          ['role_name', 'role_name']
+        ]
+      }]
+    })
+    /*
+    .then((users) => {
+      res.send(users)
+    })
+    */
+    .catch((err) => {throw err;});
+    var users = await Promise.all(dbUsers.map(user => { return {"user": user} }));
+    res.send(users);
+  }
+  catch(e) {
+    return res.status(400).json({
+      errors: {
+        error: e.stack
+      },
+    });
+  }
+}
+
 module.exports = {
   register,
   login,
   logout,
-  getCurrentUser
+  getCurrentUser,
+  getRoles,
+  getUsers
 };
